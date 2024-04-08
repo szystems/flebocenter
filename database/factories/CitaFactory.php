@@ -17,8 +17,8 @@ class CitaFactory extends Factory
         $estados = ['Pendiente', 'Confirmada', 'Atendida'];
 
         return [
-            'paciente_id' => $this->faker->numberBetween(1, 20), // Asumiendo que hay 100 pacientes
-            'doctor_id' => $this->faker->numberBetween(1, 8), // Asumiendo que hay 50 doctores
+            'paciente_id' => $this->faker->numberBetween(1, 40), // Asumiendo que hay 100 pacientes
+            'doctor_id' => $this->faker->numberBetween(1, 20), // Asumiendo que hay 50 doctores
             'clinica_id' => $this->faker->numberBetween(1, 5), // Asumiendo que hay 20 clínicas
             'fecha_cita' => $this->faker->dateTimeBetween('now', '+1 year')->format('Y-m-d'),
             'hora_inicio' => $horaInicio,

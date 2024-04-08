@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\BackendController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AsistenteController;
 use App\Http\Controllers\Admin\PacienteController;
+use App\Http\Controllers\Admin\RecetaController;
 use App\Http\Controllers\Admin\ClinicaController;
 use App\Http\Controllers\Admin\CitaController;
 use App\Http\Controllers\Admin\ConfigController;
@@ -67,6 +68,11 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-paciente/{id}',[PacienteController::class,'edit']);
     Route::put('update-paciente/{id}', [PacienteController::class, 'update']);
     Route::get('delete-paciente/{id}', [PacienteController::class, 'destroy']);
+
+    //Recetas
+    Route::post('insert-receta', [RecetaController::class, 'insert']);
+    Route::put('update-receta/{id}', [RecetaController::class, 'update'])->name('update-receta');;
+    Route::get('delete-receta/{id}', [RecetaController::class, 'delete']);
 
     //Clínicas
     Route::get('clinicas', [ClinicaController::class, 'index']);

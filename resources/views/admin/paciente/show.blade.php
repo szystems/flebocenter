@@ -45,15 +45,9 @@
                             <div class="col-12 col-md-auto">
                                 <div class="btn-group-sm m-3">
                                     <a href="{{ url('edit-paciente/'.$paciente->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
-                                    @if ($paciente->principal == "1")
-										<button disabled type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $paciente->id }}">
-                                            <i class="bi bi-trash"></i> Eliminar
-                                        </button>
-                                    @else
-                                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $paciente->id }}">
-                                            <i class="bi bi-trash"></i> Eliminar
-                                        </button>
-                                    @endif
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $paciente->id }}">
+                                        <i class="bi bi-trash"></i> Eliminar
+                                    </button>
                                     @include('admin.paciente.deletemodal')
                                 </div>
                             </div>
@@ -68,21 +62,36 @@
                     <div class="col-lg-12">
                         <div class="card light">
                             <div class="card-body">
+                                @if (count($errors)>0)
+                                    <div class="alert alert-danger text-white" role="alert">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{$error}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+
+                                @endif
                                 <div class="custom-tabs-container">
                                     <ul class="nav nav-tabs" id="customTab2" role="tablist">
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link active" id="tab-oneA" data-bs-toggle="tab" href="#oneA" role="tab"
-                                                aria-controls="oneA" aria-selected="true">Información</a>
+                                            <a class="nav-link active" id="tab-info" data-bs-toggle="tab" href="#info" role="tab"
+                                                aria-controls="info" aria-selected="true">Información</a>
                                         </li>
                                         <li class="nav-item" role="presentation">
-                                            <a class="nav-link" id="tab-twoA" data-bs-toggle="tab" href="#twoA" role="tab"
-                                                aria-controls="twoA" aria-selected="false">Citas<span
+                                            <a class="nav-link" id="tab-citas" data-bs-toggle="tab" href="#citas" role="tab"
+                                                aria-controls="citas" aria-selected="false">Citas<span
                                                 class="badge rounded-pill green ms-2">{{ $citas->count() }}</span></a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="tab-recetas" data-bs-toggle="tab" href="#recetas" role="tab"
+                                                aria-controls="recetas" aria-selected="false">Recetas<span
+                                                class="badge rounded-pill green ms-2">{{ $recetas->count() }}</span></a>
                                         </li>
                                     </ul>
                                     <div class="tab-content h-350">
 
-                                        <div class="tab-pane fade show active" id="oneA" role="tabpanel">
+                                        <div class="tab-pane fade show active" id="info" role="tabpanel">
                                             <!-- Row start -->
                                             <div class="row gx-3">
                                                 <div class="col-sm-12 col-12">
@@ -200,7 +209,7 @@
                                             <!-- Row end -->
                                         </div>
 
-                                        <div class="tab-pane fade" id="twoA" role="tabpanel">
+                                        <div class="tab-pane fade" id="citas" role="tabpanel">
                                             <div class="card-body">
                                                 <!-- Row start -->
                                                 <div class="row gx-3">
@@ -304,6 +313,80 @@
                                                                         </tbody>
                                                                     </table>
                                                                     {{-- {{ $citas->links() }} --}}
+                                                                </div>
+
+                                                            </div>
+                                                        </div>
+                                                        <!-- Card end -->
+                                                    </div>
+
+                                                </div>
+                                                <!-- Row end -->
+                                            </div>
+                                        </div>
+
+                                        <div class="tab-pane fade" id="recetas" role="tabpanel">
+                                            <div class="card-body">
+                                                <!-- Row start -->
+                                                <div class="row gx-3">
+
+                                                    <div class="col-sm-12 col-12">
+                                                        <!-- Card start -->
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h5 class="card-title"><u>Historial de Recetas</u></h5>
+                                                            </div>
+                                                            <div class="card-body">
+
+                                                                {{-- Acordion de Recetas --}}
+                                                                <div class="accordion" id="accordionRecetas">
+
+                                                                    @foreach($recetas as $receta)
+                                                                        <div class="accordion-item">
+                                                                            <h2 class="accordion-header" id="heading{{ $receta->id }}">
+                                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                                                        data-bs-target="#collapse{{ $receta->id }}" aria-expanded="false"
+                                                                                        aria-controls="collapse{{ $receta->id }}">
+                                                                                        @php
+                                                                                            $fechaReceta = date("d/m/Y", strtotime($receta->fecha));
+                                                                                            // dd($fnacimiento);
+                                                                                        @endphp
+                                                                                        {{ $fechaReceta }}
+                                                                                </button>
+                                                                            </h2>
+                                                                            <div id="collapse{{ $receta->id }}" class="accordion-collapse collapse strip"
+                                                                                aria-labelledby="heading{{ $receta->id }}" data-bs-parent="#accordionRecetas">
+                                                                                <div class="accordion-body">
+                                                                                    <div class="row gx-3">
+
+                                                                                        <div class="col-md-12 mb-3">
+                                                                                            <!-- Form Field Start -->
+                                                                                            <div class="mb-3">
+                                                                                                <label class="descripcion"><strong>Receta:</strong></label>
+                                                                                                <textarea readonly name="descripcion" class="form-control m-1" rows="3" placeholder="Descripción de la receta...">{{ $receta->descripcion }}</textarea>
+
+
+                                                                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                                                                    data-bs-target="#editarRecetaModal{{ $receta->id }}">
+                                                                                                    <i class="bi bi-pencil"></i> Editar
+                                                                                                </button>
+
+                                                                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                                                                    data-bs-target="#deleterecetaModal-{{ $receta->id }}">
+                                                                                                    <i class="bi bi-trash"></i> Eliminar
+                                                                                                </button>
+
+                                                                                                @include('admin.paciente.editarrecetamodal')
+                                                                                                @include('admin.paciente.deleterecetamodal')
+                                                                                            </div>
+                                                                                        </div>
+
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    @endforeach
+
                                                                 </div>
 
                                                             </div>

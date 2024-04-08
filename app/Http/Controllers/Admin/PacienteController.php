@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Cita;
+use App\Models\Receta;
 use App\Http\Requests\PacienteFormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -33,6 +34,7 @@ class PacienteController extends Controller
             ->orderBy('nombre','asc')
             ->paginate(20);
             $filterPacientes = Paciente::all();
+
             return view('admin.paciente.index', compact('pacientes','queryPaciente','filterPacientes'));
         }
     }
@@ -40,8 +42,9 @@ class PacienteController extends Controller
     public function show($id)
     {
         $paciente = Paciente::find($id);
+        $recetas = Receta::where('paciente_id',$id)->orderBy('fecha', 'desc')->get();
         $citas = Cita::Where('paciente_id',$paciente->id)->orderBy('fecha_cita','desc')->get();
-        return view('admin.paciente.show', compact('paciente','citas'));
+        return view('admin.paciente.show', compact('paciente','citas','recetas'));
     }
 
     public function add()
