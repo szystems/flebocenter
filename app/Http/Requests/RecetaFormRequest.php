@@ -25,7 +25,7 @@ class RecetaFormRequest extends FormRequest
     {
         return [
             'paciente_id' => 'required',
-            'descripcion' => 'required|max:255',
+            'descripcion' => 'required',
             'fecha' => 'required|date',
         ];
     }
