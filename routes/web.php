@@ -91,6 +91,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-config', [ConfigController::class, 'update']);
  });
 
- Route::middleware(['auth', 'isAdmin'])->group(function () {
-    //front user
-});
+//  Route::middleware(['auth', 'isAdmin'])->group(function () {
+//     //front user
+// });

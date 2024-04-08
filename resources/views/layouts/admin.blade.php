@@ -18,7 +18,7 @@
 		<link rel="shortcut icon" href="assets/imgs/logos/favicon.ico" />
 
 		<!-- Title -->
-		<title>{{ config('app.name', 'Laravel') }}</title>
+		<title>{{ config('app.name', 'Flebo Center') }}</title>
 
 		<!-- *************
 			************ Common Css Files *************

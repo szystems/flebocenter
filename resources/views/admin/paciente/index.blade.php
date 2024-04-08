@@ -41,8 +41,10 @@
 
                         </div>
                         <div class="card-body">
+
+
                             <div class="table-responsive">
-                                <table class="table align-middle table-striped flex-column">
+                                <table id="highlightRowColumn" class="table custom-table">
                                     <thead>
                                         <tr>
                                             <td align="center"><i class="bi bi-list-task"></i></td>
@@ -137,7 +139,6 @@
                                                 </small>
                                             </td>
                                             <td><small>{{ $paciente->direccion }}</small></td>
-
                                         </tr>
                                         @include('admin.paciente.deletemodal')
                                         @endforeach
@@ -145,6 +146,7 @@
                                 </table>
                                 {{ $pacientes->links() }}
                             </div>
+
                         </div>
                     </div>
                 </div>
