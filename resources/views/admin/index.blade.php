@@ -10,7 +10,7 @@
                 <div class="page-icon">
                     <i class="bi bi-house"></i>
                 </div>
-                <div class="page-title d-none d-md-block">
+                <div class="page-title">
                     @php
                         $usuario = Auth::user()->name;
                         $nombre = explode(' ', trim($usuario));
@@ -20,7 +20,7 @@
                 </div>
             </div>
             <!-- Date range start -->
-            <div class="d-flex align-items-end">
+            <div class="d-flex align-items-end d-none d-sm-block">
                 <h6 class="float-end text-light" id="reloj"></h6>
             </div>
             <!-- Date range end -->

@@ -9,12 +9,12 @@
                 <div class="page-icon">
                     <i class="bi bi-shield-plus"></i>
                 </div>
-                <div class="page-title d-none d-md-block">
+                <div class="page-title">
                     <h5>Doctores</h5>
                 </div>
             </div>
             <!-- Date range start -->
-            <div class="d-flex align-items-end">
+            <div class="d-flex align-items-end d-none d-sm-block">
                 <h6 class="float-end text-light" id="reloj"></h6>
             </div>
         </div>

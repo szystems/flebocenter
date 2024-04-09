@@ -1,6 +1,10 @@
 <!-- Page header starts -->
 <div class="page-header">
 
+    <div class="toggle-sidebar m-3" id="toggle-sidebar">
+        <i class="bi bi-list"></i>
+    </div>
+
     <!-- Sidebar brand starts -->
     <div class="brand">
         <a href="index.html" class="logo">
@@ -9,10 +13,6 @@
         </a>
     </div>
     <!-- Sidebar brand ends -->
-
-    <div class="toggle-sidebar" id="toggle-sidebar">
-        <i class="bi bi-list"></i>
-    </div>
 
     <!-- Header actions ccontainer start -->
     <div class="header-actions-container">
