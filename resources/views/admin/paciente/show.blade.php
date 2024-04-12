@@ -363,7 +363,7 @@
                                                                                             <!-- Form Field Start -->
                                                                                             <div class="mb-3">
                                                                                                 <label class="descripcion"><strong>Receta:</strong></label>
-                                                                                                <textarea readonly name="descripcion" class="form-control m-1" rows="3" placeholder="Descripción de la receta...">{{ $receta->descripcion }}</textarea>
+                                                                                                <textarea readonly name="descripcion" class="form-control m-1" rows="10" placeholder="Descripción de la receta...">{{ $receta->descripcion }}</textarea>
 
 
                                                                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"

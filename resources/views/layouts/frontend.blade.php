@@ -176,7 +176,7 @@
                         {{-- <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="#"><i class="fab fa-twitter fw-normal"></i></a> --}}
                         <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="https://www.facebook.com/flebocenterQuetzaltenango/"><i class="fab fa-facebook-f fw-normal"></i></a>
                         <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="https://wa.me/50257358668"><i class="fab fa-whatsapp fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded" target="_blank" href="https://www.instagram.com/flebocenter_xela?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded" target="_blank" href="https://www.instagram.com/flebocenter_quetzaltenango/?utm_source=qr&igsh=OXAyZDl6Zjh1OHh4"><i class="fab fa-instagram fw-normal"></i></a>
                     </div>
                 </div>
             </div>

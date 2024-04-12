@@ -77,7 +77,7 @@
                                 <a class="btn btn-primary btn-square m-1" href="tel:+50277677954"><i class="bi bi-telephone fw-normal"></i></a>
                                 <a class="btn btn-primary btn-square m-1" href="https://wa.me/50257358668" target="_blank"><i class="fab fa-whatsapp fw-normal"></i></a>
                                 <a class="btn btn-primary btn-square m-1" href="https://www.facebook.com/flebocenterQuetzaltenango/" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
-                                <a class="btn btn-primary btn-square m-1" href="https://www.instagram.com/flebocenter_xela?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank"><i class="fab fa-instagram fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="https://www.instagram.com/flebocenter_quetzaltenango/?utm_source=qr&igsh=OXAyZDl6Zjh1OHh4" target="_blank"><i class="fab fa-instagram fw-normal"></i></a>
                             </div>
                         </div>
                         <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
