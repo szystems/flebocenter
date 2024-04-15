@@ -102,7 +102,7 @@
                                                                 @if ($config->logo)
                                                                 <label class="form-label">Imágen</label>
                                                                     <div class="brand">
-                                                                        <img src="{{ asset('assets/uploads/logos/'.$config->logo) }}" class="img-thumbnail" style="height: 100px;" alt="Logo" />
+                                                                        <img src="{{ asset('assets/imgs/logos/'.$config->logo) }}" class="img-thumbnail" style="height: 100px;" alt="Logo" />
                                                                     </div>
                                                                 @endif
                                                                 <label class="form-label">Cambiar Imágen</label>

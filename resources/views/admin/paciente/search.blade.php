@@ -18,8 +18,8 @@
                                 <option value="{{ $item->nombre }}">{{ $item->nombre }}</option>
                             @endforeach
                         </datalist>
-                        <button class="btn btn-outline-secondary" type="button">
-                            Buscar
+                        <button class="btn btn-outline-secondary" type="submit">
+                            <i class="bi bi-search"></i>
                         </button>
                     </div>
                 </form>

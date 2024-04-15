@@ -26,7 +26,7 @@ class ConfigController extends Controller
         $config = Config::first();
         if($request->hasFile('logo'))
         {
-            $path = 'assets/uploads/logos/'.$config->logo;
+            $path = 'assets/imgs/logos/'.$config->logo;
             if(File::exists($path))
             {
                 File::delete($path);
@@ -34,12 +34,12 @@ class ConfigController extends Controller
             $file = $request->file('logo');
             $ext = $file->getClientOriginalExtension();
             $filename = time().'.'.$ext;
-            $file->move('assets/uploads/logos/',$filename);
+            $file->move('assets/imgs/logos/',$filename);
             $config->logo = $filename;
         }
         if($request->hasFile('contract'))
         {
-            $path1 = 'assets/uploads/contract/'.$config->contract;
+            $path1 = 'assets/imgs/contract/'.$config->contract;
             if(File::exists($path1))
             {
                 File::delete($path1);
@@ -47,7 +47,7 @@ class ConfigController extends Controller
             $file1 = $request->file('contract');
             $ext1 = $file1->getClientOriginalExtension();
             $filename1 = time().'.'.$ext1;
-            $file1->move('assets/uploads/contract/',$filename1);
+            $file1->move('assets/imgs/contract/',$filename1);
             $config->contract = $filename1;
         }
         $config->currency = $request->input('currency');

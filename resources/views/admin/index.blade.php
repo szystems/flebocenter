@@ -234,7 +234,7 @@
                                 <h6 class="text-light">Almacén</h6>
                                 <a href="{{ url('') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-boxes"></i> <u>Articulos</u></a>
                                 <br>
-                                <a href="{{ url('') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-diagram-3"></i> <u>Categorías</u></a>
+                                <a href="{{ url('categorias') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-diagram-3"></i> <u>Categorías</u></a>
                             </div>
                             <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
 
@@ -252,7 +252,7 @@
                                 <h6 class="text-light">Compras</h6>
                                 <a href="{{ url('') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-cart-plus"></i> <u>Ingresos</u></a>
                                 <br>
-                                <a href="{{ url('') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-person-video2"></i> <u>Proveedores</u></a>
+                                <a href="{{ url('proveedores') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-person-video2"></i> <u>Proveedores</u></a>
                             </div>
                             <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
 

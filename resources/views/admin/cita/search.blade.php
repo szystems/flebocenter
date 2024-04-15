@@ -94,7 +94,7 @@
                                             <!-- Form Field Start -->
                                             <div class="mb-3 mt-4">
                                                 <button type="submit" class="btn btn-info">
-                                                    <i class="bi bi-search"></i> Buscar
+                                                    <i class="bi bi-search"></i>
                                                 </button>
                                             </div>
                                         </div>

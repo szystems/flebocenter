@@ -120,7 +120,7 @@
                         </ul>
                         <ul>
                             <li class="{{ Request::is('categorias','show-categoria/*','add-categoria','edit-categoria/*') ? 'active-page-link':''  }}">
-                                <a href="{{ url('') }}"><i class="bi bi-diagram-3"></i> Categorías</a>
+                                <a href="{{ url('categorias') }}"><i class="bi bi-diagram-3"></i> Categorías</a>
                             </li>
                         </ul>
                     </div>
@@ -139,7 +139,7 @@
                         </ul>
                         <ul>
                             <li class="{{ Request::is('proveedores','show-proveedor/*','add-proveedor','edit-proveedor/*') ? 'active-page-link':''  }}">
-                                <a href="{{ url('') }}"><i class="bi bi-person-video2"></i> Proveedores</a>
+                                <a href="{{ url('proveedores') }}"><i class="bi bi-person-video2"></i> Proveedores</a>
                             </li>
                         </ul>
                     </div>
