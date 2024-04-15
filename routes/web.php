@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\PacienteController;
 use App\Http\Controllers\Admin\RecetaController;
 use App\Http\Controllers\Admin\ClinicaController;
 use App\Http\Controllers\Admin\CitaController;
+use App\Http\Controllers\Admin\CategoriaController;
+use App\Http\Controllers\Admin\ProveedorController;
 use App\Http\Controllers\Admin\ConfigController;
 
 /*
@@ -91,6 +93,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-cita/{id}',[CitaController::class,'edit']);
     Route::put('update-cita/{id}', [CitaController::class, 'update']);
     Route::get('delete-cita/{id}', [CitaController::class, 'destroy']);
+
+    //Categorías
+    Route::get('categorias', [CategoriaController::class, 'index']);
+    Route::get('show-categoria/{id}', [CategoriaController::class, 'show']);
+    Route::get('add-categoria', [CategoriaController::class, 'add']);
+    Route::post('insert-categoria',[CategoriaController::class,'insert']);
+    Route::get('edit-categoria/{id}',[CategoriaController::class,'edit']);
+    Route::put('update-categoria/{id}', [CategoriaController::class, 'update']);
+    Route::get('delete-categoria/{id}', [CategoriaController::class, 'destroy']);
+
+    //Proveedores
+    Route::get('proveedores', [ProveedorController::class, 'index']);
+    Route::get('show-proveedor/{id}', [ProveedorController::class, 'show']);
+    Route::get('add-proveedor', [ProveedorController::class, 'add']);
+    Route::post('insert-proveedor',[ProveedorController::class,'insert']);
+    Route::get('edit-proveedor/{id}',[ProveedorController::class,'edit']);
+    Route::put('update-proveedor/{id}', [ProveedorController::class, 'update']);
+    Route::get('delete-proveedor/{id}', [ProveedorController::class, 'destroy']);
 
     //config
     Route::get('config', [ConfigController::class, 'index']);
