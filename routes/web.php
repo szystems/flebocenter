@@ -15,6 +15,8 @@ use App\Http\Controllers\Admin\ClinicaController;
 use App\Http\Controllers\Admin\CitaController;
 use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ProveedorController;
+use App\Http\Controllers\Admin\ArticuloController;
+use App\Http\Controllers\Admin\IngresoController;
 use App\Http\Controllers\Admin\ConfigController;
 
 /*
@@ -111,6 +113,24 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-proveedor/{id}',[ProveedorController::class,'edit']);
     Route::put('update-proveedor/{id}', [ProveedorController::class, 'update']);
     Route::get('delete-proveedor/{id}', [ProveedorController::class, 'destroy']);
+
+    //articulos
+    Route::get('articulos', [ArticuloController::class, 'index']);
+    Route::get('show-articulo/{id}', [ArticuloController::class, 'show']);
+    Route::get('add-articulo', [ArticuloController::class, 'add']);
+    Route::post('insert-articulo',[ArticuloController::class,'insert']);
+    Route::get('edit-articulo/{id}',[ArticuloController::class,'edit']);
+    Route::put('update-articulo/{id}', [ArticuloController::class, 'update']);
+    Route::get('delete-articulo/{id}', [ArticuloController::class, 'destroy']);
+
+    //Ingresos
+    Route::get('ingresos', [IngresoController::class, 'index']);
+    Route::get('show-ingreso/{id}', [IngresoController::class, 'show']);
+    Route::get('add-ingreso', [IngresoController::class, 'add']);
+    Route::post('insert-ingreso',[IngresoController::class,'insert']);
+    Route::get('edit-ingreso/{id}',[IngresoController::class,'edit']);
+    Route::put('update-ingreso/{id}', [IngresoController::class, 'update']);
+    Route::get('delete-ingreso/{id}', [IngresoController::class, 'destroy']);
 
     //config
     Route::get('config', [ConfigController::class, 'index']);
