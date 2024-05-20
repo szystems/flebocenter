@@ -16,7 +16,7 @@ class CreateCategoriasTable extends Migration
         Schema::create('categorias', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
-            $table->text('descripcion')->nullable()->default('Sin descripción');
+            $table->text('descripcion')->nullable();
             $table->tinyInteger('estado')->default(true);
             $table->timestamps();
         });

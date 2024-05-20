@@ -44,7 +44,7 @@ class PacienteController extends Controller
     public function show($id)
     {
         $paciente = Paciente::find($id);
-        $recetas = Receta::where('paciente_id',$id)->orderBy('fecha', 'desc')->get();
+        $recetas = Receta::where('paciente_id',$id)->orderBy('created_at', 'desc')->get();
         $citas = Cita::Where('paciente_id',$paciente->id)->orderBy('fecha_cita','desc')->get();
         return view('admin.paciente.show', compact('paciente','citas','recetas'));
     }

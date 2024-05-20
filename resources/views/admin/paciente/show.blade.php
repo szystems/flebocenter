@@ -335,6 +335,13 @@
                                                         <div class="card">
                                                             <div class="card-header">
                                                                 <h5 class="card-title"><u>Historial de Recetas</u></h5>
+                                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                                    data-bs-target="#addRecetaModal">
+                                                                    <i class="bi bi-plus-square"></i> Crear Receta
+                                                                </button>
+
+                                                                @include('admin.paciente.addrecetamodal')
+
                                                             </div>
                                                             <div class="card-body">
 
@@ -363,7 +370,11 @@
                                                                                             <!-- Form Field Start -->
                                                                                             <div class="mb-3">
                                                                                                 <label class="descripcion"><strong>Receta:</strong></label>
-                                                                                                <textarea readonly name="descripcion" class="form-control m-1" rows="10" placeholder="Descripción de la receta...">{{ $receta->descripcion }}</textarea>
+                                                                                                <div class="card">
+                                                                                                    <div class="card-body">
+                                                                                                        {!! html_entity_decode($receta->descripcion) !!}
+                                                                                                    </div>
+                                                                                                </div>
 
 
                                                                                                 <button type="button" class="btn btn-warning" data-bs-toggle="modal"
@@ -419,4 +430,5 @@
         <!-- Content wrapper end -->
     </div>
     <!-- Content wrapper scroll end -->
+
 @endsection
