@@ -248,6 +248,22 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="col-md-12 mb-3">
+                                                                <!-- Form Field Start -->
+                                                                <div class="mb-3">
+                                                                    <label class="form-label">Descripción CKEditor 5</label>
+                                                                    {{-- <textarea name="descripcionckeditor" class="form-control" rows="3" placeholder="Descripción de la empresa...">{{ old('descripcionckeditor') }}</textarea> --}}
+                                                                    <textarea id="editor" class="form-control border px-2 class" name="contenido" rows="20">{{ old('contenido') }}</textarea>
+                                                                    @if ($errors->has('contenido'))
+                                                                        <span class="help-block opacity-7">
+                                                                                <strong>
+                                                                                    <font color="red">{{ $errors->first('contenido') }}</font>
+                                                                                </strong>
+                                                                        </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                         <div class="d-flex gap-2 justify-content-center">
                                                             <a href="{{ url('pacientes') }}" type="button" class="btn btn-danger">
@@ -301,5 +317,13 @@
         };
         $( '#fnacimiento' ).datepicker( optSimple );
     </script>
+
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
 
 @endsection

@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\File;
 use App\Models\Config;
 use PDF;
 use DB;
+use App\Exports\PacientesExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PacienteController extends Controller
 {
@@ -187,5 +189,10 @@ class PacienteController extends Controller
                 return $pdf->stream ('Listado Pacientes '.$nompdf.'.pdf');
             }
         }
+    }
+
+    public function exportexcel(Request $request)
+    {
+        return Excel::download(new PacientesExport, 'pacientes.xlsx');
     }
 }

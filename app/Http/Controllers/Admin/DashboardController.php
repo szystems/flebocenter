@@ -36,7 +36,7 @@ class DashboardController extends Controller
                 ->orWhere('celular', 'LIKE', '%' . $queryUser . '%');
             })
             ->orderBy('name','asc')
-            ->paginate(5);
+            ->paginate(20);
             $filterUsers = User::all();
             return view('admin.user.index', compact('users','queryUser','filterUsers'));
         }

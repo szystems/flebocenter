@@ -73,6 +73,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-paciente/{id}', [PacienteController::class, 'update']);
     Route::get('delete-paciente/{id}', [PacienteController::class, 'destroy']);
     Route::get('pdf-pacientes', [PacienteController::class, 'pdf']);
+    Route::get('exportpacientes', [PacienteController::class, 'exportexcel']);
 
     //Recetas
     Route::post('insert-receta', [RecetaController::class, 'insert']);
