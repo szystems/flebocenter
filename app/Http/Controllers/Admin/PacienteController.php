@@ -145,4 +145,47 @@ class PacienteController extends Controller
         $paciente->update();
         return redirect('users')->with('status',__('Paciente eliminado correctamente!'));
     }
+
+    public function pdf(Request $request)
+    {
+        if ($request)
+        {
+
+            $pacientes = Paciente::where('estado',1)->orderBy('nombre','asc')->get();
+            $verpdf = "Browser";
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/uploads/');
+
+            $config = Config::first();
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+
+            $config = Config::first();
+
+            if ( $verpdf == "Download" )
+            {
+                $pdf = PDF::loadView('admin.paciente.pdf',['pacientes'=>$pacientes,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->download ('Listado Pacientes '.$nompdf.'.pdf');
+            }
+            if ( $verpdf == "Browser" )
+            {
+                $pdf = PDF::loadView('admin.paciente.pdf',['pacientes'=>$pacientes,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->stream ('Listado Pacientes '.$nompdf.'.pdf');
+            }
+        }
+    }
 }

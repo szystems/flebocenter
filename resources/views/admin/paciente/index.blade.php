@@ -34,6 +34,10 @@
                         <div class="card-header">
                             <div class="card-title">
                                 Listado de Pacientes
+                                <br>
+                                <a target="_blank" href="{{ url('pdf-pacientes') }}" type="button" class="btn btn-danger btn-sm">
+                                    <i class="bi bi-file-pdf-fill"></i> PDF
+                                </a>
                                 <a href="{{ url('add-paciente') }}" type="button" class="btn btn-success float-end">
                                     <i class="bi bi-plus-square"></i> Agregar
                                 </a>
