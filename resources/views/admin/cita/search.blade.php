@@ -16,7 +16,7 @@
                                 <div class="d-flex align-items-center">
                                     <i class="bi bi-filter text-info"></i>
                                     <div class="ms-3">
-                                        <h5 class="text-info">Filtros de Búsqueda</h5>
+                                        <h5 class="text-yellow">Filtros de Búsqueda</h5>
                                         {{-- <p class="m-0 fw-normal">Leader</p> --}}
 
                                     </div>

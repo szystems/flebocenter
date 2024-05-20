@@ -16,7 +16,7 @@ class CreateArticulosTable extends Migration
         Schema::create('articulos', function (Blueprint $table) {
             $table->id();
             $table->string('nombre')->index();
-            $table->string('codigo')->nullable()->unique();
+            $table->string('codigo')->nullable();
             $table->string('imagen')->nullable()->default('default.png');
             $table->text('descripcion')->nullable();
             $table->decimal('precio_compra', 8, 2)->default(0.00);

@@ -115,7 +115,7 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li class="{{ Request::is('articulos','show-articulo/*','add-articulo','edit-articulo/*') ? 'active-page-link':''  }}">
-                                <a href="{{ url('') }}"><i class="bi bi-boxes"></i> Articulos</a>
+                                <a href="{{ url('articulos') }}"><i class="bi bi-boxes"></i> Articulos</a>
                             </li>
                         </ul>
                         <ul>
@@ -134,7 +134,7 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li class="{{ Request::is('ingresos','show-ingreso/*','add-ingreso','edit-ingreso/*') ? 'active-page-link':''  }}">
-                                <a href="{{ url('') }}"><i class="bi bi-cart-plus"></i> Ingresos</a>
+                                <a href="{{ url('ingresos') }}"><i class="bi bi-cart-plus"></i> Ingresos</a>
                             </li>
                         </ul>
                         <ul>

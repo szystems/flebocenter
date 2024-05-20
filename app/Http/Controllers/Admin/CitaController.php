@@ -153,7 +153,7 @@ class CitaController extends Controller
 
     public function show($id)
     {
-        $cita = cITA::find($id);
+        $cita = Cita::find($id);
         return view('admin.cita.show', compact('cita'));
     }
 

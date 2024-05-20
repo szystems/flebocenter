@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ArticuloFormRequest extends FormRequest
+class IngresoFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,15 +24,17 @@ class ArticuloFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'nombre' => 'required|string|max:255',
-            'codigo' => 'nullable',
-            'imagen' => 'nullable|mimes:jpeg,png,jpg,gif,svg,bmp|max:2048',
-            'descripcion' => 'nullable|string',
+            'fecha' => 'required|date',
+            'proveedor_id' => 'required|exists:proveedores,id',
+            'tipo_comprobante' => 'string|max:255',
+            'serie_comprobante' => 'string|max:255',
+            'numero_comprobante' => 'string|max:255',
+            'tipo_pago' => 'required'|'max:255',
+
+            'articulo_id' => 'required|exists:articulos,id',
+            'cantidad' => 'required|integer|min:1',
             'precio_compra' => 'required|numeric|min:0',
             'precio_venta' => 'required|numeric|min:0',
-            'stock' => 'required|integer|min:0',
-            'categoria_id' => 'required|integer|exists:categorias,id',
-            'proveedor_id' => 'required|integer|exists:proveedors,id'
         ];
     }
 }
