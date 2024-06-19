@@ -11,6 +11,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AsistenteController;
 use App\Http\Controllers\Admin\PacienteController;
 use App\Http\Controllers\Admin\RecetaController;
+use App\Http\Controllers\Admin\HistoriaController;
+use App\Http\Controllers\Admin\DocumentoController;
+use App\Http\Controllers\Admin\TerapiaController;
 use App\Http\Controllers\Admin\ClinicaController;
 use App\Http\Controllers\Admin\CitaController;
 use App\Http\Controllers\Admin\CategoriaController;
@@ -77,8 +80,34 @@ Route::middleware(['auth'])->group(function () {
 
     //Recetas
     Route::post('insert-receta', [RecetaController::class, 'insert']);
-    Route::put('update-receta/{id}', [RecetaController::class, 'update'])->name('update-receta');;
+    Route::put('update-receta/{id}', [RecetaController::class, 'update'])->name('update-receta');
     Route::get('delete-receta/{id}', [RecetaController::class, 'delete']);
+
+    //Historia
+    Route::get('edit-historia/{id}',[HistoriaController::class,'edit']);
+    Route::put('update-historia/{id}', [HistoriaController::class, 'update']);
+    Route::post('upload_imagen_historia', [HistoriaController::class, 'uploadimagen']);
+
+    //Documentos
+    Route::get('show-documento/{id}', [DocumentoController::class, 'show']);
+    Route::post('insert-documento', [DocumentoController::class, 'insert']);
+    Route::put('update-documento/{id}', [DocumentoController::class, 'update']);
+    Route::get('delete-documento/{id}', [DocumentoController::class, 'destroy']);
+
+    //Terapia
+    Route::get('show-terapia/{id}', [TerapiaController::class, 'show']);
+    Route::post('insert-terapia', [TerapiaController::class, 'insert']);
+    Route::put('update-terapia/{id}', [TerapiaController::class, 'update']);
+    Route::get('delete-terapia/{id}', [TerapiaController::class, 'destroy']);
+    Route::post('upload_imagen_terapia', [TerapiaController::class, 'uploadimagen']);
+
+    Route::post('insert-sesion-derecha', [TerapiaController::class, 'insertsesionderecha']);
+    Route::put('update-sesion-derecha/{id}', [TerapiaController::class, 'updatesesionderecha']);
+    Route::get('delete-sesion-derecha/{id}', [TerapiaController::class, 'destroysesionderecha']);
+
+    Route::post('insert-sesion-izquierda', [TerapiaController::class, 'insertsesionizquierda']);
+    Route::put('update-sesion-izquierda/{id}', [TerapiaController::class, 'updatesesionizquierda']);
+    Route::get('delete-sesion-izquierda/{id}', [TerapiaController::class, 'destroysesionizquierda']);
 
     //Clínicas
     Route::get('clinicas', [ClinicaController::class, 'index']);

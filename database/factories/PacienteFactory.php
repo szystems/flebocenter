@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Paciente;
+use App\Models\Historia;
+use Database\Factories\HistoriaFactory;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 
@@ -41,4 +44,18 @@ class PacienteFactory extends Factory
             'updated_at' => now()
         ];
     }
+
+    /**
+     * Configure the model factory.
+     *
+     * @return $this
+     */
+    // public function configure()
+    // {
+    //     return $this->afterCreating(function (Paciente $paciente) {
+    //         Historia::factory()->create([
+    //             'paciente_id' => $paciente->id,
+    //         ]);
+    //     });
+    // }
 }

@@ -45,4 +45,18 @@ class Paciente extends Model
         // Aquí puedes añadir otros casts si es necesario, por ejemplo:
         // 'email_verified_at' => 'datetime',
     ];
+
+    public function historia()
+    {
+        return $this->hasOne(Historia::class);
+    }
+
+    protected static function booted()
+    {
+        parent::booted();
+
+        static::saved(function (Paciente $paciente) {
+            $paciente->historia()->save(new Historia());
+        });
+    }
 }

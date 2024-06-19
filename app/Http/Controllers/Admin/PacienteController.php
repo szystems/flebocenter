@@ -8,6 +8,10 @@ use App\Models\Paciente;
 use App\Models\Cita;
 use App\Models\Receta;
 use App\Http\Requests\PacienteFormRequest;
+use App\Models\Historia;
+use App\Http\Requests\HistoriaFormRequest;
+use App\Models\Documento;
+use App\Models\Terapia;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\Config;
@@ -46,7 +50,11 @@ class PacienteController extends Controller
         $paciente = Paciente::find($id);
         $recetas = Receta::where('paciente_id',$id)->orderBy('created_at', 'desc')->get();
         $citas = Cita::Where('paciente_id',$paciente->id)->orderBy('fecha_cita','desc')->get();
-        return view('admin.paciente.show', compact('paciente','citas','recetas'));
+        $historia = Historia::where('paciente_id', $paciente->id)->first();
+        $documentos = Documento::Where('paciente_id',$paciente->id)->orderBy('created_at','desc')->get();
+        $terapias = Terapia::Where('paciente_id',$paciente->id)->orderBy('created_at','desc')->get();
+        // dd($historia);
+        return view('admin.paciente.show', compact('paciente','citas','recetas','historia','documentos','terapias'));
     }
 
     public function add()
@@ -79,6 +87,9 @@ class PacienteController extends Controller
         $paciente->dpi = $request->input('dpi');
         $paciente->nit = $request->input('nit');
         $paciente->save();
+
+        // $historia = new Historia();
+        // $historia->save();
 
         return redirect('show-paciente/'.$paciente->id)->with('status', __('Paciente agregado  correctamente!'));
     }
