@@ -32,7 +32,7 @@
                             <div class="custom-tabs-container">
                                 <div class="col-12 col-md-auto float-end">
                                     <div class="btn-group-sm m-3">
-                                        <a href="{{ url('edit-ingreso/'.$ingreso->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
+                                        {{-- <a href="{{ url('edit-ingreso/'.$ingreso->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a> --}}
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $ingreso->id }}">
                                             <i class="bi bi-trash"></i> Eliminar
                                         </button>
@@ -49,12 +49,24 @@
                                     <div class="tab-pane fade show active" id="oneA" role="tabpanel">
                                         <!-- Row start -->
                                         <div class="row gx-3">
+
+                                            @if (count($errors)>0)
+                                                <div class="alert alert-danger text-white" role="alert">
+                                                    <ul>
+                                                        @foreach ($errors->all() as $error)
+                                                            <li>{{$error}}</li>
+                                                        @endforeach
+                                                    </ul>
+                                                </div>
+
+                                            @endif
+
                                             <div class="col-sm-12 col-12">
                                                 <div class="row gx-3">
 
-                                                            <h4>Ingreso</h4>
+                                                    <h4>Ingreso</h4>
                                                     <hr>
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <!-- Form Field Start -->
                                                         <div class="mb-3">
                                                             <label for="fecha" class="form-label">Fecha</label>
@@ -65,7 +77,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <!-- Form Field Start -->
                                                         <div class="mb-3">
                                                             <label for="codigo" class="form-label">Proveedor</label>
@@ -73,7 +85,7 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3 mb-3">
+                                                    <div class="col-md-4 mb-3">
                                                         <!-- Form Field Start -->
                                                         <div class="mb-3">
                                                             <label for="categoria" class="form-label">Comprobante</label>
@@ -81,11 +93,38 @@
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-3 mb-3">
+                                                    @php
+                                                        $saldo = $total - $totalAbonado;
+                                                    @endphp
+                                                    <div class="col-md-4 mb-3">
                                                         <!-- Form Field Start -->
                                                         <div class="mb-3">
-                                                            <label for="proveedor" class="form-label">Tipo Pago</label>
-                                                            <p>{{ $ingreso->tipo_pago }}</p>
+                                                            <label for="categoria" class="form-label">Pagado/Saldo</label>
+                                                            <p><strong class="text-success">Q.{{ number_format($totalAbonado,2, '.', ',') }}</strong>/<strong class="text-warning">Q.{{ number_format($saldo,2, '.', ',') }}</strong></p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 mb-3">
+                                                        <!-- Form Field Start -->
+                                                        <div class="mb-3">
+                                                            <label for="saldo" class="form-label">Estado Saldo</label>
+                                                            <p>
+                                                                @if($total > $totalAbonado)
+                                                                    <span class="badge shade-light-yellow">Pendiente</span>
+
+                                                                @elseif ($total <= $totalAbonado)
+                                                                    <span class="badge shade-light-green">Pagado</span>
+                                                                @endif
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+
+                                                    <div class="col-md-4 mb-3">
+                                                        <!-- Form Field Start -->
+                                                        <div class="mb-3">
+                                                            <label for="categoria" class="form-label">Total</label>
+                                                            <p><p><strong class="text-blue">Q.{{ number_format($total,2, '.', ',') }}</strong></p></p>
                                                         </div>
                                                     </div>
 
@@ -121,9 +160,9 @@
                                                                                         <a class="text-primary" href="{{ url('show-articulo/'.$detalle->articulo->id) }}"><b>{{ $detalle->articulo->nombre }}</b></a>
                                                                                         <br>
                                                                                         <small>
-                                                                                            <a class="text-secondary" href="{{ url('show-categoria/'.$detalle->articulo->categoria->id) }}"><b>{{ $detalle->articulo->categoria->nombre }}</b></a>
+                                                                                            Categoría: <a class="text-secondary" href="{{ url('show-categoria/'.$detalle->articulo->categoria->id) }}"><b>{{ $detalle->articulo->categoria->nombre }}</b></a>
                                                                                             <br>
-                                                                                            <a class="text-yellow" href="{{ url('show-articulo/'.$detalle->articulo->proveedor->id) }}"><b>{{ $detalle->articulo->proveedor->nombre }}</b></a>
+                                                                                            Proveedor: <a class="text-yellow" href="{{ url('show-proveedor/'.$detalle->articulo->proveedor->id) }}"><b>{{ $detalle->articulo->proveedor->nombre }}</b></a>
                                                                                         </small>
                                                                                     </p>
 
@@ -165,12 +204,92 @@
                                                                                 <span class="input-group-text">{{ $config->currency_simbol }}.</span>
                                                                                 <span class="input-group-text text-danger"><strong><h3>{{ number_format($total,2, '.', ',') }}</h3></strong></span>
                                                                             </div> --}}
-                                                                            <p><strong class="text-secondary">Total: </strong><strong class="text-danger">{{ $config->currency_simbol }}.{{ number_format($total,2, '.', ',') }}</strong></p>
+                                                                            <h4><strong class="text-secondary">Total: </strong><strong class="text-warning">{{ $config->currency_simbol }}.{{ number_format($total,2, '.', ',') }}</strong></h4>
                                                                         </td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
                                                             {{-- {{ $ingresos->links() }} --}}
+                                                        </div>
+
+                                                        <h4>Pagos</h4>
+                                                        <hr>
+
+                                                        <div class="col-md-4 mb-3">
+                                                            <!-- Form Field Start -->
+                                                            <div class="mb-3">
+                                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                                    data-bs-target="#addPagoModal">
+                                                                    <i class="bi bi-plus-square"></i> Agregar Pago
+                                                                </button>
+                                                            </div>
+                                                        </div>
+
+
+                                                        <br>
+
+                                                        @include('admin.ingreso.addpagomodal')
+
+                                                        <div class="table-responsive">
+                                                            <table class="table align-middle table-striped flex-column">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <td align="center"><i class="bi bi-list-task"></i></td>
+                                                                        <td align="center">fecha</td>
+                                                                        <td align="center">Cantidad</td>
+                                                                        <td align="center">Tipo Pago</td>
+                                                                        <td align="center">Imagen</td>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @foreach ($pagos as $pago)
+                                                                    <tr>
+                                                                        <td align="center">
+
+                                                                            {{-- <a type="button" class="btn btn-info m-1" href="{{ asset('assets/uploads/pagos/'.$doc->archivo) }}" target="_blank"><i class="bi bi-eye-fill text-white"></i></a> --}}
+
+                                                                            <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                                                data-bs-target="#editarPagoModal{{ $pago->id }}">
+                                                                                <i class="bi bi-pencil"></i>
+                                                                            </button>
+
+                                                                            <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePagoModal-{{ $pago->id }}">
+                                                                                <i class="bi bi-trash-fill text-white"></i>
+                                                                            </button>
+
+                                                                        </td>
+                                                                        <td align="center">
+                                                                            @php
+                                                                                $fecha = date('d/m/Y', strtotime($pago->created_at));
+                                                                            @endphp
+                                                                            <p>{{ $fecha }}</p>
+                                                                        </td>
+                                                                        <td align="center">
+                                                                            <p><strong>{{ $config->currency_simbol }}.{{ number_format($pago->cantidad,2, '.', ',') }}</strong></p>
+                                                                        </td>
+                                                                        <td align="center">
+                                                                            <p>{{ $pago->tipo_pago }}</p>
+                                                                        </td>
+                                                                        <td align="center">
+                                                                            @if ($pago->imagen)
+                                                                                <a href="{{ asset('assets/imgs/pagos/'.$pago->imagen) }}" target="_blank" rel="Imagen pago"><img src="{{ asset('assets/imgs/pagos/'.$pago->imagen) }}" class="img-thumbnail" style="height: 100px;" alt="Imagen pago" /></a>
+                                                                            @endif
+                                                                        </td>
+
+                                                                    </tr>
+                                                                    @include('admin.ingreso.editpagomodal')
+                                                                    @include('admin.ingreso.deletepagomodal')
+                                                                    @endforeach
+                                                                </tbody>
+                                                            </table>
+                                                            @if ($pagos->count() == 0)
+                                                                <div class="alert alert-warning text-white" role="alert">
+                                                                    <ul align="center">
+                                                                        <p>No se han ingresado documentos.</p>
+                                                                    </ul>
+                                                                </div>
+                                                            @endif
+                                                            {{-- {{ $Movimientos->links() }} --}}
                                                         </div>
 
                                                     </div>

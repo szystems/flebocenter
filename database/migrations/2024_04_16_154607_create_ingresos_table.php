@@ -17,10 +17,9 @@ class CreateIngresosTable extends Migration
             $table->id();
             $table->date('fecha');
             $table->unsignedBigInteger('proveedor_id');
-            $table->string('tipo_comprobante');
-            $table->string('serie_comprobante');
-            $table->string('numero_comprobante');
-            $table->string('tipo_pago');
+            $table->string('tipo_comprobante')->nullable();
+            $table->string('serie_comprobante')->nullable();
+            $table->string('numero_comprobante')->nullable();
             $table->timestamps();
         });
     }

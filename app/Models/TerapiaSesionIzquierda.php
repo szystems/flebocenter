@@ -9,6 +9,10 @@ class TerapiaSesionIzquierda extends Model
 {
     use HasFactory;
 
+    protected $table = 'terapia_sesion_izquierdas';
+
+    protected $primaryKey='id';
+
     protected $fillable = [
         'terapia_id',
         'antes1',

@@ -19,6 +19,7 @@ class Articulo extends Model
         'precio_compra',
         'precio_venta',
         'stock',
+        'stock_minimo',
         'categoria_id',
         'proveedor_id'
     ];
@@ -31,6 +32,11 @@ class Articulo extends Model
     public function proveedor()
     {
         return $this->belongsTo(Proveedor::class);
+    }
+
+    public function paciente()
+    {
+        return $this->belongsTo(Paciente::class);
     }
 
 }

@@ -32,11 +32,11 @@ class LoginController extends Controller
     {
         if(Auth::user()->role_as == '0') //1 = Admin Login
         {
-            return redirect('dashboard')->with('status',__('Bienvenido Doctor a Flebo Center'));
+            return redirect('dashboard')->with('status',__('Bienvenido Doctor a FLEBOCENTER'));
         }
         elseif(Auth::user()->role_as == '1') // Normal or Default User Login
         {
-            return redirect('dashboard')->with('status',__('Bienvenido Usuario a Flebo Center'));
+            return redirect('dashboard')->with('status',__('Bienvenido Usuario a FLEBOCENTER'));
         }
     }
 

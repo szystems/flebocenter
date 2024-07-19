@@ -25,6 +25,7 @@ class ProveedorFormRequest extends FormRequest
     {
         return [
             'nombre' => 'required|string|max:255|',
+            'nit' => 'nullable|string|max:17',
             'contacto' => 'nullable|string|max:255',
             'telefono' => 'nullable|string|max:255',
             'celular' => 'nullable|string|max:255',

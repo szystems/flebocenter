@@ -207,23 +207,23 @@
                     </a>
                 </div>
                 <hr>
-                <div class="col-xxl-3 col-sm-6 col-12">
-                    <a href="{{ url('') }}">
+                {{-- <div class="col-xxl-3 col-sm-6 col-12">
+                    <a href="{{ url('inventario') }}">
                         <div class="stats-tile d-flex align-items-center position-relative tile-blue">
                             <div class="sale-icon icon-box xl rounded-5 me-3">
                                 <i class="bi bi-inboxes font-2x text-blue"></i>
                             </div>
                             <div class="sale-details">
                                 <h5 class="text-light"><u>Inventario</u></h5>
-                                {{-- <h3>95%</h3> --}}
+                                <h3>95%</h3>
                             </div>
                             <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
-                                {{-- <i class="bi bi-arrow-down-circle-fill font-1x"></i>
-                                <span>9%</span> --}}
+                                <i class="bi bi-arrow-down-circle-fill font-1x"></i>
+                                <span>9%</span>
                             </div>
                         </div>
                     </a>
-                </div>
+                </div> --}}
                 <div class="col-xxl-3 col-sm-6 col-12">
                     <a href="#">
                         <div class="stats-tile d-flex align-items-center position-relative tile-blue">
@@ -236,9 +236,9 @@
                                 <br>
                                 <a href="{{ url('categorias') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-diagram-3"></i> <u>Categorías</u></a>
                             </div>
-                            <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
+                            {{-- <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
 
-                            </div>
+                            </div> --}}
                         </div>
                     </a>
                 </div>
@@ -254,9 +254,9 @@
                                 <br>
                                 <a href="{{ url('proveedores') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-person-video2"></i> <u>Proveedores</u></a>
                             </div>
-                            <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
+                            {{-- <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
 
-                            </div>
+                            </div> --}}
                         </div>
                     </a>
                 </div>
@@ -268,13 +268,13 @@
                             </div>
                             <div class="sale-details">
                                 <h6 class="text-light">Ventas</h6>
-                                <a href="{{ url('') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-cash-stack"></i> <u>Ventas</u></a>
-                                {{-- <br>
-                                <a href="{{ url('') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-cash"></i> <u>Cotizaciones</u></a> --}}
+                                <a href="{{ url('ventas') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-cash-stack"></i> <u>Ventas</u></a>
+                                <br>
+                                <a href="{{ url('inventario') }}" class="text-primary"><i class="bi bi-chevron-compact-right"></i> <i class="bi bi-inboxes"></i> <u>Inventario</u></a>
                             </div>
-                            <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
+                            {{-- <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
 
-                            </div>
+                            </div> --}}
                         </div>
                     </a>
                 </div>
@@ -289,10 +289,10 @@
                                 <h6 class="text-light">Configuración</h6>
                                 {{-- <h3>368</h3> --}}
                             </div>
-                            <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold yellow">
-                                {{-- <i class="bi bi-arrow-up-circle-fill font-1x"></i>
-                                <span>5%</span> --}}
-                            </div>
+                            {{-- <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold yellow">
+                                <i class="bi bi-arrow-up-circle-fill font-1x"></i>
+                                <span>5%</span>
+                            </div> --}}
                         </div>
                     </a>
                 </div>

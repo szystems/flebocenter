@@ -25,16 +25,17 @@ class IngresoFormRequest extends FormRequest
     {
         return [
             'fecha' => 'required|date',
-            'proveedor_id' => 'required|exists:proveedores,id',
-            'tipo_comprobante' => 'string|max:255',
-            'serie_comprobante' => 'string|max:255',
-            'numero_comprobante' => 'string|max:255',
-            'tipo_pago' => 'required'|'max:255',
+            'proveedor_id' => 'required|exists:proveedors,id',
+            'tipo_comprobante' => 'nullable|string|max:255',
+            'serie_comprobante' => 'nullable|string|max:255',
+            'numero_comprobante' => 'nullable|string|max:255',
 
-            'articulo_id' => 'required|exists:articulos,id',
-            'cantidad' => 'required|integer|min:1',
-            'precio_compra' => 'required|numeric|min:0',
-            'precio_venta' => 'required|numeric|min:0',
+            'idarticulo' => 'required|exists:articulos,id',
+            'cantidad' => 'required',
+            'precio_compra' => 'required',
+            'precio_venta' => 'required',
+
+            'tipo_pago' => 'required|string',
         ];
     }
 }

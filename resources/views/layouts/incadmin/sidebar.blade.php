@@ -100,12 +100,12 @@
                         <span class="menu-text">Clínicas</span>
                     </a>
                 </li>
-                <li class="{{ Request::is('inventario') ? 'active-page-link':''  }}">
-                    <a href="{{ url('') }}">
+                {{-- <li class="{{ Request::is('inventario') ? 'active-page-link':''  }}">
+                    <a href="{{ url('inventario') }}">
                         <i class="bi bi-inboxes"></i>
                         <span class="menu-text">Inventario</span>
                     </a>
-                </li>
+                </li> --}}
                 <li class="sidebar-dropdown">
                     <a href="#">
                         <i class="bi bi-boxes"></i>
@@ -153,14 +153,14 @@
                     <div class="sidebar-submenu">
                         <ul>
                             <li class="{{ Request::is('ventas','show-venta/*','add-venta','edit-venta/*') ? 'active-page-link':''  }}">
-                                <a href="{{ url('') }}"><i class="bi bi-cash-stack"></i> Ventas</a>
+                                <a href="{{ url('ventas') }}"><i class="bi bi-cash-stack"></i> Ventas</a>
                             </li>
                         </ul>
-                        {{-- <ul>
-                            <li class="{{ Request::is('cotizaciones','show-cotizacion/*','add-cotizacion','edit-cotizacion/*') ? 'active-page-link':''  }}">
-                                <a href="{{ url('') }}"><i class="bi bi-person-video2"></i> Cotizaciones</a>
+                        <ul>
+                            <li class="{{ Request::is('inventario') ? 'active-page-link':''  }}">
+                                <a href="{{ url('inventario') }}"><i class="bi bi-inboxes"></i> Inventario</a>
                             </li>
-                        </ul> --}}
+                        </ul>
                     </div>
                 </li>
                 <li class="{{ Request::is('config') ? 'active-page-link':''  }}">

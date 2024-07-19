@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Flebo Center</title>
+    <title>FLEBOCENTER</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="Free HTML Templates" name="keywords">
     <meta content="Free HTML Templates" name="description">
@@ -186,7 +186,7 @@
         <div class="container">
             <div class="row g-0">
                 <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="https://flebocenter.com">Flebo Center</a>. Todos los derechos reservados.</p>
+                    <p class="mb-md-0">&copy; <a class="text-white border-bottom" href="{{ url('/') }}">FLEBOCENTER</a>. Todos los derechos reservados.</p>
                 </div>
                 <div class="col-md-6 text-center text-md-end">
                     <p class="mb-0">Diseñado por <a class="text-white border-bottom" href="https://szystems.com">Szystems</a></p>

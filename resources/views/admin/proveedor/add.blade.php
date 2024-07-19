@@ -56,7 +56,7 @@
                                                     @csrf
                                                     <div class="row gx-3">
 
-                                                        <div class="col-md-12 mb-3">
+                                                        <div class="col-md-8 mb-3">
                                                             <!-- Form Field Start -->
                                                             <div class="mb-3">
                                                                 <label for="nombre" class="form-label">Nombre del Proveedor</label>
@@ -65,6 +65,21 @@
                                                                     <span class="help-block opacity-7">
                                                                             <strong>
                                                                                 <font color="red">{{ $errors->first('nombre') }}</font>
+                                                                            </strong>
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-4 mb-3">
+                                                            <!-- Form Field Start -->
+                                                            <div class="mb-3">
+                                                                <label for="nit" class="form-label">NIT</label>
+                                                                <input name="nit" type="text" class="form-control" placeholder="# de NIT..." value="{{ old('nit') }}" />
+                                                                @if ($errors->has('nit'))
+                                                                    <span class="help-block opacity-7">
+                                                                            <strong>
+                                                                                <font color="red">{{ $errors->first('nit') }}</font>
                                                                             </strong>
                                                                     </span>
                                                                 @endif

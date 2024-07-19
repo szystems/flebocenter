@@ -19,6 +19,7 @@ class ConfigsTableSeeder extends Seeder
             'currency_iso' => 'GTQ',
             'currency_simbol' => 'Q',
             'email' => 'oszarata@szystems.com',
+            'descuento_maximo' => '50.00',
         ]);
     }
 }

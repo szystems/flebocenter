@@ -27,7 +27,6 @@ class IngresoFactory extends Factory
             'tipo_comprobante' => $this->faker->randomElement($tiposComprobantes),
             'serie_comprobante' => $this->faker->numberBetween(0, 100),
             'numero_comprobante' => $this->faker->numberBetween(0, 100),
-            'tipo_pago' => $this->faker->randomElement($tiposPagos),
         ];
     }
 }

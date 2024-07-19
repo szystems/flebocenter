@@ -22,6 +22,7 @@ class CreateArticulosTable extends Migration
             $table->decimal('precio_compra', 8, 2)->default(0.00);
             $table->decimal('precio_venta', 8, 2)->default(0.00);
             $table->integer('stock')->default(0);
+            $table->integer('stock_minimo')->default(0);
             $table->bigInteger('categoria_id');
             $table->bigInteger('proveedor_id');
             $table->tinyInteger('estado')->default(true);

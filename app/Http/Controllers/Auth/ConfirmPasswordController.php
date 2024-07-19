@@ -32,11 +32,11 @@ class ConfirmPasswordController extends Controller
     {
         if(Auth::user()->role_as == '0') //0 = Admin Login
         {
-            return redirect('dashboard')->with('status',__('Bienvenido Doctor al panel de Flebo Center'));
+            return redirect('dashboard')->with('status',__('Bienvenido Doctor al panel de FLEBOCENTER'));
         }
         elseif(Auth::user()->role_as == '1') // 1 Normal or Default User Login
         {
-            return redirect('dashboard')->with('status',__('Bienvenido al panel de Flebo Center'));
+            return redirect('dashboard')->with('status',__('Bienvenido al panel de FLEBOCENTER'));
         }
     }
 

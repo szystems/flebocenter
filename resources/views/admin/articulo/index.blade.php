@@ -47,8 +47,8 @@
                                         <tr>
                                             <td align="center"><i class="bi bi-list-task"></i></td>
                                             <td>Articulo</td>
-                                            <td align="center">Precio</td>
-                                            <td>Stock</td>
+                                            {{-- <td align="center">Precio</td>
+                                            <td>Stock</td> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -77,29 +77,29 @@
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     @if ($articulo->imagen != null)
-                                                        <img src="{{ asset('assets/imgs/articulos/'.$articulo->imagen) }}" class="img-4x rounded-2 me-3" alt="Artículos" />
+                                                    <a class="text-primary" href="{{ url('show-articulo/'.$articulo->id) }}"><img src="{{ asset('assets/imgs/articulos/'.$articulo->imagen) }}" class="img-4x rounded-2 me-3" alt="Artículos" /></a>
                                                     @else
-                                                        <img src="{{ asset('assets/imgs/articulos/default.png') }}" class="img-4x rounded-2 me-3" alt="Artículos" />
+                                                    <a class="text-primary" href="{{ url('show-articulo/'.$articulo->id) }}"><img src="{{ asset('assets/imgs/articulos/default.png') }}" class="img-4x rounded-2 me-3" alt="Artículos" /></a>
                                                     @endif
 
                                                     <p class="m-0">
-                                                        <a class="text-primary" href="{{ url('show-articulo/'.$articulo->id) }}"><b>{{ $articulo->nombre }}</b></a>
+                                                        <a class="text-primary" href="{{ url('show-articulo/'.$articulo->id) }}"><font color="gray"><small>{{ $articulo->codigo }}</small></font> <b>{{ $articulo->nombre }}</b></a>
                                                         <br>
                                                         <small>
-                                                            <a class="text-secondary" href="{{ url('show-categoria/'.$articulo->categoria->id) }}"><b>{{ $articulo->categoria->nombre }}</b></a>
+                                                            Categoría: <a class="text-secondary" href="{{ url('show-categoria/'.$articulo->categoria->id) }}"><b>{{ $articulo->categoria->nombre }}</b></a>
                                                             <br>
-                                                            <a class="text-yellow" href="{{ url('show-articulo/'.$articulo->proveedor->id) }}"><b>{{ $articulo->proveedor->nombre }}</b></a>
+                                                            Proveedor: <a class="text-yellow" href="{{ url('show-articulo/'.$articulo->proveedor->id) }}"><b>{{ $articulo->proveedor->nombre }}</b></a>
                                                         </small>
                                                     </p>
 
                                                 </div>
                                             </td>
-                                            <td align="center">
+                                            {{-- <td align="center">
                                                 Compra: <small class=" text-yellow"><strong>{{ $config->currency_simbol }}.{{ number_format($articulo->precio_compra, 2, '.', ',') }}</strong></small>
                                                 <br>
                                                 Venta: <small class=" text-success"><strong>{{ $config->currency_simbol }}.{{ number_format($articulo->precio_venta, 2, '.', ',') }}</strong></small>
                                             </td>
-                                            <td>{{ $articulo->stock }}</td>
+                                            <td>Stock: <strong>{{ $articulo->stock }}</strong> <br> Min: <strong>{{ $articulo->stock_minimo }}</strong></td> --}}
 
                                         </tr>
                                         @include('admin.articulo.deletemodal')

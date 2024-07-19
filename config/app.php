@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Flebo Center'),
+    'name' => env('APP_NAME', 'FLEBOCENTER'),
 
     /*
     |--------------------------------------------------------------------------

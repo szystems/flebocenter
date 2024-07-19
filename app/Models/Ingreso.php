@@ -11,13 +11,16 @@ class Ingreso extends Model
 {
     use HasFactory;
 
+    protected $table = 'ingresos';
+
+    protected $primaryKey='id';
+
     protected $fillable = [
         'fecha',
         'proveedor_id',
         'tipo_comprobante',
         'serie_comprobante',
         'numero_comprobante',
-        'tipo_pago',
     ];
 
     public function proveedor()
@@ -28,5 +31,10 @@ class Ingreso extends Model
     public function detalleIngresos()
     {
         return $this->hasMany(DetalleIngreso::class);
+    }
+
+    public function pago_ingresos()
+    {
+        return $this->hasMany(PagoIngreso::class);
     }
 }

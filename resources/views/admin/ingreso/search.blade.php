@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <!-- Form Field Start -->
                                             <div class="mb-3">
                                                 <label for="tipo_comprobante" class="form-label">Tipo Comprobante</label>
@@ -83,7 +83,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <!-- Form Field Start -->
                                             <div class="mb-3">
                                                 <label for="numero_comprobante" class="form-label">Número Comprobante</label>
@@ -91,21 +91,19 @@
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <!-- Form Field Start -->
                                             <div class="mb-3">
-                                                <label for="tipo_pago" class="form-label">Tipo Pago</label>
-                                                <select name="tipo_pago" class="form-select" aria-label="Default select example">
-                                                    <option value=""{{ request('tipo_pago') == '' ? ' selected' : '' }}>Todos</option>
-                                                    <option value="Efectivo"{{ request('tipo_pago') == 'Efectivo' ? ' selected' : '' }}>Efectivo</option>
-                                                    <option value="Tarjeta"{{ request('tipo_pago') == 'Tarjeta' ? ' selected' : '' }}>Tarjeta</option>
-                                                    <option value="Deposito"{{ request('tipo_pago') == 'Deposito' ? ' selected' : '' }}>Deposito</option>
-                                                    <option value="Transferencia"{{ request('tipo_pago') == 'Transferencia' ? ' selected' : '' }}>Transferencia</option>
+                                                <label for="saldo" class="form-label">Saldo</label>
+                                                <select name="saldo" class="form-select" aria-label="Default select example">
+                                                    <option value=""{{ request('saldo') == '' ? ' selected' : '' }}>Todos</option>
+                                                    <option value="Pagado"{{ request('saldo') == 'Pagado' ? ' selected' : '' }}>Pagado</option>
+                                                    <option value="Pendiente"{{ request('saldo') == 'Pendiente' ? ' selected' : '' }}>Pendiente</option>
                                                 </select>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-2 mb-3">
+                                        <div class="col-md-4 mb-3">
                                             <!-- Form Field Start -->
                                             <div class="mb-3 mt-4">
                                                 <button type="submit" class="btn btn-info">

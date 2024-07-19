@@ -47,6 +47,7 @@
                                         <tr>
                                             <td align="center"><i class="bi bi-list-task"></i></td>
                                             <td>Proveedor</td>
+                                            <td>NIT</td>
                                             <td>Contacto</td>
                                             <td>Banco</td>
                                         </tr>
@@ -74,6 +75,7 @@
                                                     </ul>
                                                 </div>
                                             </td>
+
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <p class="m-0">
@@ -81,6 +83,7 @@
                                                     </p>
                                                 </div>
                                             </td>
+                                            <td><p>{{ $proveedor->nit }}</p></td>
                                             <td>
                                                 <div class="d-flex align-items-center">
 

@@ -31,6 +31,7 @@ class ArticuloFormRequest extends FormRequest
             'precio_compra' => 'required|numeric',
             'precio_venta' => 'required|numeric',
             'stock' => 'required|integer|min:0',
+            'stock_minimo' => 'nullable|integer|min:0',
             'categoria_id' => 'required|integer|exists:categorias,id',
             'proveedor_id' => 'required|integer|exists:proveedors,id'
         ];

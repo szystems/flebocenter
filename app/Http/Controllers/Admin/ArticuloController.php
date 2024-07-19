@@ -19,16 +19,20 @@ class ArticuloController extends Controller
 
     public function index(Request $request)
 	{
+        // dd($request->all());
         if ($request) {
             $articulos = Articulo::query();
-            if ($request->has('nombre')) {
-                $articulos->where('nombre', 'like', "%{$request->input('nombre')}%");
+            if ($request->has('nombre') && $request->input('nombre') !== null) {
+                $articulos->where(function ($query) use ($request) {
+                    $query->where('nombre', 'like', "%{$request->input('nombre')}%")
+                        ->orWhere('codigo', 'like', "%{$request->input('nombre')}%");
+                });
             }
-            if ($request->has('categoria_id')) {
-                $articulos->where('categoria_id', 'like', "%{$request->input('categoria_id')}%");
+            if ($request->has('categoria_id') && $request->input('categoria_id') !== null) {
+                $articulos->where('categoria_id', '=', $request->input('categoria_id'));
             }
-            if ($request->has('proveedor_id')) {
-                $articulos->where('proveedor_id', 'like', "%{$request->input('proveedor_id')}%");
+            if ($request->has('proveedor_id') && $request->input('proveedor_id') !== null) {
+                $articulos->where('proveedor_id', '=', $request->input('proveedor_id'));
             }
             $articulos->where('estado', 1);
             $articulos->orderBy('nombre','asc');
@@ -76,6 +80,7 @@ class ArticuloController extends Controller
         $articulo->precio_compra = $request->input('precio_compra');
         $articulo->precio_venta = $request->input('precio_venta');
         $articulo->stock = $request->input('stock');
+        $articulo->stock_minimo = $request->input('stock_minimo');
         $articulo->categoria_id= $request->input('categoria_id');
         $articulo->proveedor_id = $request->input('proveedor_id');
         $articulo->save();
@@ -115,6 +120,7 @@ class ArticuloController extends Controller
         $articulo->precio_venta = $request->input('precio_venta');
         $articulo->categoria_id= $request->input('categoria_id');
         $articulo->proveedor_id = $request->input('proveedor_id');
+        $articulo->stock_minimo = $request->input('stock_minimo');
         $articulo->update();
 
         return redirect('show-articulo/'.$id)->with('status',__('Articulo  actualizado correctamente!'));

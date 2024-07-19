@@ -26,7 +26,7 @@ class AdminMiddleware
             }
             else
             {
-                return redirect('/dashboard')->with('status','Acceso denegado no eres Usuario de Flebo Center');
+                return redirect('/dashboard')->with('status','Acceso denegado no eres Usuario de FLEBOCENTER');
             }
         }
         else

@@ -19,6 +19,7 @@ class ProveedorController extends Controller
             ->where('estado', '=', 1)
             ->where(function ($query) use ($queryProveedor) {
                 $query->where('nombre', 'LIKE', '%' . $queryProveedor . '%')
+                    ->orWhere('nit', 'LIKE', '%' . $queryProveedor . '%')
                     ->orWhere('contacto', 'LIKE', '%' . $queryProveedor . '%')
                     ->orWhere('email', 'LIKE', '%' . $queryProveedor . '%')
                     ->orWhere('telefono', 'LIKE', '%' . $queryProveedor . '%')
@@ -47,6 +48,7 @@ class ProveedorController extends Controller
     {
         $proveedor = new Proveedor();
         $proveedor->nombre = $request->input('nombre');
+        $proveedor->nit = $request->input('nit');
         $proveedor->contacto = $request->input('contacto');
         $proveedor->telefono = $request->input('telefono');
         $proveedor->celular = $request->input('celular');
@@ -72,6 +74,7 @@ class ProveedorController extends Controller
     {
         $proveedor = Proveedor::find($id);
         $proveedor->nombre = $request->input('nombre');
+        $proveedor->nit = $request->input('nit');
         $proveedor->contacto = $request->input('contacto');
         $proveedor->telefono = $request->input('telefono');
         $proveedor->celular = $request->input('celular');

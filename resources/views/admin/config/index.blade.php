@@ -75,7 +75,7 @@
                                                     @method('PUT')
                                                     <div class="row gx-3">
 
-                                                        <div class="col-md-12 mb-3">
+                                                        <div class="col-md-6 mb-3">
                                                             <!-- Form Field Start -->
                                                             <div class="mb-3">
                                                                 <label for="moneda" class="form-label">Moneda</label>
@@ -89,6 +89,25 @@
                                                                     <span class="help-block opacity-7">
                                                                             <strong>
                                                                                 <font color="red">{{ $errors->first('currency') }}</font>
+                                                                            </strong>
+                                                                    </span>
+                                                                @endif
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-6 mb-3">
+                                                            <!-- Form Field Start -->
+                                                            <div class="mb-3">
+                                                                <label for="descuento_maximo" class="form-label">Descuento Máximo</label>
+                                                                <p class="text-yellow">Define el descuento máximo permitido para una venta.</p>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-text">%</span>
+                                                                    <input name="descuento_maximo" type="number" class="form-control" placeholder="0"  value="{{ $config->descuento_maximo }}">
+                                                                </div>
+                                                                @if ($errors->has('descuento_maximo'))
+                                                                    <span class="help-block opacity-7">
+                                                                            <strong>
+                                                                                <font color="red">{{ $errors->first('descuento_maximo') }}</font>
                                                                             </strong>
                                                                     </span>
                                                                 @endif

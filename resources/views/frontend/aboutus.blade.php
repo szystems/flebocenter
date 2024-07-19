@@ -21,10 +21,10 @@
             <div class="col-lg-7">
                 <div class="section-title mb-4">
                     <h5 class="position-relative d-inline-block text-primary text-uppercase">¿Quiénes somos?</h5>
-                    <h1 class="display-5 mb-0">Flebo Center</h1>
+                    <h1 class="display-5 mb-0">FLEBOCENTER</h1>
                 </div>
                 <h4 class="text-body fst-italic mb-4">Líderes en el tratamiento de enfermedades venosas y linfáticas</h4>
-                <p class="mb-4">En Flebo Center, nos dedicamos apasionadamente a mejorar la salud vascular de nuestros pacientes. Con más de 10 años de experiencia, somos líderes en el tratamiento de enfermedades venosas y linfáticas. Nuestro equipo de especialistas altamente capacitados está comprometido con la excelencia médica y la atención personalizada.</p>
+                <p class="mb-4">En FLEBOCENTER, nos dedicamos apasionadamente a mejorar la salud vascular de nuestros pacientes. Con más de 10 años de experiencia, somos líderes en el tratamiento de enfermedades venosas y linfáticas. Nuestro equipo de especialistas altamente capacitados está comprometido con la excelencia médica y la atención personalizada.</p>
                 <p class="mb-4">Serán gustosamente atendidos por la <strong>Dra. Mirla Rodríguez</strong></p>
                 <div class="row g-3">
                     <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">

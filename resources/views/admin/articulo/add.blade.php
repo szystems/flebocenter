@@ -156,7 +156,7 @@
 
                                                         <hr>
 
-                                                        <div class="col-md-4 mb-3">
+                                                        <div class="col-md-3 mb-3">
                                                             <label class="form-label">Precio Compra</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text">{{ $config->currency_simbol }}.</span>
@@ -165,7 +165,7 @@
                                                             <div id="precio_compra_error" class="invalid-feedback"></div>
                                                         </div>
 
-                                                        <div class="col-md-4 mb-3">
+                                                        <div class="col-md-3 mb-3">
                                                             <label class="form-label">Precio Venta</label>
                                                             <div class="input-group">
                                                                 <span class="input-group-text">{{ $config->currency_simbol }}.</span>
@@ -174,11 +174,19 @@
                                                             <div id="precio_venta_error" class="invalid-feedback"></div>
                                                         </div>
 
-                                                        <div class="col-md-4 mb-3">
+                                                        <div class="col-md-3 mb-3">
                                                             <label class="form-label">Cantidad Inicial (Stock)</label>
                                                             <div class="input-group">
                                                                 {{-- <span class="input-group-text">{{ $config->currency_simbol }}.</span> --}}
-                                                                <input name="stock" type="number" class="form-control" id="stock" min="0" step="1" placeholder="0" value="{{ old('stock') }}">
+                                                                <input name="stock" type="number" class="form-control" id="stock" min="0" step="1" placeholder="0" value="{{ old('stock') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                                            </div>
+                                                            <div id="precio_venta_error" class="invalid-feedback"></div>
+                                                        </div>
+
+                                                        <div class="col-md-3 mb-3">
+                                                            <label class="form-label">Stock Minimo</label>
+                                                            <div class="input-group">
+                                                                <input name="stock_minimo" type="number" class="form-control" id="stock_minimo" min="0" step="1" placeholder="0" value="{{ old('stock_minimo') }}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                                                             </div>
                                                             <div id="precio_venta_error" class="invalid-feedback"></div>
                                                         </div>

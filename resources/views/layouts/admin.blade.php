@@ -7,18 +7,18 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 
 		<!-- Meta -->
-		<meta name="description" content="clinica, flebo center, flebo, citas" />
+		<meta name="description" content="clinica, FLEBOCENTER, flebo, citas" />
 		<meta name="author" content="Szystems" />
 		<link rel="canonical" href="https://www.szystems.com">
 		<meta property="og:url" content="https://www.szystems.com">
-		<meta property="og:title" content="Flebo Center">
+		<meta property="og:title" content="FLEBOCENTER">
 		<meta property="og:description" content="Software de manejo de clinica">
 		<meta property="og:type" content="Web App">
 		<meta property="og:site_name" content="https://www.flebocenter.com">
 		<link rel="shortcut icon" href="assets/imgs/logos/favicon.ico" />
 
 		<!-- Title -->
-		<title>{{ config('app.name', 'Flebo Center') }}</title>
+		<title>{{ config('app.name', 'FLEBOCENTER') }}</title>
 
 		<!-- *************
 			************ Common Css Files *************

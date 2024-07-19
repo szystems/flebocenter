@@ -19,6 +19,7 @@ class ProveedorFactory extends Factory
     {
         return [
             'nombre' => $this->faker->company(),
+            'nit' => $this->faker->optional()->numerify('########-#'),
             'contacto' => $this->faker->name(),
             'telefono' => $this->faker->optional()->phoneNumber(),
             'celular' => $this->faker->optional()->phoneNumber(),

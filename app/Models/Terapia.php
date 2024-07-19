@@ -9,6 +9,10 @@ class Terapia extends Model
 {
     use HasFactory;
 
+    protected $table = 'terapias';
+
+    protected $primaryKey='id';
+
     protected $fillable = [
         'paciente_id',
         'talla_media',

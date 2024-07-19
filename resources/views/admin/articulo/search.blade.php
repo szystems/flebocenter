@@ -34,7 +34,7 @@
                                             <!-- Form Field Start -->
                                             <div class="mb-3">
                                                 <label for="articulo" class="form-label">Articulo</label>
-                                                <input class="form-control" placeholder="Nombre del articulo..." name="nombre" value="{{ old('nombre', request('nombre')) }}"/>
+                                                <input class="form-control" placeholder="Nombre o codígo del articulo..." name="nombre" value="{{ old('nombre', request('nombre')) }}"/>
                                             </div>
                                         </div>
 
@@ -63,6 +63,30 @@
                                                 </select>
                                             </div>
                                         </div>
+
+                                        {{-- <div class="col-md-2 mb-3">
+                                            <!-- Form Field Start -->
+                                            <div class="mb-3">
+                                                <label for="stock" class="form-label">Stock</label>
+                                                <select name="stock" class="form-select" aria-label="Default select example">
+                                                    <option value=""{{ request('stock') == '' ? ' selected' : '' }}>Todos</option>
+                                                    <option value="Con Stock"{{ request('stock') == 'Con Stock' ? ' selected' : '' }}>Con Stock</option>
+                                                    <option value="Sin Stock"{{ request('stock') == 'Sin Stock' ? ' selected' : '' }}>Sin Stock</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-2 mb-3">
+                                            <!-- Form Field Start -->
+                                            <div class="mb-3">
+                                                <label for="stock_minimo" class="form-label">Stock Minimo</label>
+                                                <select name="stock_minimo" class="form-select" aria-label="Default select example">
+                                                    <option value=""{{ request('stock_minimo') == '' ? ' selected' : '' }}>Todos</option>
+                                                    <option value="<="{{ request('stock_minimo') == '<=' ? ' selected' : '' }}><=</option>
+                                                    <option value=">"{{ request('stock_minimo') == '>' ? ' selected' : '' }}>></option>
+                                                </select>
+                                            </div>
+                                        </div> --}}
 
                                         <div class="col-md-2 mb-3">
                                             <!-- Form Field Start -->

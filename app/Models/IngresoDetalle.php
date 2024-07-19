@@ -11,6 +11,10 @@ class IngresoDetalle extends Model
 {
     use HasFactory;
 
+    protected $table = 'ingreso_detalles';
+
+    protected $primaryKey='id';
+
     protected $fillable = [
         'ingreso_id',
         'articulo_id',

@@ -52,11 +52,19 @@
                                             <div class="col-sm-12 col-12">
                                                 <div class="row gx-3">
 
-                                                    <div class="col-md-12 mb-3">
+                                                    <div class="col-md-8 mb-3">
                                                         <!-- Form Field Start -->
                                                         <div class="mb-3">
                                                             <label for="fullName" class="form-label">Nombre</label>
                                                             <p>{{ $proveedor->nombre }}</p>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 mb-3">
+                                                        <!-- Form Field Start -->
+                                                        <div class="mb-3">
+                                                            <label for="fullName" class="form-label">NIT</label>
+                                                            <p>{{ $proveedor->nit }}</p>
                                                         </div>
                                                     </div>
 

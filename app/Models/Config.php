@@ -28,5 +28,6 @@ class Config extends Model
         'inst_link',
         'yt_link',
         'wapp_link',
+        'descuento_maximo'
     ];
 }

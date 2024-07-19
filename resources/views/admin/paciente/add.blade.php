@@ -251,7 +251,7 @@
                                                             <div class="col-md-12 mb-3">
                                                                 <!-- Form Field Start -->
                                                                 <div class="mb-3">
-                                                                    <label class="form-label">Descripción CKEditor 5</label>
+                                                                    <label class="form-label">Descripción</label>
                                                                     {{-- <textarea name="descripcionckeditor" class="form-control" rows="3" placeholder="Descripción de la empresa...">{{ old('descripcionckeditor') }}</textarea> --}}
                                                                     <textarea id="editor" class="form-control border px-2 class" name="contenido" rows="20">{{ old('contenido') }}</textarea>
                                                                     @if ($errors->has('contenido'))

@@ -7,7 +7,7 @@
 
     <!-- Sidebar brand starts -->
     <div class="brand">
-        <a href="index.html" class="logo">
+        <a href="{{ url('dashboard') }}" class="logo">
             <img src="{{ asset('assets/imgs/logos/logopng.png') }}" class="d-none d-md-block me-4" alt="Sapphire Admin Dashboard" />
             <img src="{{ asset('assets/imgs/logos/logoimg.png') }}" class="d-block d-md-none me-4" alt="Sapphire Admin Dashboard" />
         </a>

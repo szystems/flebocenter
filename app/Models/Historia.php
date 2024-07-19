@@ -9,6 +9,10 @@ class Historia extends Model
 {
     use HasFactory;
 
+    protected $table = 'historias';
+
+    protected $primaryKey='id';
+
     protected $fillable = [
         'paciente_id',
         'medico',

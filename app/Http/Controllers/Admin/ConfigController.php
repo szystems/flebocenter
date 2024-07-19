@@ -57,6 +57,7 @@ class ConfigController extends Controller
         $config->inst_link = $request->input('inst_link');
         $config->yt_link = $request->input('yt_link');
         $config->wapp_link = $request->input('wapp_link');
+        $config->descuento_maximo = $request->input('descuento_maximo');
         $config->update();
 
         $request->session()->flash('alert-success', __('Settings updated correctly'));

@@ -19,7 +19,11 @@ use App\Http\Controllers\Admin\CitaController;
 use App\Http\Controllers\Admin\CategoriaController;
 use App\Http\Controllers\Admin\ProveedorController;
 use App\Http\Controllers\Admin\ArticuloController;
+use App\Http\Controllers\Admin\InventarioController;
 use App\Http\Controllers\Admin\IngresoController;
+use App\Http\Controllers\Admin\PagoIngresoController;
+use App\Http\Controllers\Admin\VentaController;
+use App\Http\Controllers\Admin\PagoVentaController;
 use App\Http\Controllers\Admin\ConfigController;
 
 /*
@@ -154,6 +158,9 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-articulo/{id}', [ArticuloController::class, 'update']);
     Route::get('delete-articulo/{id}', [ArticuloController::class, 'destroy']);
 
+    //inventario
+    Route::get('inventario', [InventarioController::class, 'index']);
+
     //Ingresos
     Route::get('ingresos', [IngresoController::class, 'index']);
     Route::get('show-ingreso/{id}', [IngresoController::class, 'show']);
@@ -162,6 +169,29 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-ingreso/{id}',[IngresoController::class,'edit']);
     Route::put('update-ingreso/{id}', [IngresoController::class, 'update']);
     Route::get('delete-ingreso/{id}', [IngresoController::class, 'destroy']);
+
+    //Ingresos Pagos
+    Route::post('insert-pago', [PagoIngresoController::class, 'insert']);
+    Route::put('update-pago/{id}', [PagoIngresoController::class, 'update']);
+    Route::get('delete-pago/{id}', [PagoIngresoController::class, 'destroy']);
+
+
+
+    //Ventas
+    Route::get('ventas', [VentaController::class, 'index']);
+    Route::get('show-venta/{id}', [VentaController::class, 'show']);
+    Route::get('add-venta', [VentaController::class, 'add']);
+    Route::post('insert-venta',[VentaController::class,'insert']);
+    Route::get('edit-venta/{id}',[VentaController::class,'edit']);
+    Route::put('update-venta/{id}', [VentaController::class, 'update']);
+    Route::get('delete-venta/{id}', [VentaController::class, 'destroy']);
+    Route::get('delete-detalle-venta/{id}', [VentaController::class, 'destroydetalle']);
+    Route::post('insert-detalle-venta', [VentaController::class, 'insertdetalle']);
+
+    //Ventas Pagos
+    Route::post('insert-pago-venta', [PagoVentaController::class, 'insert']);
+    Route::put('update-pago-venta/{id}', [PagoVentaController::class, 'update']);
+    Route::get('delete-pago-venta/{id}', [PagoVentaController::class, 'destroy']);
 
     //config
     Route::get('config', [ConfigController::class, 'index']);

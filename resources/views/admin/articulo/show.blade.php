@@ -138,6 +138,14 @@
                                                         <div id="precio_venta_error" class="invalid-feedback"></div>
                                                     </div>
 
+                                                    <div class="col-md-3 mb-3">
+                                                        <label class="form-label">Stock Minimo</label>
+                                                        <div class="input-group">
+                                                            <p><strong>{{ $articulo->stock_minimo }}</strong></p>
+                                                        </div>
+                                                        <div id="precio_venta_error" class="invalid-feedback"></div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>

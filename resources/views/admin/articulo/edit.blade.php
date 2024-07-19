@@ -191,6 +191,21 @@
                                                                 @endif
                                                         </div>
 
+                                                        <div class="col-md-4 mb-3">
+                                                            <label class="form-label">Stock Minimo</label>
+                                                            <div class="input-group">
+                                                                <input name="stock_minimo" type="number" class="form-control" id="stock_minimo" min="0" step="1" placeholder="0" value="{{ $articulo->stock_minimo }}" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                                                            </div>
+                                                            <div id="precio_venta_error" class="invalid-feedback"></div>
+                                                            @if ($errors->has('stock_minimo'))
+                                                                <span class="help-block opacity-7">
+                                                                        <strong>
+                                                                            <font color="red">{{ $errors->first('stock_minimo') }}</font>
+                                                                        </strong>
+                                                                </span>
+                                                            @endif
+                                                        </div>
+
                                                     </div>
                                                     <div class="d-flex gap-2 justify-content-center">
                                                         <a href="{{ url('articulos') }}" type="button" class="btn btn-danger">
