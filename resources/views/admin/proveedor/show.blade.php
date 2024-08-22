@@ -32,6 +32,9 @@
                             <div class="custom-tabs-container">
                                 <div class="col-12 col-md-auto float-end">
                                     <div class="btn-group-sm m-3">
+                                        <a target="_blank" href="{{ url('pdf-proveedor/'.$proveedor->id) }}" type="button" class="btn btn-info">
+                                            <i class="bi bi-printer"></i> Imprimir
+                                        </a>
                                         <a href="{{ url('edit-proveedor/'.$proveedor->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $proveedor->id }}">
                                             <i class="bi bi-trash"></i> Eliminar

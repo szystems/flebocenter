@@ -41,6 +41,7 @@ class ArticuloController extends Controller
             $categorias = Categoria::where('estado', 1)->get();
             $proveedores = Proveedor::where('estado', 1)->get();
             $config = Config::first();
+            $filtros = $request->all();
 
             return view('admin.articulo.index',compact("request", "articulos", "config","categorias", "proveedores"));
         }
@@ -131,5 +132,128 @@ class ArticuloController extends Controller
         $articulo = Articulo::find($id);
         $articulo->delete();
         return redirect('articulos')->with('status',__('Articulo eliminado correctamente.'));
+    }
+
+    public function printarticulos(Request $request)
+    {
+        // dd($request);
+        if ($request)
+        {
+            $farticulo = $request->input('articulo_imprimir');
+            $fcategoria = $request->input('categoria_imprimir');
+            $fproveedor = $request->input('proveedor_imprimir');
+
+            $articulos = Articulo::query();
+            if ($farticulo && $farticulo !== null) {
+                $articulos->where(function ($query) use ($farticulo) {
+                    $query->where('nombre', 'like', "%{$farticulo}%")
+                        ->orWhere('codigo', 'like', "%{$farticulo}%");
+                });
+            }
+            if ($fcategoria && $fcategoria !== null) {
+                $articulos->where(function ($query) use ($fcategoria) {
+                    $query->where('categoria_id', '=', $fcategoria);
+                });
+            }
+            if ($fproveedor && $fproveedor !== null) {
+                $articulos->where(function ($query) use ($fproveedor) {
+                    $query->where('proveedor_id', '=', $fproveedor);
+                });
+            }
+            $articulos->where('estado', 1);
+            $articulos->orderBy('nombre','asc');
+            $articulos = $articulos->get();
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+            $patharticulo = public_path('assets/imgs/articulos/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.articulo.pdfarticulos', compact('imagen','articulos','request','config','patharticulo'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Listado de Articulos-'.$nompdf.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.articulo.pdfarticulos', compact('imagen','articulos','request','config','patharticulo'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Listado de Articulos-'.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function printarticulo(Request $request)
+    {
+        // dd($request);
+        if ($request)
+        {
+            $articulo = Articulo::find($request->input('articulo_id'));
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+            $patharticulo = public_path('assets/imgs/articulos/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.articulo.pdfarticulo', compact('imagen','articulo','config','patharticulo'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Articulo: '.$articulo->nombre.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.articulo.pdfarticulo', compact('imagen','articulo','config','patharticulo'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Articulo paciente: '.$articulo->nombre.'.pdf');
+            }
+        }
     }
 }

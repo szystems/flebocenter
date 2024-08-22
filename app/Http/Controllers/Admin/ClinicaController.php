@@ -5,8 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Clinica;
+use App\Models\Config;
 use App\Http\Requests\ClinicaFormRequest;
 use DB;
+use PDF;
 
 class ClinicaController extends Controller
 {
@@ -82,5 +84,88 @@ class ClinicaController extends Controller
         $clinica->estado = 0;
         $clinica->update();
         return redirect('clinicas')->with('status',__('Clínica eliminada correctamente.'));
+    }
+
+    public function pdf(Request $request)
+    {
+        if ($request)
+        {
+
+            $clinicas = Clinica::where('estado',1)->orderBy('nombre','asc')->get();
+            $verpdf = "Browser";
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $config = Config::first();
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+
+            $config = Config::first();
+
+            if ( $verpdf == "Download" )
+            {
+                $pdf = PDF::loadView('admin.clinica.pdf',['clinicas'=>$clinicas,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->download ('Listado Clinicas '.$nompdf.'.pdf');
+            }
+            if ( $verpdf == "Browser" )
+            {
+                $pdf = PDF::loadView('admin.clinica.pdf',['clinicas'=>$clinicas,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->stream ('Listado Clinicas '.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function pdfclinica($id)
+    {
+
+        $clinica = Clinica::find($id);
+        $verpdf = "Browser";
+        $nompdf = date('m/d/Y g:ia');
+        $path = public_path('assets/imgs/');
+
+        $config = Config::first();
+
+        $currency = $config->currency_simbol;
+
+        if ($config->logo == null)
+        {
+            $logo = null;
+            $imagen = null;
+        }
+        else
+        {
+                $logo = $config->logo;
+                $imagen = public_path('assets/imgs/logos/'.$logo);
+        }
+
+
+        $config = Config::first();
+
+        if ( $verpdf == "Download" )
+        {
+            $pdf = PDF::loadView('admin.clinica.pdfclinica',['clinica'=>$clinica,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+            return $pdf->download ('Clinica: '.$clinica->nombre.'-'.$nompdf.'.pdf');
+        }
+        if ( $verpdf == "Browser" )
+        {
+            $pdf = PDF::loadView('admin.clinica.pdfclinica',['clinica'=>$clinica,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+            return $pdf->stream ('Clinica: '.$clinica->nombre.'-'.$nompdf.'.pdf');
+        }
     }
 }

@@ -19,6 +19,7 @@ class Receta extends Model
         'descripcion',
         'fecha',
         'paciente_id', // Agrega el campo de la clave foránea
+        'doctor_id',
     ];
 
     // Relación con el modelo Paciente
@@ -26,4 +27,10 @@ class Receta extends Model
     {
         return $this->belongsTo(Paciente::class);
     }
+
+     // Relación con el modelo Doctor
+     public function doctor()
+     {
+         return $this->belongsTo(User::class);
+     }
 }

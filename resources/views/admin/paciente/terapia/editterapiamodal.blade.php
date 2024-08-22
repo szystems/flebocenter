@@ -20,7 +20,7 @@
                         <div class="col-md-12 mb-3">
                             <!-- Form Field Start -->
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">Talla de Media</label>
+                                <label for="nombre" class="form-label">Elastocompresión</label>
                             <input name="talla_media" type="text" class="form-control" placeholder="" value="{{ $terapia->talla_media }}" />
                                 @if ($errors->has('talla_media'))
                                     <span class="help-block opacity-7">

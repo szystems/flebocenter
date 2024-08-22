@@ -34,13 +34,42 @@
                         <div class="card-header">
                             <div class="card-title">
                                 Listado de Artículos
-                                <a href="{{ url('add-articulo') }}" type="button" class="btn btn-success float-end">
-                                    <i class="bi bi-plus-square"></i> Agregar
-                                </a>
+
                             </div>
 
                         </div>
                         <div class="card-body">
+                            <hr>
+                            <p class="m-0 fw-normal text-dark">
+                                <a href="{{ url('add-articulo') }}" type="button" class="btn btn-success float-end">
+                                    <i class="bi bi-plus-square"></i> Agregar
+                                </a>
+
+                                <strong><u>Filtros:</u></strong>
+                                <br>
+                                <small>
+                                    @if (request('nombre'))
+                                        <strong>Nombre: </strong><font color="Blue">{{ request('nombre') }}</font>
+                                    @endif
+                                    @if (request('categoria_id'))
+                                        @php
+                                            $categoria = \App\Models\Categoria::find(request('categoria_id'));
+                                        @endphp
+                                        <strong>Clinica: </strong><font color="Blue">{{ $categoria->nombre }}</font>
+                                    @endif
+                                    @if (request('proveedor_id'))
+                                        @php
+                                            $proveedor = \App\Models\Proveedor::find(request('proveedor_id'));
+                                        @endphp
+                                        <strong>Proveedor: </strong><font color="Blue">{{ $proveedor->nombre }}</font>
+                                    @endif
+                                </small>
+                            </p>
+                            <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printArticulosModal">
+                                <i class="bi bi-printer"></i> Imprimir
+                            </button>
+
+                            @include('admin.articulo.printarticulosmodal')
                             <div class="table-responsive">
                                 <table class="table align-middle table-striped flex-column">
                                     <thead>

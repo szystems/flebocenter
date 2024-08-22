@@ -78,29 +78,47 @@ class CitaController extends Controller
         return view('admin.cita.add', compact('filtroDoctores','filtroPacientes','filtroClinicas'));
     }
 
-    public function verificarTraslapeEnOtraClinica($clinica_id, $doctor_id, $fecha_cita, $hora_inicio, $hora_fin) {
+    public function verificarTraslape($clinica_id, $doctor_id, $fecha_cita, $hora_inicio, $hora_fin) {
         // Buscar citas existentes para el mismo doctor y fecha
         $citasExistentes = Cita::where('doctor_id', $doctor_id)
                                ->where('fecha_cita', $fecha_cita)
                                ->get();
 
-        // Verificar si hay traslape con alguna cita existente en otra clínica
+        // Verificar si hay traslape con alguna cita existente en la misma clínica
         foreach ($citasExistentes as $citaExistente) {
-            // Convertir las horas a timestamps para la comparación
-            $inicioExistente = strtotime($citaExistente->hora_inicio);
-            $finExistente = strtotime($citaExistente->hora_fin);
-            $inicioNuevo = strtotime($hora_inicio);
-            $finNuevo = strtotime($hora_fin);
+            if ($citaExistente->clinica_id == $clinica_id) {
+                // Convertir las horas a timestamps para la comparación
+                $inicioExistente = strtotime($citaExistente->hora_inicio);
+                $finExistente = strtotime($citaExistente->hora_fin);
+                $inicioNuevo = strtotime($hora_inicio);
+                $finNuevo = strtotime($hora_fin);
 
-            // Verificar si hay traslape y si la clínica es diferente
-            if ($inicioNuevo < $finExistente && $inicioExistente < $finNuevo
-                && $citaExistente->clinica_id != $clinica_id) {
-                // Hay traslape en otra clínica
-                return true;
+                // Verificar si hay traslape
+                if ($inicioNuevo < $finExistente && $inicioExistente < $finNuevo) {
+                    // Hay traslape en la misma clínica
+                    return true;
+                }
             }
         }
 
-        // No hay traslape en otras clínicas
+        // Verificar si hay traslape con alguna cita existente en otra clínica
+        foreach ($citasExistentes as $citaExistente) {
+            if ($citaExistente->clinica_id != $clinica_id) {
+                // Convertir las horas a timestamps para la comparación
+                $inicioExistente = strtotime($citaExistente->hora_inicio);
+                $finExistente = strtotime($citaExistente->hora_fin);
+                $inicioNuevo = strtotime($hora_inicio);
+                $finNuevo = strtotime($hora_fin);
+
+                // Verificar si hay traslape
+                if ($inicioNuevo < $finExistente && $inicioExistente < $finNuevo) {
+                    // Hay traslape en otra clínica
+                    return true;
+                }
+            }
+        }
+
+        // No hay traslape en ninguna clínica
         return false;
     }
 
@@ -108,7 +126,7 @@ class CitaController extends Controller
     public function insert(CitaFormRequest $request)
     {
         $fechaPHP = date("Y-m-d", strtotime($request->fecha_cita));
-        $traslape = $this->verificarTraslapeEnOtraClinica(
+        $traslape = $this->verificarTraslape(
             $request->clinica_id,
             $request->doctor_id,
             $fechaPHP,
@@ -214,6 +232,134 @@ class CitaController extends Controller
         $cita = Cita::find($id);
         $cita->delete();
         return redirect('citas')->with('status',__('Cita eliminada correctamente.'));
+    }
+
+    public function printcitas(Request $request)
+    {
+        // dd($request);
+        if ($request)
+        {
+            $ffecha = date("Y-m-d", strtotime($request->input('fecha_imprimir')));
+            $festado = $request->input('estado_imprimir');
+            $fclinica = $request->input('clinica_imprimir');
+            $fdoctor = $request->input('doctor_imprimir');
+            $fpaciente = $request->input('paciente_imprimir');
+
+            $citas = Cita::query()
+            ->select('citas.*')
+            ->join('pacientes', 'citas.paciente_id', '=', 'pacientes.id')
+            ->when($fpaciente, function ($query, $paciente) {
+                return $query->where(function($query) use ($paciente) {
+                    $query->where('pacientes.nombre', 'like', "%{$paciente}%")
+                        ->orWhere('pacientes.dpi', 'like', "%{$paciente}%");
+                });
+            })
+            ->when($fdoctor, function ($query, $doctor_id) {
+                return $query->where('citas.doctor_id', $doctor_id);
+            })
+            ->when($fclinica, function ($query, $clinica_id) {
+                return $query->where('citas.clinica_id', $clinica_id);
+            })
+            ->when($ffecha, function ($query, $fecha_cita) {
+                return $query->whereDate('citas.fecha_cita', $fecha_cita);
+            })
+            ->when($festado, function ($query, $estado) {
+                return $query->where('citas.estado', $estado);
+            })
+            ->orderBy('citas.hora_inicio', 'asc')
+            ->orderBy('citas.clinica_id', 'asc')
+            ->orderBy('citas.doctor_id', 'asc')
+            ->get();
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.cita.pdfcitas', compact('imagen','citas','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Citas fecha: '.$request->input('fecha_imprimir').' - '.$nompdf.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.cita.pdfcitas', compact('imagen','citas','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Citas fecha: '.$request->input('fecha_imprimir').' - '.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function printcita(Request $request)
+    {
+        // dd($request);
+        if ($request)
+        {
+            $cita = Cita::find($request->input('cita_id'));
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.cita.pdfcita', compact('imagen','cita','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Cita paciente: '.$cita->paciente->nombre.' - '.date('d/m/Y', strtotime($cita->fecha_cita)).'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.cita.pdfcita', compact('imagen','cita','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Cita paciente: '.$cita->paciente->nombre.' - '.date('d/m/Y', strtotime($cita->fecha_cita)).'.pdf');
+            }
+        }
     }
 
 }

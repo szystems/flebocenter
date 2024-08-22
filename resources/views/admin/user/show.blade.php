@@ -44,6 +44,9 @@
                             </div>
                             <div class="col-12 col-md-auto">
                                 <div class="btn-group-sm m-3">
+                                    <a target="_blank" href="{{ url('pdf-doctor/'.$user->id) }}" type="button" class="btn btn-info">
+                                        <i class="bi bi-printer"></i> Imprimir
+                                    </a>
                                     <a href="{{ url('edit-user/'.$user->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
                                     @if ($user->principal == "1")
 										<button disabled type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $user->id }}">
@@ -54,6 +57,7 @@
                                             <i class="bi bi-trash"></i> Eliminar
                                         </button>
                                     @endif
+
                                     @include('admin.user.deletemodal')
                                 </div>
                             </div>
@@ -154,6 +158,14 @@
                                                             <div class="mb-3">
                                                                 <label class="form-label">Dirección</label>
                                                                 <p>{{ $user->direccion }}</p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-4 mb-3">
+                                                            <!-- Form Field Start -->
+                                                            <div class="mb-3">
+                                                                <label class="form-label">No. Colegiado</label>
+                                                                <p>{{ $user->colegiado }}</p>
                                                             </div>
                                                         </div>
 

@@ -32,6 +32,15 @@
                             <div class="custom-tabs-container">
                                 <div class="col-12 col-md-auto float-end">
                                     <div class="btn-group-sm m-3">
+                                        <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                            data-bs-target="#editarIngresoModal{{ $ingreso->id }}">
+                                            <i class="bi bi-pencil"></i> Editar
+                                        </button>
+                                        @include('admin.ingreso.editingresomodal')
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#printIngresoModal{{ $ingreso->id }}">
+                                            <i class="bi bi-printer"></i> Imprimir
+                                        </button>
+                                        @include('admin.ingreso.printingresomodal')
                                         {{-- <a href="{{ url('edit-ingreso/'.$ingreso->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a> --}}
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $ingreso->id }}">
                                             <i class="bi bi-trash"></i> Eliminar
@@ -285,7 +294,7 @@
                                                             @if ($pagos->count() == 0)
                                                                 <div class="alert alert-warning text-white" role="alert">
                                                                     <ul align="center">
-                                                                        <p>No se han ingresado documentos.</p>
+                                                                        <p>No se han ingresado pagos.</p>
                                                                     </ul>
                                                                 </div>
                                                             @endif

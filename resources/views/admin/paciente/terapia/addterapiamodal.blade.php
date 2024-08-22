@@ -29,8 +29,8 @@ aria-labelledby="addTerapiaModal" aria-hidden="true">
                     <div class="col-md-12 mb-3">
                         <!-- Form Field Start -->
                         <div class="mb-3">
-                            <label for="nombre" class="form-label">Talla de Media</label>
-                            <input name="talla_media" type="text" class="form-control" placeholder="Nombre..." value="{{ old('talla_media') }}" />
+                            <label for="nombre" class="form-label">Elastocompresión</label>
+                            <input name="talla_media" type="text" class="form-control" placeholder="" value="{{ old('talla_media') }}" />
                             @if ($errors->has('talla_media'))
                                 <span class="help-block opacity-7">
                                         <strong>

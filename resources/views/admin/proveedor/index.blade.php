@@ -34,6 +34,10 @@
                         <div class="card-header">
                             <div class="card-title">
                                 Listado de proveedores
+                                <br>
+                                <a target="_blank" href="{{ url('pdf-proveedores') }}" type="button" class="btn btn-info btn-sm">
+                                    <i class="bi bi-printer"></i> Imprimir
+                                </a>
                                 <a href="{{ url('add-proveedor') }}" type="button" class="btn btn-success float-end">
                                     <i class="bi bi-plus-square"></i> Agregar
                                 </a>

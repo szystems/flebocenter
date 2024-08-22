@@ -35,12 +35,12 @@
                             <div class="card-title">
                                 Listado de Pacientes
                                 <br>
-                                <a target="_blank" href="{{ url('pdf-pacientes') }}" type="button" class="btn btn-danger btn-sm">
-                                    <i class="bi bi-file-pdf-fill"></i> PDF
+                                <a target="_blank" href="{{ url('pdf-pacientes') }}" type="button" class="btn btn-info btn-sm">
+                                    <i class="bi bi-printer"></i> Imprimir
                                 </a>
-                                <a arget="_blank" href="{{ url('exportpacientes') }}" type="button" class="btn btn-success btn-sm">
+                                {{-- <a arget="_blank" href="{{ url('exportpacientes') }}" type="button" class="btn btn-success btn-sm">
                                     <i class="bi bi-file-earmark-excel-fill"></i> Excel
-                                </a>
+                                </a> --}}
                                 <a href="{{ url('add-paciente') }}" type="button" class="btn btn-success float-end">
                                     <i class="bi bi-plus-square"></i> Agregar
                                 </a>

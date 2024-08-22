@@ -167,7 +167,7 @@ class PacienteController extends Controller
             $pacientes = Paciente::where('estado',1)->orderBy('nombre','asc')->get();
             $verpdf = "Browser";
             $nompdf = date('m/d/Y g:ia');
-            $path = public_path('assets/uploads/');
+            $path = public_path('assets/imgs/');
 
             $config = Config::first();
 
@@ -199,6 +199,47 @@ class PacienteController extends Controller
 
                 return $pdf->stream ('Listado Pacientes '.$nompdf.'.pdf');
             }
+        }
+    }
+
+    public function pdfpaciente($id)
+    {
+
+        $paciente = Paciente::find($id);
+        $verpdf = "Browser";
+        $nompdf = date('m/d/Y g:ia');
+        $path = public_path('assets/imgs/');
+        $pathpaciente = public_path('assets/imgs/pacientes/');
+
+        $config = Config::first();
+
+        $currency = $config->currency_simbol;
+
+        if ($config->logo == null)
+        {
+            $logo = null;
+            $imagen = null;
+        }
+        else
+        {
+                $logo = $config->logo;
+                $imagen = public_path('assets/imgs/logos/'.$logo);
+        }
+
+
+        $config = Config::first();
+
+        if ( $verpdf == "Download" )
+        {
+            $pdf = PDF::loadView('admin.paciente.pdfpaciente',['paciente'=>$paciente,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathpaciente'=>$pathpaciente]);
+
+            return $pdf->download ('Paciente: '.$paciente->nombre.'-'.$nompdf.'.pdf');
+        }
+        if ( $verpdf == "Browser" )
+        {
+            $pdf = PDF::loadView('admin.paciente.pdfpaciente',['paciente'=>$paciente,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathpaciente'=>$pathpaciente]);
+
+            return $pdf->stream ('Paciente: '.$paciente->nombre.'-'.$nompdf.'.pdf');
         }
     }
 

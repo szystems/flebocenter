@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use App\Models\Proveedor;
 use App\Http\Requests\ProveedorFormRequest;
 use DB;
+use App\Models\Config;
+use Carbon\Carbon;
+use PDF;
 
 class ProveedorController extends Controller
 {
@@ -95,5 +98,89 @@ class ProveedorController extends Controller
         $proveedor->estado = 0;
         $proveedor->update();
         return redirect('proveedores')->with('status',__('Proveedor eliminada correctamente.'));
+    }
+
+    public function pdf(Request $request)
+    {
+        if ($request)
+        {
+
+            $proveedores = Proveedor::where('estado',1)->orderBy('nombre','asc')->get();
+            $verpdf = "Browser";
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $config = Config::first();
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+
+            $config = Config::first();
+
+            if ( $verpdf == "Download" )
+            {
+                $pdf = PDF::loadView('admin.proveedor.pdf',['proveedores'=>$proveedores,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->download ('Listado Proveedores '.$nompdf.'.pdf');
+            }
+            if ( $verpdf == "Browser" )
+            {
+                $pdf = PDF::loadView('admin.proveedor.pdf',['proveedores'=>$proveedores,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->stream ('Listado Proveedores '.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function pdfproveedor($id)
+    {
+
+        $proveedor = Proveedor::find($id);
+        $verpdf = "Browser";
+        $nompdf = date('m/d/Y g:ia');
+        $path = public_path('assets/imgs/');
+        $pathproveedor = public_path('assets/imgs/proveedores/');
+
+        $config = Config::first();
+
+        $currency = $config->currency_simbol;
+
+        if ($config->logo == null)
+        {
+            $logo = null;
+            $imagen = null;
+        }
+        else
+        {
+                $logo = $config->logo;
+                $imagen = public_path('assets/imgs/logos/'.$logo);
+        }
+
+
+        $config = Config::first();
+
+        if ( $verpdf == "Download" )
+        {
+            $pdf = PDF::loadView('admin.proveedor.pdfproveedor',['proveedor'=>$proveedor,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathproveedor'=>$pathproveedor]);
+
+            return $pdf->download ('Proveedor: '.$proveedor->nombre.'-'.$nompdf.'.pdf');
+        }
+        if ( $verpdf == "Browser" )
+        {
+            $pdf = PDF::loadView('admin.proveedor.pdfproveedor',['proveedor'=>$proveedor,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathproveedor'=>$pathproveedor]);
+
+            return $pdf->stream ('Proveedor: '.$proveedor->proveedor.'-'.$nompdf.'.pdf');
+        }
     }
 }

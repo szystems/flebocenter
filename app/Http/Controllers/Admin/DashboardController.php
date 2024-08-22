@@ -33,7 +33,8 @@ class DashboardController extends Controller
             $query->where('name', 'LIKE', '%' . $queryUser . '%')
                 ->orWhere('email', 'LIKE', '%' . $queryUser . '%')
                 ->orWhere('telefono', 'LIKE', '%' . $queryUser . '%')
-                ->orWhere('celular', 'LIKE', '%' . $queryUser . '%');
+                ->orWhere('celular', 'LIKE', '%' . $queryUser . '%')
+                ->orWhere('colegiado', 'LIKE', '%' . $queryUser . '%');
             })
             ->orderBy('name','asc')
             ->paginate(20);
@@ -84,6 +85,7 @@ class DashboardController extends Controller
         $user->password = 'Flebo'.rand(1111,9999);
         $user->telefono = $request->input('telefono');
         $user->celular = $request->input('celular');
+        $user->colegiado = $request->input('colegiado');
         // $user->especialidad_id = $request->input('especialidad');
         $user->direccion = $request->input('direccion');
         $user->descripcion = $request->input('descripcion');
@@ -92,7 +94,7 @@ class DashboardController extends Controller
 
         // Mail::to($user->email)->send(new UserMail($user));
 
-        return redirect('users')->with('status', __('User Added Successfully'));
+        return redirect('users')->with('status', __('Doctor agregado correctamente'));
     }
 
     public function edituser($id)
@@ -127,6 +129,7 @@ class DashboardController extends Controller
         // $user->password = 'Flebo'.rand(1111,9999);
         $user->telefono = $request->input('telefono');
         $user->celular = $request->input('celular');
+        $user->colegiado = $request->input('colegiado');
         // $user->especialidad_id = $request->input('especialidad');
         $user->direccion = $request->input('direccion');
         $user->descripcion = $request->input('descripcion');
@@ -136,7 +139,7 @@ class DashboardController extends Controller
         if ($emailrepeat >= "1") {
             return redirect('show-user/'.$id)->with('status',__('Usuario actualizado, email no se pudo editar ya que otro usuario ya lo esta usando.'));
         }
-        return redirect('show-user/'.$id)->with('status',__('User Updated Successfully'));
+        return redirect('show-user/'.$id)->with('status',__('Doctor actualizado correctamente.'));
 
     }
 
@@ -155,6 +158,90 @@ class DashboardController extends Controller
         $user->estado = 0;
         $user->email = $user->email.'-Deleted'.$user->id;
         $user->update();
-        return redirect('users')->with('status',__('User Deleted Successfully'));
+        return redirect('users')->with('status',__('Doctor eliminado correctamente.'));
+    }
+
+    public function pdf(Request $request)
+    {
+        if ($request)
+        {
+
+            $doctores = User::where('estado',1)->orderBy('name','asc')->get();
+            $verpdf = "Browser";
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $config = Config::first();
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+
+            $config = Config::first();
+
+            if ( $verpdf == "Download" )
+            {
+                $pdf = PDF::loadView('admin.user.pdf',['doctores'=>$doctores,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->download ('Listado Doctores '.$nompdf.'.pdf');
+            }
+            if ( $verpdf == "Browser" )
+            {
+                $pdf = PDF::loadView('admin.user.pdf',['doctores'=>$doctores,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->stream ('Listado Doctores '.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function pdfdoctor($id)
+    {
+
+        $doctor = User::find($id);
+        $verpdf = "Browser";
+        $nompdf = date('m/d/Y g:ia');
+        $path = public_path('assets/imgs/');
+        $pathdoctor = public_path('assets/imgs/pacientes/');
+
+        $config = Config::first();
+
+        $currency = $config->currency_simbol;
+
+        if ($config->logo == null)
+        {
+            $logo = null;
+            $imagen = null;
+        }
+        else
+        {
+                $logo = $config->logo;
+                $imagen = public_path('assets/imgs/logos/'.$logo);
+        }
+
+
+        $config = Config::first();
+
+        if ( $verpdf == "Download" )
+        {
+            $pdf = PDF::loadView('admin.user.pdfdoctor',['doctor'=>$doctor,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathdoctor'=>$pathdoctor]);
+
+            return $pdf->download ('Doctor: '.$doctor->name.'-'.$nompdf.'.pdf');
+        }
+        if ( $verpdf == "Browser" )
+        {
+            $pdf = PDF::loadView('admin.user.pdfdoctor',['doctor'=>$doctor,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathdoctor'=>$pathdoctor]);
+
+            return $pdf->stream ('Doctor: '.$doctor->name.'-'.$nompdf.'.pdf');
+        }
     }
 }

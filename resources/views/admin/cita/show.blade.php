@@ -32,10 +32,15 @@
                             <div class="custom-tabs-container">
                                 <div class="col-12 col-md-auto float-end">
                                     <div class="btn-group-sm m-3">
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#printCitaModal{{ $cita->id }}">
+                                            <i class="bi bi-printer"></i> Imprimir
+                                        </button>
+
                                         <a href="{{ url('edit-cita/'.$cita->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $cita->id }}">
                                             <i class="bi bi-trash"></i> Eliminar
                                         </button>
+                                        @include('admin.cita.printcitamodal')
                                         @include('admin.cita.deletemodal')
                                     </div>
                                 </div>

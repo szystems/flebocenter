@@ -66,6 +66,12 @@
                                         Stock Minimo:  <small class="text-info">{{ request('stock_minimo') }},</small>
                                     @endif
                                 </small>
+                                <br>
+                                <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printInventarioModal">
+                                    <i class="bi bi-printer"></i> Imprimir
+                                </button>
+
+                                @include('admin.inventario.printinventariomodal')
                             </div>
 
                         </div>

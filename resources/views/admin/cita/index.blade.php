@@ -76,6 +76,11 @@
                                     @endif
                                 </small>
                             </p>
+                            <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printCitasModal">
+                                <i class="bi bi-printer"></i> Imprimir
+                            </button>
+
+                            @include('admin.cita.printcitasmodal')
                             <div class="table-responsive">
                                 <table class="table align-middle table-striped flex-column">
                                     <thead>

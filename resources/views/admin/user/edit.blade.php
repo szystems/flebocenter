@@ -134,6 +134,21 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="col-md-3 mb-3">
+                                                                <!-- Form Field Start -->
+                                                                <div class="mb-3">
+                                                                    <label for="colegiado" class="form-label">No.Colegiado</label>
+                                                                    <input name="colegiado" type="text" class="form-control" placeholder="XXXXXX" value="{{ $user->colegiado }}"/>
+                                                                    @if ($errors->has('colegiado'))
+                                                                        <span class="help-block opacity-7">
+                                                                                <strong>
+                                                                                    <font color="red">{{ $errors->first('colegiado') }}</font>
+                                                                                </strong>
+                                                                        </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
                                                             <div class="col-md-4 mb-3">
                                                                 <!-- Form Field Start -->
                                                                 <div class="mb-3">
@@ -154,7 +169,7 @@
                                                                 <div class="mb-3">
                                                                     <label for="celular" class="form-label">Celular</label>
                                                                     <input name="celular" type="number" oninput="this.value = this.value.replace(/[^0-9]/g, '');" class="form-control" placeholder="Celular..." value="{{ $user->celular }}"/>
-                                                                    @if ($errors->has('telefono'))
+                                                                    @if ($errors->has('celular'))
                                                                         <span class="help-block opacity-7">
                                                                                 <strong>
                                                                                     <font color="red">{{ $errors->first('celular') }}</font>
@@ -193,6 +208,8 @@
                                                                     @endif
                                                                 </div>
                                                             </div>
+
+
 
                                                             <div class="col-md-12 mb-3">
                                                                 <!-- Form Field Start -->

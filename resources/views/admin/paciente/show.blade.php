@@ -109,10 +109,13 @@
                                                             <!-- Form Field Start -->
                                                             <div class="mb-3">
                                                                 <h5 class="card-title"><u>Informacíon de Paciente</u></h5>
-                                                                <a href="{{ url('edit-paciente/'.$paciente->id) }}" class="btn btn-warning float-end m-1" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
                                                                 <button type="button" class="btn btn-danger float-end m-1" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $paciente->id }}">
                                                                     <i class="bi bi-trash"></i> Eliminar
                                                                 </button>
+                                                                <a href="{{ url('edit-paciente/'.$paciente->id) }}" class="btn btn-warning float-end m-1" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
+                                                                <a target="_blank" href="{{ url('pdf-paciente/'.$paciente->id) }}" type="button" class="btn btn-info float-end m-1">
+                                                                    <i class="bi bi-printer"></i> Imprimir
+                                                                </a>
                                                                 @include('admin.paciente.deletemodal')
                                                             </div>
                                                         </div>
@@ -340,6 +343,11 @@
                                                         <h5 class="card-title"><u>Historia General</u></h5>
 
                                                         <a href="{{ url('edit-historia/'.$historia->id) }}" class="btn btn-warning m-1" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
+                                                        <button type="button" class="btn btn-info m-1" data-bs-toggle="modal"
+                                                            data-bs-target="#printModal{{ $historia->id }}">
+                                                            <i class="bi bi-printer"></i> Imprimir
+                                                        </button>
+                                                        @include('admin.paciente.historia.printmodal')
                                                     </div>
                                                 </div>
 
@@ -538,7 +546,7 @@
                                                                     $fur = date("d/m/Y", strtotime($historia->fur));
                                                                 }
                                                             @endphp
-                                                            {{ $historia->j_fecha_ultima_regla != null ? $historia->j_fecha_ultima_regla : 'No definido' }}
+                                                            {{ $historia->j_fecha_ultima_regla != null ? $fur : 'No definido' }}
                                                             <br>
                                                             ¿Esta tomando hormonas o anticonceptivos? <strong>{{ $historia->j_hormonas_anticonceptivos == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
@@ -580,10 +588,20 @@
                                                 <div class="col-md-12 mb-3">
                                                     <!-- Form Field Start -->
                                                     <div class="mb-3">
-                                                        <label class="form-label">M. ¿PROBLEMAS DURANTE SUS EMBARAZOS?</label>
+                                                        <label class="form-label">M. ¿EMBARAZOS?</label>
                                                         <p>
-                                                            <strong>{{ $historia->m_embarazos == '1' ? 'Si' : 'No' }}</strong>
-                                                            <br>
+                                                            <strong>{{ $historia->m_embarazos >= '1' ? $historia->m_embarazos : 'No' }}</strong>
+                                                        </p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-12 mb-3">
+                                                    <!-- Form Field Start -->
+                                                    <div class="mb-3">
+                                                        <label class="form-label">¿PROBLEMAS DURANTE SUS EMBARAZOS?</label>
+                                                        <p>
+                                                            {{-- <strong>{{ $historia->m_embarazos == '1' ? 'Si' : 'No' }}</strong>
+                                                            <br> --}}
                                                             Cuales: <textarea class="form-control border px-2 class" rows="5">{{ $historia->m_problemas == null ? 'Ninguno' : $historia->m_problemas }}</textarea>
                                                         </p>
                                                     </div>
@@ -914,6 +932,11 @@
                                                                                     <i class="bi bi-trash"></i> Eliminar
                                                                                 </button>
 
+                                                                                <button type="button" class="btn btn-info m-1" data-bs-toggle="modal"
+                                                                                    data-bs-target="#printModal{{ $receta->id }}">
+                                                                                    <i class="bi bi-printer"></i> Imprimir
+                                                                                </button>
+                                                                                @include('admin.paciente.receta.printmodal')
                                                                                 @include('admin.paciente.receta.editarrecetamodal')
                                                                                 @include('admin.paciente.receta.deleterecetamodal')
                                                                             </div>

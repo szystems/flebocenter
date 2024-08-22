@@ -179,10 +179,10 @@
                                                             <!-- Form Field Start -->
                                                             <div class="mb-3">
                                                                 <label for="articulo_id" class="form-label">Artículo</label>
-                                                                <select id="pidarticulo" class="form-select" aria-label="Default select example">
+                                                                <select id="pidarticulo" class="form-select select2" aria-label="Default select example">
                                                                     <option value="">Seleccione articulo</option>
                                                                     @foreach($articulos as $articulo)
-                                                                        <option value="{{$articulo->id}}_{{number_format($articulo->precio_compra,2, '.', '')}}_{{number_format($articulo->precio_venta,2, '.', '')}}"{{ old('articulo_id') == $articulo->id ? ' selected' : '' }}>{{ $articulo->nombre }}</option>
+                                                                        <option value="{{$articulo->id}}_{{$articulo->codigo}}_{{number_format($articulo->precio_compra,2, '.', '')}}_{{number_format($articulo->precio_venta,2, '.', '')}}"{{ old('articulo_id') == $articulo->id ? ' selected' : '' }}>{{ $articulo->nombre }} ({{$articulo->codigo}})</option>
                                                                     @endforeach
                                                                 </select>
                                                                 @if ($errors->has('articulo_id'))
@@ -194,6 +194,16 @@
                                                                 @endif
                                                             </div>
                                                         </div>
+
+                                                        <script>
+                                                            $(document).ready(function() {
+                                                                $('#pidarticulo').select2({
+                                                                    placeholder: 'Seleccione articulo',
+                                                                    allowClear: true,
+                                                                    minimumInputLength: 1
+                                                                });
+                                                            });
+                                                        </script>
 
                                                         <div class="col-md-2 mb-3">
                                                             <label class="form-label">Cantidad</label>
@@ -367,8 +377,8 @@
             function mostrarValores()
             {
                 datosArticulo=document.getElementById('pidarticulo').value.split('_');
-                $("#pprecio_venta").val(datosArticulo[2]);
-                $("#pprecio_compra").val(datosArticulo[1]);
+                $("#pprecio_venta").val(datosArticulo[3]);
+                $("#pprecio_compra").val(datosArticulo[2]);
                 $("#pariculo_id").val(datosArticulo[0]);
             }
 

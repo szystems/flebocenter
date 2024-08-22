@@ -481,7 +481,7 @@
                                                 <!-- Form Field Start -->
                                                 <div class="mb-3">
                                                     <label class="form-label">¿Problemas durante el embarazo?</label>
-                                                        <input name="m_problemas" type="number" class="form-control" placeholder="Si hubieron problemas describa cuales..." value="{{$historia->m_problemas }}" />
+                                                        <input name="m_problemas" type="text" class="form-control" placeholder="Si hubieron problemas describa cuales..." value="{{$historia->m_problemas }}" />
                                                 </div>
                                             </div>
 

@@ -18,6 +18,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class VentaController extends Controller
 {
@@ -66,12 +67,12 @@ class VentaController extends Controller
             }
 
             if ($request->input('saldo') == 'Pagado') {
-                $Consultafiltros->whereHas('pago_ventas', function ($query) {
-                    $query->havingRaw('SUM(cantidad) = (SELECT SUM(sub_total) FROM venta_detalles WHERE venta_id = ventas.id)');
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ventas WHERE venta_id = ventas.id), 0)) >= (COALESCE((SELECT SUM(sub_total) FROM venta_detalles WHERE venta_id = ventas.id), 0))');
                 });
             } elseif ($request->input('saldo') == 'Pendiente') {
-                $Consultafiltros->whereHas('pago_ventas', function ($query) {
-                    $query->havingRaw('SUM(cantidad) < (SELECT SUM(sub_total) FROM venta_detalles WHERE venta_id = ventas.id)');
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ventas WHERE venta_id = ventas.id), 0)) < (COALESCE((SELECT SUM(sub_total) FROM venta_detalles WHERE venta_id = ventas.id), 0))');
                 });
             }
 
@@ -321,5 +322,151 @@ class VentaController extends Controller
     	// }
 
     	return redirect('edit-venta/'.$venta->id)->with('status',__('Detalle de venta agregada correctamente!'));
+    }
+
+    public function printventas(Request $request)
+    {
+        // dd($request->all());
+        if ($request)
+        {
+            $ffechadesde = date("Y-m-d", strtotime($request->input('desde_imprimir')));
+            $ffechahasta = date("Y-m-d", strtotime($request->input('hasta_imprimir')));
+            $fpaciente = $request->input('paciente_imprimir');
+            $ftipocomprobante = $request->input('tipocomprobante_imprimir');
+            $fnumerocomprobante = $request->input('numerocomprobante_imprimir');
+            $fsaldo = $request->input('saldo_imprimir');
+
+            $Consultafiltros = Venta::where('fecha', '>=', $ffechadesde)
+                                        ->where('fecha', '<=', $ffechahasta);
+
+            if (!empty($fpaciente)) {
+                $Consultafiltros->where('paciente_id', '=', $fpaciente);
+            }
+
+            if (!empty($ftipocomprobante)) {
+                $Consultafiltros->where('tipo_comprobante', '=', $ftipocomprobante);
+            }
+
+            if (!empty($fnumerocomprobante)) {
+                $Consultafiltros->where('numero_comprobante', '=', $fnumerocomprobante);
+            }
+
+            if ($request->input('saldo_imprimir') == 'Pagado') {
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ventas WHERE venta_id = ventas.id), 0)) >= (COALESCE((SELECT SUM(sub_total) FROM venta_detalles WHERE venta_id = ventas.id), 0))');
+                });
+            } elseif ($request->input('saldo_imprimir') == 'Pendiente') {
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ventas WHERE venta_id = ventas.id), 0)) < (COALESCE((SELECT SUM(sub_total) FROM venta_detalles WHERE venta_id = ventas.id), 0))');
+                });
+            }
+
+            $Consultafiltros->orderBy('fecha','desc');
+            $ventas = $Consultafiltros->get();
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.venta.pdfventas', compact('imagen','ventas','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Ventas - '.$nompdf.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.venta.pdfventas', compact('imagen','ventas','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Venta - '.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function printventa(Request $request)
+    {
+        // dd($request);
+        if ($request)
+        {
+            $venta = Venta::find($request->input('venta_id'));
+            $ventaDetalles = VentaDetalle::where('venta_id', $venta->id)->get();
+            $total = VentaDetalle::where('venta_id', $venta->id)->sum('sub_total');
+            $pagos = PagoVenta::where('venta_id', $venta->id)->get();
+            $totalAbonado = PagoVenta::where('venta_id', $venta->id)->sum('cantidad');
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+            $pdftipo = $request->input('pdftipo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                if($pdftipo == "Cliente")
+                {
+                    $pdf = PDF::loadView('admin.venta.pdfventacliente', compact('venta','ventaDetalles','total','pagos','totalAbonado','config','imagen','path'));
+                }elseif ($pdftipo == "Usuario") {
+                    $pdf = PDF::loadView('admin.venta.pdfventa', compact('venta','ventaDetalles','total','pagos','totalAbonado','config','imagen','path'));
+                }
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Venta: '.$venta->tipo_comprobante.' '.$venta->serie_comprobante.'-'.$venta->numero_comprobante.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                if($pdftipo == "Cliente")
+                {
+                    $pdf = PDF::loadView('admin.venta.pdfventacliente', compact('venta','ventaDetalles','total','pagos','totalAbonado','config','imagen','path'));
+                }elseif ($pdftipo == "Usuario") {
+                    $pdf = PDF::loadView('admin.venta.pdfventa', compact('venta','ventaDetalles','total','pagos','totalAbonado','config','imagen','path'));
+                }
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Venta: '.$venta->tipo_comprobante.' '.$venta->serie_comprobante.'-'.$venta->numero_comprobante.'.pdf');
+            }
+        }
     }
 }

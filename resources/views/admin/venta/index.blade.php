@@ -61,6 +61,12 @@
                                         Número Comprobante:  <small class="text-info">{{ request('numero_comprobante') }},</small>
                                     @endif
                                 </small>
+                                <br>
+                                <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printVentasModal">
+                                    <i class="bi bi-printer"></i> Imprimir
+                                </button>
+
+                                @include('admin.venta.printventasmodal')
                             </div>
 
                         </div>
@@ -151,7 +157,7 @@
                                                 </p>
                                             </td>
                                             <td align="center">
-                                                <p class="text-warning"><strong>{{ $config->currency_simbol }}.{{ number_format($compras,2, '.', ',') }}</strong>/<font class="text-success">{{ $config->currency_simbol }}.<strong>{{ number_format($total-$compras,2, '.', ',') }}</strong></P></p>
+                                                <p class="text-warning"><strong>{{ $config->currency_simbol }}.{{ number_format($compras,2, '.', ',') }}</strong>/<font class="text-success">{{ $config->currency_simbol }}.<strong>{{ number_format($total-$compras,2, '.', ',') }}</strong></font></p>
                                             </td>
                                             <td align="right">
                                                 <p class="text-blue"><strong>{{ $config->currency_simbol }}.{{ number_format($total,2, '.', ',') }}</strong></p>

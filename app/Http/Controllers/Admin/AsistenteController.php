@@ -143,4 +143,88 @@ class AsistenteController extends Controller
         $user->update();
         return redirect('asistentes')->with('status',__('Asistente  eliminado correctamente!'));
     }
+
+    public function pdf(Request $request)
+    {
+        if ($request)
+        {
+
+            $asistentes = User::where('estado',1)->orderBy('name','asc')->get();
+            $verpdf = "Browser";
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $config = Config::first();
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+
+            $config = Config::first();
+
+            if ( $verpdf == "Download" )
+            {
+                $pdf = PDF::loadView('admin.asistente.pdf',['asistentes'=>$asistentes,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->download ('Listado Asistentes '.$nompdf.'.pdf');
+            }
+            if ( $verpdf == "Browser" )
+            {
+                $pdf = PDF::loadView('admin.asistente.pdf',['asistentes'=>$asistentes,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency]);
+
+                return $pdf->stream ('Listado Asistentes '.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function pdfasistente($id)
+    {
+
+        $asistente = User::find($id);
+        $verpdf = "Browser";
+        $nompdf = date('m/d/Y g:ia');
+        $path = public_path('assets/imgs/');
+        $pathasistente = public_path('assets/imgs/users/');
+
+        $config = Config::first();
+
+        $currency = $config->currency_simbol;
+
+        if ($config->logo == null)
+        {
+            $logo = null;
+            $imagen = null;
+        }
+        else
+        {
+                $logo = $config->logo;
+                $imagen = public_path('assets/imgs/logos/'.$logo);
+        }
+
+
+        $config = Config::first();
+
+        if ( $verpdf == "Download" )
+        {
+            $pdf = PDF::loadView('admin.asistente.pdfasistente',['asistente'=>$asistente,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathasistente'=>$pathasistente]);
+
+            return $pdf->download ('Asistente: '.$asistente->name.'-'.$nompdf.'.pdf');
+        }
+        if ( $verpdf == "Browser" )
+        {
+            $pdf = PDF::loadView('admin.asistente.pdfasistente',['asistente'=>$asistente,'path'=>$path,'config'=>$config,'imagen'=>$imagen,'currency'=>$currency,'pathasistente'=>$pathasistente]);
+
+            return $pdf->stream ('Asistente: '.$asistente->name.'-'.$nompdf.'.pdf');
+        }
+    }
 }

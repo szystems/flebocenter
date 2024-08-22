@@ -13,6 +13,62 @@
 
     <title>{{ __('Pacientes') }}</title>
 
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        .table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .table th,
+        .table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            /* text-align: center; */
+        }
+
+        .table th {
+            background-color: #f0f0f0;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        section {
+            margin-bottom: 20px;
+        }
+
+        section h2 {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+        img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
+
 </head>
 
 <body>
@@ -21,11 +77,11 @@
     </center>
     <h3 align="center"><u>{{ __('Pacientes') }}</u></h3>
     <label>
-        <font size="1">{{ __('Fecha Reporte:') }}:</font>
+        <font size="1">{{ __('Fecha Reporte:') }}</font>
         <font color="blue" size="1">
             @php
                 $horafecha = now();
-                $horafecha = $horafecha->format('d-m-Y, H:i:s')
+                $horafecha = $horafecha->format('d/m/Y')
             @endphp
             {{ $horafecha }}
         </font>
@@ -33,7 +89,7 @@
     <br>
 
     <h5><u>{{ __('Listado de Pacientes') }}:</u></h5>
-    <table class="pure-table pure-table-bordered" Width=100%>
+    <table class="table" Width=100%>
         <thead>
             <tr>
                 <th>
@@ -92,10 +148,10 @@
                             @endif
                         </font>
                     </td>
-                    <td align="left">
+                    <td align="center">
                         <font size="1">{{ $paciente->nit }}</font>
                     </td>
-                    <td align="left">
+                    <td align="center">
                         <font size="1">{{ $paciente->dpi }}</font>
                     </td>
 

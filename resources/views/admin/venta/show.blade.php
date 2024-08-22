@@ -32,6 +32,11 @@
                             <div class="custom-tabs-container">
                                 <div class="col-12 col-md-auto float-end">
                                     <div class="btn-group-sm m-3">
+
+                                        <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#printVentaModal{{ $venta->id }}">
+                                            <i class="bi bi-printer"></i> Imprimir
+                                        </button>
+                                        @include('admin.venta.printventamodal')
                                         <a href="{{ url('edit-venta/'.$venta->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
                                         <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $venta->id }}">
                                             <i class="bi bi-trash"></i> Eliminar
@@ -168,7 +173,7 @@
                                                                                         <small>
                                                                                             Categoría: <a class="text-secondary" href="{{ url('show-categoria/'.$detalle->articulo->categoria->id) }}"><b>{{ $detalle->articulo->categoria->nombre }}</b></a>
                                                                                             <br>
-                                                                                            Paciente: <a class="text-yellow" href="{{ url('show-paciente/'.$venta->paciente_id) }}"><b>{{ $venta->paciente->nombre }}</b></a>
+                                                                                            Proveedor: <a class="text-yellow" href="{{ url('show-proveedor/'.$detalle->articulo->proveedor_id) }}"><b>{{ $detalle->articulo->proveedor->nombre }}</b></a>
                                                                                         </small>
                                                                                     </p>
 

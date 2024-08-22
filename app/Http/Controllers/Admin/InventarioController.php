@@ -58,4 +58,84 @@ class InventarioController extends Controller
             return view('admin.inventario.index',compact("request", "articulos", "config","categorias", "proveedores"));
         }
     }
+
+    public function printinventario(Request $request)
+    {
+        // dd($request->all());
+        if ($request)
+        {
+            $articulos = Articulo::query();
+            if ($request->has('articulo_imprimir') && $request->input('articulo_imprimir') !== null) {
+                $articulos->where(function ($query) use ($request) {
+                    $query->where('nombre', 'like', "%{$request->input('articulo_imprimir')}%")
+                        ->orWhere('codigo', 'like', "%{$request->input('articulo_imprimir')}%");
+                });
+            }
+            if ($request->has('categoria_imprimir') && $request->input('categoria_imprimir') !== null) {
+                $articulos->where('categoria_id', '=', $request->input('catecategoria_imprimirgoria_id'));
+            }
+            if ($request->has('proveedor_imprimir') && $request->input('proveedor_imprimir') !== null) {
+                $articulos->where('proveedor_id', '=', $request->input('proveedor_imprimir'));
+            }
+            if ($request->has('stock_imprimir')) {
+                $stock = $request->input('stock_imprimir');
+                if ($stock == 'Sin Stock') {
+                    $articulos->where('stock', 0);
+                } elseif ($stock == 'Con Stock') {
+                    $articulos->where('stock', '>', 0);
+                }
+            }
+            if ($request->has('stockminimo_imprimir')) {
+                $stock_minimo = $request->input('stockminimo_imprimir');
+                if ($stock_minimo == '<=') {
+                    $articulos->where('stock', '<=', DB::raw('stock_minimo'));
+                } elseif ($stock_minimo == '>') {
+                    $articulos->where('stock', '>', DB::raw('stock_minimo'));
+                }
+            }
+            $articulos->where('estado', 1);
+            $articulos->orderBy('nombre','asc');
+            $articulos = $articulos->get();
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.inventario.pdfinventario', compact('imagen','articulos','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Inventario - '.$nompdf.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.inventario.pdfinventario', compact('imagen','articulos','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Inventario - '.$nompdf.'.pdf');
+            }
+        }
+    }
 }

@@ -11,6 +11,7 @@ use App\Models\Proveedor;
 use App\Models\Articulo;
 use App\Models\Config;
 use App\Http\Requests\IngresoFormRequest;
+use App\Http\Requests\IngresoEditFormRequest;
 use App\Models\PagoIngreso;
 use App\Http\Requests\PagoIngresoFormRequest;
 
@@ -18,6 +19,7 @@ use Carbon\Carbon;
 use DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Validator;
+use PDF;
 
 class IngresoController extends Controller
 {
@@ -66,12 +68,12 @@ class IngresoController extends Controller
             }
 
             if ($request->input('saldo') == 'Pagado') {
-                $Consultafiltros->whereHas('pago_ingresos', function ($query) {
-                    $query->havingRaw('SUM(cantidad) = (SELECT SUM(sub_total) FROM ingreso_detalles WHERE ingreso_id = ingresos.id)');
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ingresos WHERE ingreso_id = ingresos.id), 0)) >= (COALESCE((SELECT SUM(sub_total) FROM ingreso_detalles WHERE ingreso_id = ingresos.id), 0))');
                 });
             } elseif ($request->input('saldo') == 'Pendiente') {
-                $Consultafiltros->whereHas('pago_ingresos', function ($query) {
-                    $query->havingRaw('SUM(cantidad) < (SELECT SUM(sub_total) FROM ingreso_detalles WHERE ingreso_id = ingresos.id)');
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ingresos WHERE ingreso_id = ingresos.id), 0)) < (COALESCE((SELECT SUM(sub_total) FROM ingreso_detalles WHERE ingreso_id = ingresos.id), 0))');
                 });
             }
 
@@ -92,8 +94,9 @@ class IngresoController extends Controller
         $total = IngresoDetalle::where('ingreso_id', $id)->sum('sub_total');
         $pagos = PagoIngreso::where('ingreso_id', $id)->get();
         $totalAbonado = PagoIngreso::where('ingreso_id', $id)->sum('cantidad');
+        $proveedores = Proveedor::all();
         $config = Config::first();
-        return view('admin.ingreso.show', compact('ingreso','ingresoDetalles','total','pagos','totalAbonado','config'));
+        return view('admin.ingreso.show', compact('ingreso','ingresoDetalles','total','pagos','totalAbonado','config','proveedores'));
     }
 
     public function add()
@@ -203,7 +206,21 @@ class IngresoController extends Controller
     	return redirect('show-ingreso/'.$ingreso->id)->with('status',__('Ingreso creado correctamente!'));
     }
 
+    public function update(IngresoEditFormRequest $request, $id)
+    {
+        $fecha=trim($request->input('fecha'));
+        $fecha = date("Y-m-d", strtotime($fecha));
 
+        $ingreso = Ingreso::find($id);
+        $ingreso->proveedor_id=$request->input('proveedor_id');
+        $ingreso->tipo_comprobante=$request->input('tipo_comprobante');
+        $ingreso->serie_comprobante=$request->input('serie_comprobante');
+        $ingreso->numero_comprobante=$request->input('numero_comprobante');
+        $ingreso->fecha=$fecha;
+        $ingreso->update();
+        return redirect('show-ingreso/'.$id)->with('status',__('Cabecera de ingreso actualizada correctamente.'));
+
+    }
 
 
     public function destroy($id)
@@ -226,5 +243,140 @@ class IngresoController extends Controller
         $ingreso->delete();
 
         return redirect('ingresos')->with('status',__('Ingreso eliminado correctamente.'));
+    }
+
+    public function printingresos(Request $request)
+    {
+        // dd($request->all());
+        if ($request)
+        {
+            $ffechadesde = date("Y-m-d", strtotime($request->input('desde_imprimir')));
+            $ffechahasta = date("Y-m-d", strtotime($request->input('hasta_imprimir')));
+            $fproveedor = $request->input('proveedor_imprimir');
+            $ftipocomprobante = $request->input('tipocomprobante_imprimir');
+            $fnumerocomprobante = $request->input('numerocomprobante_imprimir');
+            $fsaldo = $request->input('saldo_imprimir');
+
+            $Consultafiltros = Ingreso::where('fecha', '>=', $ffechadesde)
+                                        ->where('fecha', '<=', $ffechahasta);
+
+            if (!empty($fproveedor)) {
+                $Consultafiltros->where('proveedor_id', '=', $fproveedor);
+            }
+
+            if (!empty($ftipocomprobante)) {
+                $Consultafiltros->where('tipo_comprobante', '=', $ftipocomprobante);
+            }
+
+            if (!empty($fnumerocomprobante)) {
+                $Consultafiltros->where('numero_comprobante', '=', $fnumerocomprobante);
+            }
+
+            if ($request->input('saldo_imprimir') == 'Pagado') {
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ingresos WHERE ingreso_id = ingresos.id), 0)) >= (COALESCE((SELECT SUM(sub_total) FROM ingreso_detalles WHERE ingreso_id = ingresos.id), 0))');
+                });
+            } elseif ($request->input('saldo_imprimir') == 'Pendiente') {
+                $Consultafiltros->where(function ($query) {
+                    $query->whereRaw('(COALESCE((SELECT SUM(cantidad) FROM pago_ingresos WHERE ingreso_id = ingresos.id), 0)) < (COALESCE((SELECT SUM(sub_total) FROM ingreso_detalles WHERE ingreso_id = ingresos.id), 0))');
+                });
+            }
+
+            $Consultafiltros->orderBy('fecha','desc');
+            $ingresos = $Consultafiltros->get();
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.ingreso.pdfingresos', compact('imagen','ingresos','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Ingresos - '.$nompdf.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.ingreso.pdfingresos', compact('imagen','ingresos','request','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Ingresos - '.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    public function printingreso(Request $request)
+    {
+        // dd($request);
+        if ($request)
+        {
+            $ingreso = Ingreso::find($request->input('ingreso_id'));
+            $ingresoDetalles = IngresoDetalle::where('ingreso_id', $ingreso->id)->get();
+            $total = IngresoDetalle::where('ingreso_id', $ingreso->id)->sum('sub_total');
+            $pagos = PagoIngreso::where('ingreso_id', $ingreso->id)->get();
+            $totalAbonado = PagoIngreso::where('ingreso_id', $ingreso->id)->sum('cantidad');
+
+            $config = Config::first();
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.ingreso.pdfingreso', compact('ingreso','ingresoDetalles','total','pagos','totalAbonado','config','imagen','path'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Ingreso: '.$ingreso->tipo_comprobante.' '.$ingreso->serie_comprobante.'-'.$ingreso->numero_comprobante.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.ingreso.pdfingreso', compact('ingreso','ingresoDetalles','total','pagos','totalAbonado','config','imagen','path'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Ingreso: '.$ingreso->tipo_comprobante.' '.$ingreso->serie_comprobante.'-'.$ingreso->numero_comprobante.'.pdf');
+            }
+        }
     }
 }

@@ -26,7 +26,7 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
             <div class="modal-body">
                 <div class="row gx-3">
 
-                    <div class="col-md-12 mb-3">
+                    <div class="col-md-4 mb-3">
                         <!-- Form Field Start -->
                         <div class="mb-3">
                             <label class="receta"><strong>Fecha</strong></label>
@@ -37,6 +37,15 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
                             <p><?php echo $hoyshow; ?></p>
                             <input type="hidden" name="fecha" value="<?php echo $hoy; ?>">
                             <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                            <input type="hidden" name="doctor_id" value="{{ Auth::User()->id }}">
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 mb-3">
+                        <!-- Form Field Start -->
+                        <div class="mb-3">
+                            <label class="receta"><strong>Doctor</strong></label>
+                            <p>{{ Auth::User()->name }} ({{ Auth::User()->colegiado }})</p>
                         </div>
                     </div>
 

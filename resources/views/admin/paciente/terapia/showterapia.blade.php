@@ -193,17 +193,22 @@
                                         <!-- Form Field Start -->
                                         <div class="mb-3">
 
-                                            <button type="button" class="btn btn-warning float-end m-1" data-bs-toggle="modal"
-                                                data-bs-target="#editarTerapiaModal{{ $terapia->id }}">
-                                                <i class="bi bi-pencil"></i> Editar
-                                            </button>
-
                                             @if (Auth::user()->principal == 1)
                                                 <button type="button" class="btn btn-danger float-end m-1" data-bs-toggle="modal" data-bs-target="#deleteTerapiaModal-{{ $terapia->id }}">
                                                     <i class="bi bi-trash-fill text-white"></i> Eliminar
                                                 </button>
                                             @endif
 
+                                            <button type="button" class="btn btn-warning float-end m-1" data-bs-toggle="modal"
+                                                data-bs-target="#editarTerapiaModal{{ $terapia->id }}">
+                                                <i class="bi bi-pencil"></i> Editar
+                                            </button>
+
+                                            <button type="button" class="btn btn-info float-end m-1" data-bs-toggle="modal" data-bs-target="#printTerapiaModal{{ $terapia->id }}">
+                                                <i class="bi bi-printer"></i> Imprimir
+                                            </button>
+
+                                            @include('admin.paciente.terapia.printmodal')
                                             @include('admin.paciente.terapia.editterapiamodal')
                                             @include('admin.paciente.terapia.deleteterapiamodal')
                                         </div>
@@ -233,7 +238,7 @@
                                     <div class="col-md-4 mb-3">
                                         <!-- Form Field Start -->
                                         <div class="mb-3">
-                                            <label for="nombre" class="form-label">Talla de Media</label>
+                                            <label for="nombre" class="form-label">Elastocompresión</label>
                                             <p>{{ $terapia->talla_media }}</p>
                                         </div>
                                     </div>

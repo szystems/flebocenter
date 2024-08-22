@@ -44,6 +44,9 @@
                             </div>
                             <div class="col-12 col-md-auto">
                                 <div class="btn-group-sm m-3">
+                                    <a target="_blank" href="{{ url('pdf-asistente/'.$user->id) }}" type="button" class="btn btn-info">
+                                        <i class="bi bi-printer"></i> Imprimir
+                                    </a>
                                     <a href="{{ url('edit-asistente/'.$user->id) }}" class="btn btn-warning" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
                                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{ $user->id }}">
                                         <i class="bi bi-trash"></i> Eliminar

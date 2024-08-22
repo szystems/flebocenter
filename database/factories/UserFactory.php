@@ -27,6 +27,7 @@ class UserFactory extends Factory
             'principal' => '0',
             'telefono'=> $this->faker->numberBetween($min = 10000000, $max = 99999999),
             'celular'=> $this->faker->numberBetween($min = 10000000, $max = 99999999),
+            'colegiado'=> $this->faker->numberBetween($min = 100000, $max = 999999),
             'direccion'=> $this->faker->streetAddress,
             'fecha_nacimiento' => $this->faker->dateTimeBetween('-60 years', '-5 years'),
             'fotografia' => $this->faker->randomElement([

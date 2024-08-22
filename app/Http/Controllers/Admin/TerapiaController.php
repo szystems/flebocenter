@@ -170,4 +170,68 @@ class TerapiaController extends Controller
             return response()->json(['fileName' => $fileName, 'uploaded' => 1, 'url' => $url]);
         }
     }
+
+    public function print(Request $request)
+    {
+        // dd($request);
+        if ($request)
+        {
+            $config = Config::first();
+            $terapia = Terapia::find($request->input('terapia_id'));
+            $miembroIzquierdo = TerapiaSesionIzquierda::where('terapia_id', $terapia->id)->get();
+            $miembroDerecha = TerapiaSesionDerecha::where('terapia_id', $terapia->id)->get();
+
+            $nompdf = date('m/d/Y g:ia');
+            $path = public_path('assets/imgs/');
+
+            $currency = $config->currency_simbol;
+
+            if ($config->logo == null)
+            {
+                $logo = null;
+                $imagen = null;
+            }
+            else
+            {
+                    $logo = $config->logo;
+                    $imagen = public_path('assets/imgs/logos/'.$logo);
+            }
+
+            //recibir detalles de la impresion
+            $pdftamaño = $request->input('pdftamaño');
+            $pdfhorientacion = $request->input('pdfhorientacion');
+            $pdfarchivo = $request->input('pdfarchivo');
+
+            // dd($historia);
+
+            if ( $pdfarchivo == "download" )
+            {
+                $pdf = PDF::loadView('admin.paciente.terapia.pdfterapia', compact('imagen','terapia','miembroIzquierdo','miembroDerecha','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->download ('Terapia: '.$terapia->id.' Paciente: '.$terapia->paciente->nombre.'-'.$nompdf.'.pdf');
+            }
+
+            if ( $pdfarchivo == "stream" )
+            {
+                $pdf = PDF::loadView('admin.paciente.terapia.pdfterapia', compact('imagen','terapia','miembroIzquierdo','miembroDerecha','config'));
+                $pdf->getDomPDF()->set_option("enable_html5_parser", true);
+                $pdf->setPaper($pdftamaño, $pdfhorientacion);
+                return $pdf->stream ('Terapia: '.$terapia->id.' Paciente: '.$terapia->paciente->nombre.'-'.$nompdf.'.pdf');
+            }
+        }
+    }
+
+    private function parseHtml($html)
+    {
+        $parser = new \Masterminds\HTML5();
+        $dom = $parser->parse($html);
+        $xpath = new \DOMXPath($dom);
+        $nodes = $xpath->query('//p | //h1 | //h2 | //h3 | //h4 | //h5 | //h6 | //img | //ul | //ol | //li');
+        $parsedHtml = '';
+        foreach ($nodes as $node) {
+            $parsedHtml .= $dom->saveHTML($node);
+        }
+        return $parsedHtml;
+    }
 }

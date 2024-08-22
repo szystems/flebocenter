@@ -60,7 +60,16 @@
                                     @if (request('numero_comprobante'))
                                         Número Comprobante:  <small class="text-info">{{ request('numero_comprobante') }},</small>
                                     @endif
+                                    @if (request('saldo'))
+                                        Saldo:  <small class="text-info">{{ request('saldo') }},</small>
+                                    @endif
                                 </small>
+                                <br>
+                                <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printIngresosModal">
+                                    <i class="bi bi-printer"></i> Imprimir
+                                </button>
+
+                                @include('admin.ingreso.printingresosmodal')
                             </div>
 
                         </div>

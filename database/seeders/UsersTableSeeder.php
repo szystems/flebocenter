@@ -19,6 +19,7 @@ class UsersTableSeeder extends Seeder
             'name' => 'Otto Szarata',
             'email' => 'szystems@hotmail.com',
             'password' => Hash::make('SPP7007aaa@@@'),
+            'colegiado'=> '888888',
             'role_as' => '0',
             'principal' => '1',
         ]);

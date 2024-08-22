@@ -61,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-user/{id}',[DashboardController::class,'edituser']);
     Route::put('update-user/{id}', [DashboardController::class, 'updateuser']);
     Route::get('delete-user/{id}', [DashboardController::class, 'destroyuser']);
+    Route::get('pdf-doctores', [DashboardController::class, 'pdf']);
+    Route::get('pdf-doctor/{id}', [DashboardController::class, 'pdfdoctor']);
 
     //Assistant Users
     Route::get('asistentes', [AsistenteController::class, 'users']);
@@ -70,6 +72,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-asistente/{id}',[AsistenteController::class,'edituser']);
     Route::put('update-asistente/{id}', [AsistenteController::class, 'updateuser']);
     Route::get('delete-asistente/{id}', [AsistenteController::class, 'destroyuser']);
+    Route::get('pdf-asistentes', [AsistenteController::class, 'pdf']);
+    Route::get('pdf-asistente/{id}', [AsistenteController::class, 'pdfasistente']);
 
     //Pacientes
     Route::get('pacientes', [PacienteController::class, 'pacientes']);
@@ -80,17 +84,20 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-paciente/{id}', [PacienteController::class, 'update']);
     Route::get('delete-paciente/{id}', [PacienteController::class, 'destroy']);
     Route::get('pdf-pacientes', [PacienteController::class, 'pdf']);
+    Route::get('pdf-paciente/{id}', [PacienteController::class, 'pdfpaciente']);
     Route::get('exportpacientes', [PacienteController::class, 'exportexcel']);
 
     //Recetas
     Route::post('insert-receta', [RecetaController::class, 'insert']);
     Route::put('update-receta/{id}', [RecetaController::class, 'update'])->name('update-receta');
     Route::get('delete-receta/{id}', [RecetaController::class, 'delete']);
+    Route::get('print-receta', [RecetaController::class, 'print']);
 
     //Historia
     Route::get('edit-historia/{id}',[HistoriaController::class,'edit']);
     Route::put('update-historia/{id}', [HistoriaController::class, 'update']);
     Route::post('upload_imagen_historia', [HistoriaController::class, 'uploadimagen']);
+    Route::get('print-historia', [HistoriaController::class, 'print']);
 
     //Documentos
     Route::get('show-documento/{id}', [DocumentoController::class, 'show']);
@@ -104,6 +111,7 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-terapia/{id}', [TerapiaController::class, 'update']);
     Route::get('delete-terapia/{id}', [TerapiaController::class, 'destroy']);
     Route::post('upload_imagen_terapia', [TerapiaController::class, 'uploadimagen']);
+    Route::get('print-terapia', [TerapiaController::class, 'print']);
 
     Route::post('insert-sesion-derecha', [TerapiaController::class, 'insertsesionderecha']);
     Route::put('update-sesion-derecha/{id}', [TerapiaController::class, 'updatesesionderecha']);
@@ -121,6 +129,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-clinica/{id}',[ClinicaController::class,'edit']);
     Route::put('update-clinica/{id}', [ClinicaController::class, 'update']);
     Route::get('delete-clinica/{id}', [ClinicaController::class, 'destroy']);
+    Route::get('pdf-clinicas', [ClinicaController::class, 'pdf']);
+    Route::get('pdf-clinica/{id}', [ClinicaController::class, 'pdfclinica']);
 
     //Citas
     Route::get('citas', [CitaController::class, 'index']);
@@ -130,6 +140,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-cita/{id}',[CitaController::class,'edit']);
     Route::put('update-cita/{id}', [CitaController::class, 'update']);
     Route::get('delete-cita/{id}', [CitaController::class, 'destroy']);
+    Route::get('print-citas', [CitaController::class, 'printcitas']);
+    Route::get('print-cita', [CitaController::class, 'printcita']);
 
     //Categorías
     Route::get('categorias', [CategoriaController::class, 'index']);
@@ -148,6 +160,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-proveedor/{id}',[ProveedorController::class,'edit']);
     Route::put('update-proveedor/{id}', [ProveedorController::class, 'update']);
     Route::get('delete-proveedor/{id}', [ProveedorController::class, 'destroy']);
+    Route::get('pdf-proveedores', [ProveedorController::class, 'pdf']);
+    Route::get('pdf-proveedor/{id}', [ProveedorController::class, 'pdfproveedor']);
 
     //articulos
     Route::get('articulos', [ArticuloController::class, 'index']);
@@ -157,9 +171,12 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-articulo/{id}',[ArticuloController::class,'edit']);
     Route::put('update-articulo/{id}', [ArticuloController::class, 'update']);
     Route::get('delete-articulo/{id}', [ArticuloController::class, 'destroy']);
+    Route::get('print-articulos', [ArticuloController::class, 'printarticulos']);
+    Route::get('print-articulo', [ArticuloController::class, 'printarticulo']);
 
     //inventario
     Route::get('inventario', [InventarioController::class, 'index']);
+    Route::get('print-inventario', [InventarioController::class, 'printinventario']);
 
     //Ingresos
     Route::get('ingresos', [IngresoController::class, 'index']);
@@ -169,6 +186,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('edit-ingreso/{id}',[IngresoController::class,'edit']);
     Route::put('update-ingreso/{id}', [IngresoController::class, 'update']);
     Route::get('delete-ingreso/{id}', [IngresoController::class, 'destroy']);
+    Route::get('print-ingresos', [IngresoController::class, 'printingresos']);
+    Route::get('print-ingreso', [IngresoController::class, 'printingreso']);
 
     //Ingresos Pagos
     Route::post('insert-pago', [PagoIngresoController::class, 'insert']);
@@ -187,6 +206,8 @@ Route::middleware(['auth'])->group(function () {
     Route::get('delete-venta/{id}', [VentaController::class, 'destroy']);
     Route::get('delete-detalle-venta/{id}', [VentaController::class, 'destroydetalle']);
     Route::post('insert-detalle-venta', [VentaController::class, 'insertdetalle']);
+    Route::get('print-ventas', [VentaController::class, 'printventas']);
+    Route::get('print-venta', [VentaController::class, 'printventa']);
 
     //Ventas Pagos
     Route::post('insert-pago-venta', [PagoVentaController::class, 'insert']);
