@@ -70,6 +70,19 @@
                                 <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printInventarioModal">
                                     <i class="bi bi-printer"></i> Imprimir
                                 </button>
+                                    <form action="{{ url('exportinventario') }}" method="GET" target="_blank">
+
+                                        <input type="hidden" name="articulo_imprimir" value="{{ request('nombre') }}">
+                                        <input type="hidden" name="categoria_imprimir" value="{{ request('categoria_id') }}">
+                                        <input type="hidden" name="proveedor_imprimir" value="{{ request('proveedor_id') }}">
+                                        <input type="hidden" name="stock_imprimir" value="{{ request('stock') }}">
+                                        <input type="hidden" name="stockminimo_imprimir" value="{{ request('stock_minimo') }}">
+
+
+                                        <button type="submit" class="btn btn-success m-1">
+                                            <i class="bi bi-printer"></i> Informe Plano
+                                        </button>
+                                    </form>
 
                                 @include('admin.inventario.printinventariomodal')
                             </div>

@@ -177,6 +177,7 @@ Route::middleware(['auth'])->group(function () {
     //inventario
     Route::get('inventario', [InventarioController::class, 'index']);
     Route::get('print-inventario', [InventarioController::class, 'printinventario']);
+    Route::get('exportinventario', [InventarioController::class, 'exportinventario']);
 
     //Ingresos
     Route::get('ingresos', [IngresoController::class, 'index']);

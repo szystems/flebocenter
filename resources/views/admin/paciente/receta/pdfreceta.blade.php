@@ -133,6 +133,20 @@ header('Content-Type: text/html; charset=UTF-8');
         </table>
     </section>
 
+    <footer>
+        <br><br>
+        <table align="center" width="100%">
+            <tr>
+                <td width="50%" align="center">___________________________</td>
+                <td width="50%" align="center">___________________________</td>
+            </tr>
+            <tr>
+                <td width="50%" align="center">Firma del médico</td>
+                <td width="50%" align="center">Sello del médico</td>
+            </tr>
+        </table><br>
+        <p align="left">Próxima cita: __________________</p>
+    </footer>
 </body>
 
 </html>

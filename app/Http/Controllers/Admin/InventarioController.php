@@ -12,6 +12,9 @@ use App\Models\Config;
 use PDF;
 use DB;
 
+use App\Exports\InventarioExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 class InventarioController extends Controller
 {
     public function index(Request $request)
@@ -72,7 +75,7 @@ class InventarioController extends Controller
                 });
             }
             if ($request->has('categoria_imprimir') && $request->input('categoria_imprimir') !== null) {
-                $articulos->where('categoria_id', '=', $request->input('catecategoria_imprimirgoria_id'));
+                $articulos->where('categoria_id', '=', $request->input('categoria_imprimir'));
             }
             if ($request->has('proveedor_imprimir') && $request->input('proveedor_imprimir') !== null) {
                 $articulos->where('proveedor_id', '=', $request->input('proveedor_imprimir'));
@@ -137,5 +140,19 @@ class InventarioController extends Controller
                 return $pdf->stream ('Inventario - '.$nompdf.'.pdf');
             }
         }
+    }
+
+    public function exportinventario(Request $request)
+    {
+        // Crear una instancia de la clase de exportación con el request
+        $export = new InventarioExport($request);
+
+        // Obtener la colección de artículos filtrados
+        $articulos = $export->collection();
+
+        $dateExport = date('m-d-Y g:ia');
+
+        // Retornar la vista con los datos de los artículos
+        return view('admin.inventario.exportinventario', ['articulos' => $articulos]);
     }
 }
