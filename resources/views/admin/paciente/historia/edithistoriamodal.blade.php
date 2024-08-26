@@ -1,17 +1,17 @@
 <!-- Modal -->
-<div class="modal fade" id="editarHistoriaModal{{ $historia->id }}" tabindex="-1"
-    aria-labelledby="editarHistoriaModal{{ $historia->id }}" aria-hidden="true">
+<div class="modal fade" id="editarHistoriaModal{{ $historia->paciente_id }}" tabindex="-1"
+    aria-labelledby="editarHistoriaModal{{ $historia->paciente_id }}" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="editarHistoriaModal{{ $historia->id }}">
+                <h5 class="modal-title" id="editarHistoriaModal{{ $historia->paciente_id }}">
                     <i class="bi bi-pencil text-warning"></i> Editar Historia
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
 
-            <form action="{{ url('update-historia/'.$historia->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ url('update-historia/'.$historia->paciente_id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
                 <div class="modal-body">
@@ -328,23 +328,23 @@
                                     <br>
                                     Circunferencia MII: <strong>{{ $historia->o_circunferencia_mii == null ? 'Ninguno' : $historia->o_circunferencia_mii }}</strong>
                                     <br>
-                                    Ulcera: <strong>{{ $historia->o_ulcera == null ? 'Ninguno' : $historia->o_ulcera }}</strong>
+                                    Ulcera: <strong>{{ $historia->o_ulcera == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Edema: <strong>{{ $historia->o_edema == null ? 'Ninguno' : $historia->o_edema }}</strong>
+                                    Edema: <strong>{{ $historia->o_edema == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Telangiectasias: <strong>{{ $historia->o_telangiectasias == null ? 'Ninguno' : $historia->o_telangiectasias }}</strong>
+                                    Telangiectasias: <strong>{{ $historia->o_telangiectasias == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Venas de pequeño tamaño: <strong>{{ $historia->o_venas_pequeno == null ? 'Ninguno' : $historia->o_venas_pequeno }}</strong>
+                                    Venas de pequeño tamaño: <strong>{{ $historia->o_venas_pequeno == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Venas de mediano tamaño: <strong>{{ $historia->o_venas_mediano == null ? 'Ninguno' : $historia->o_venas_mediano }}</strong>
+                                    Venas de mediano tamaño: <strong>{{ $historia->o_venas_mediano == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Venas de gran tamaño: <strong>{{ $historia->o_venas_gran == null ? 'Ninguno' : $historia->o_venas_gran }}</strong>
+                                    Venas de gran tamaño: <strong>{{ $historia->o_venas_gran == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Linfedema: <strong>{{ $historia->o_linfedema == null ? 'Ninguno' : $historia->o_linfedema }}</strong>
+                                    Linfedema: <strong>{{ $historia->o_linfedema == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Lipodermatoesclerosis: <strong>{{ $historia->o_lipodermatoesclerosis == null ? 'Ninguno' : $historia->o_lipodermatoesclerosis }}</strong>
+                                    Lipodermatoesclerosis: <strong>{{ $historia->o_lipodermatoesclerosis == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
-                                    Hipersensibilidad: <strong>{{ $historia->o_hipersensibilidad == null ? 'Ninguno' : $historia->o_hipersensibilidad }}</strong>
+                                    Hipersensibilidad: <strong>{{ $historia->o_hipersensibilidad == '1' ? 'Si' : 'No' }}</strong>
                                     <br>
                                 </p>
                             </div>
@@ -403,7 +403,7 @@
                             <div class="mb-3">
                                 <label class="historia"><strong>Historia</strong></label>
                                 {{-- <textarea name="descripcion" class="form-control" rows="6" placeholder="Descripción de la historia...">{{ $historia->descripcion }}</textarea> --}}
-                                <textarea id="edithistoria{{ $historia->id }}" class="form-control border px-2 class" name="descripcion" rows="20">{!! html_entity_decode($historia->descripcion) !!}</textarea>
+                                <textarea id="edithistoria{{ $historia->paciente_id }}" class="form-control border px-2 class" name="descripcion" rows="20">{!! html_entity_decode($historia->descripcion) !!}</textarea>
                                 @if ($errors->has('descripcion'))
                                     <span class="help-block opacity-7">
                                             <strong>

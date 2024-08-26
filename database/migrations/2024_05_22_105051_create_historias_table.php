@@ -14,8 +14,7 @@ class CreateHistoriasTable extends Migration
     public function up()
     {
         Schema::create('historias', function (Blueprint $table) {
-            $table->id();
-            $table->string('paciente_id');
+            $table->integer('paciente_id')->primary()->unique();
             $table->string('medico')->nullable();
             $table->enum('miembro_afectado', ['Izquierdo', 'Derecho', 'Ambos'])->default('Izquierdo');
             $table->decimal('peso', 8, 2)->default(0.00);
@@ -71,15 +70,15 @@ class CreateHistoriasTable extends Migration
             $table->text('n_informacion_pertinente')->nullable();
             $table->string('o_circunferencia_mid')->nullable();
             $table->string('o_circunferencia_mii')->nullable();
-            $table->string('o_ulcera')->nullable();
-            $table->string('o_edema')->nullable();
-            $table->string('o_telangiectasias')->nullable();
-            $table->string('o_venas_pequeno')->nullable();
-            $table->string('o_venas_mediano')->nullable();
-            $table->string('o_venas_gran')->nullable();
-            $table->string('o_linfedema')->nullable();
-            $table->string('o_lipodermatoesclerosis')->nullable();
-            $table->string('o_hipersensibilidad')->nullable();
+            $table->tinyInteger('o_ulcera')->default(false);
+            $table->tinyInteger('o_edema')->default(false);
+            $table->tinyInteger('o_telangiectasias')->default(false);
+            $table->tinyInteger('o_venas_pequeno')->default(false);
+            $table->tinyInteger('o_venas_mediano')->default(false);
+            $table->tinyInteger('o_venas_gran')->default(false);
+            $table->tinyInteger('o_linfedema')->default(false);
+            $table->tinyInteger('o_lipodermatoesclerosis')->default(false);
+            $table->tinyInteger('o_hipersensibilidad')->default(false);
             $table->text('p_diagnostico')->nullable();
             $table->tinyInteger('q_arterial')->default(false);
             $table->tinyInteger('q_venoso')->default(false);

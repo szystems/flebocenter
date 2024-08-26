@@ -87,15 +87,28 @@ class HistoriaController extends Controller
         $historia->n_informacion_pertinente = $request->filled('n_informacion_pertinente') ? $request->n_informacion_pertinente : null;
         $historia->o_circunferencia_mid = $request->filled('o_circunferencia_mid') ? $request->o_circunferencia_mid : null;
         $historia->o_circunferencia_mii = $request->filled('o_circunferencia_mii') ? $request->o_circunferencia_mii : null;
-        $historia->o_ulcera = $request->filled('o_ulcera') ? $request->o_ulcera : null;
-        $historia->o_edema = $request->filled('o_edema') ? $request->o_edema : null;
-        $historia->o_telangiectasias = $request->filled('o_telangiectasias') ? $request->o_telangiectasias : null;
-        $historia->o_venas_pequeno = $request->filled('o_venas_pequeno') ? $request->o_venas_pequeno : null;
-        $historia->o_venas_mediano = $request->filled('o_venas_mediano') ? $request->o_venas_mediano : null;
-        $historia->o_venas_gran = $request->filled('o_venas_gran') ? $request->o_venas_gran : null;
-        $historia->o_linfedema = $request->filled('o_linfedema') ? $request->o_linfedema : null;
-        $historia->o_lipodermatoesclerosis = $request->filled('o_lipodermatoesclerosis') ? $request->o_lipodermatoesclerosis : null;
-        $historia->o_hipersensibilidad = $request->filled('o_hipersensibilidad') ? $request->o_hipersensibilidad : null;
+
+        $historia->o_ulcera = boolval($request->filled('o_ulcera'));
+        $historia->o_edema = boolval($request->filled('o_edema'));
+        $historia->o_telangiectasias = boolval($request->filled('o_telangiectasias'));
+        $historia->o_venas_pequeno = boolval($request->filled('o_venas_pequeno'));
+        $historia->o_venas_mediano = boolval($request->filled('o_venas_mediano'));
+        $historia->o_venas_gran = boolval($request->filled('o_venas_gran'));
+        $historia->o_linfedema = boolval($request->filled('o_linfedema'));
+        $historia->o_lipodermatoesclerosis = boolval($request->filled('o_lipodermatoesclerosis'));
+        $historia->o_hipersensibilidad = boolval($request->filled('o_hipersensibilidad'));
+
+
+        // $historia->o_ulcera = $request->filled('o_ulcera') ? $request->o_ulcera : null;
+        // $historia->o_edema = $request->filled('o_edema') ? $request->o_edema : null;
+        // $historia->o_telangiectasias = $request->filled('o_telangiectasias') ? $request->o_telangiectasias : null;
+        // $historia->o_venas_pequeno = $request->filled('o_venas_pequeno') ? $request->o_venas_pequeno : null;
+        // $historia->o_venas_mediano = $request->filled('o_venas_mediano') ? $request->o_venas_mediano : null;
+        // $historia->o_venas_gran = $request->filled('o_venas_gran') ? $request->o_venas_gran : null;
+        // $historia->o_linfedema = $request->filled('o_linfedema') ? $request->o_linfedema : null;
+        // $historia->o_lipodermatoesclerosis = $request->filled('o_lipodermatoesclerosis') ? $request->o_lipodermatoesclerosis : null;
+        // $historia->o_hipersensibilidad = $request->filled('o_hipersensibilidad') ? $request->o_hipersensibilidad : null;
+
         $historia->p_diagnostico = $request->filled('p_diagnostico') ? $request->p_diagnostico : null;
         $historia->q_arterial = boolval($request->filled('q_arterial'));
         $historia->q_venoso = boolval($request->filled('q_venoso'));
@@ -107,8 +120,9 @@ class HistoriaController extends Controller
         $historia->save();
 
         $paciente = Paciente::find($historia->paciente_id);
+        // dd($paciente);
 
-        return redirect('show-paciente/'.$id)->with('status',__('Historia de Paciente actualizado correctamente!'));
+        return redirect('show-paciente/'.$paciente->id)->with('status',__('Historia de Paciente actualizado correctamente!'));
 
     }
 
@@ -166,7 +180,7 @@ class HistoriaController extends Controller
                 $pdf = PDF::loadView('admin.paciente.historia.pdfhistoria', compact('imagen','historia','config'));
                 $pdf->getDomPDF()->set_option("enable_html5_parser", true);
                 $pdf->setPaper($pdftamaño, $pdfhorientacion);
-                return $pdf->download ('Historia: '.$historia->id.'-'.$nompdf.'.pdf');
+                return $pdf->download ('Historia: '.$historia->paciente_id.'-'.$nompdf.'.pdf');
             }
 
             if ( $pdfarchivo == "stream" )
@@ -174,7 +188,7 @@ class HistoriaController extends Controller
                 $pdf = PDF::loadView('admin.paciente.historia.pdfhistoria', compact('imagen','historia','config'));
                 $pdf->getDomPDF()->set_option("enable_html5_parser", true);
                 $pdf->setPaper($pdftamaño, $pdfhorientacion);
-                return $pdf->stream ('Historia: '.$historia->id.'-'.$nompdf.'.pdf');
+                return $pdf->stream ('Historia: '.$historia->paciente_id.'-'.$nompdf.'.pdf');
             }
         }
     }

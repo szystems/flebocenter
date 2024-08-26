@@ -59,7 +59,7 @@ class Paciente extends Model
     {
         parent::booted();
 
-        static::saved(function (Paciente $paciente) {
+        static::created(function (Paciente $paciente) {
             $paciente->historia()->save(new Historia());
         });
     }

@@ -1,10 +1,10 @@
 
 <!-- Modal -->
-<div class="modal fade" id="printModal{{ $historia->id }}" tabindex="-1" aria-labelledby="printModal{{ $historia->id }}" aria-hidden="true">
+<div class="modal fade" id="printModal{{ $historia->paciente_id }}" tabindex="-1" aria-labelledby="printModal{{ $historia->paciente_id }}" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="printModal{{ $historia->id }}Title">
+                <h5 class="modal-title" id="printModal{{ $historia->paciente_id }}Title">
                     <i class="bi bi-printer text-info"></i> Imprimir
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -48,7 +48,7 @@
                             </div>
                         </div>
 
-                        <input type="hidden" name="historia_id" value="{{ $historia->id }}">
+                        <input type="hidden" name="historia_id" value="{{ $historia->paciente_id }}">
 
                     </div>
 

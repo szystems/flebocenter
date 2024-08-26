@@ -71,7 +71,7 @@
                                 </h5>
 
 
-                                <form action="{{ url('update-historia/'.$historia->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ url('update-historia/'.$historia->paciente_id) }}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
@@ -546,9 +546,11 @@
                                                                     </strong>
                                                             </span>
                                                         @endif
-                                                        <br>
-                                                        Ulcera:
-                                                        <textarea name="o_ulcera" id="o_ulcera" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_ulcera) !!}</textarea>
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Ulcera</label>
+                                                            <input name="o_ulcera" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_ulcera == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_ulcera" id="o_ulcera" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_ulcera) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_ulcera'), {
@@ -566,10 +568,12 @@
                                                                         <font color="red">{{ $errors->first('o_ulcera') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Edema:
-                                                        <textarea name="o_edema" id="o_edema" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_edema) !!}</textarea>
+                                                        @endif --}}
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Edema</label>
+                                                            <input name="o_edema" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_edema == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_edema" id="o_edema" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_edema) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_edema'), {
@@ -587,10 +591,12 @@
                                                                         <font color="red">{{ $errors->first('o_edema') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Telangiectasias:
-                                                        <textarea name="o_telangiectasias" id="o_telangiectasias" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_telangiectasias) !!}</textarea>
+                                                        @endif --}}
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Telangiectasias</label>
+                                                            <input name="o_telangiectasias" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_telangiectasias == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_telangiectasias" id="o_telangiectasias" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_telangiectasias) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_telangiectasias'), {
@@ -608,10 +614,13 @@
                                                                         <font color="red">{{ $errors->first('o_telangiectasias') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Venas de pequeño tamaño:
-                                                        <textarea name="o_venas_pequeno" id="o_venas_pequeno" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_venas_pequeno) !!}</textarea>
+                                                        @endif --}}
+
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Venas de pequeño tamaño</label>
+                                                            <input name="o_venas_pequeno" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_venas_pequeno == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_venas_pequeno" id="o_venas_pequeno" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_venas_pequeno) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_venas_pequeno'), {
@@ -629,10 +638,13 @@
                                                                         <font color="red">{{ $errors->first('o_venas_pequeno') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Venas de mediano tamaño:
-                                                        <textarea name="o_venas_mediano" id="o_venas_mediano" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_venas_mediano) !!}</textarea>
+                                                        @endif --}}
+
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Venas de mediano tamaño</label>
+                                                            <input name="o_venas_mediano" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_venas_mediano == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_venas_mediano" id="o_venas_mediano" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_venas_mediano) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_venas_mediano'), {
@@ -650,10 +662,13 @@
                                                                         <font color="red">{{ $errors->first('o_venas_mediano') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Venas de gran tamaño:
-                                                        <textarea name="o_venas_gran" id="o_venas_gran" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_venas_gran) !!}</textarea>
+                                                        @endif --}}
+
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Venas de gran tamaño</label>
+                                                            <input name="o_venas_gran" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_venas_gran == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_venas_gran" id="o_venas_gran" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_venas_gran) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_venas_gran'), {
@@ -671,10 +686,13 @@
                                                                         <font color="red">{{ $errors->first('o_venas_gran') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Linfedema:
-                                                        <textarea name="o_linfedema" id="o_linfedema" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_linfedema) !!}</textarea>
+                                                        @endif --}}
+
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Linfedema</label>
+                                                            <input name="o_linfedema" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_linfedema == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_linfedema" id="o_linfedema" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_linfedema) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_linfedema'), {
@@ -692,10 +710,13 @@
                                                                         <font color="red">{{ $errors->first('o_linfedema') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Lipodermatoesclerosis:
-                                                        <textarea name="o_lipodermatoesclerosis" id="o_lipodermatoesclerosis" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_lipodermatoesclerosis) !!}</textarea>
+                                                        @endif --}}
+
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Lipodermatoesclerosis</label>
+                                                            <input name="o_lipodermatoesclerosis" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_lipodermatoesclerosis == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_lipodermatoesclerosis" id="o_lipodermatoesclerosis" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_lipodermatoesclerosis) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_lipodermatoesclerosis'), {
@@ -713,10 +734,13 @@
                                                                         <font color="red">{{ $errors->first('o_lipodermatoesclerosis') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
-                                                        <br>
-                                                        Hipersensibilidad:
-                                                        <textarea name="o_hipersensibilidad" id="o_hipersensibilidad" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_hipersensibilidad) !!}</textarea>
+                                                        @endif --}}
+
+                                                        <div class="form-check form-switch">
+                                                            <label class="form-check-label" for="flexSwitchCheckDefault">Hipersensibilidad</label>
+                                                            <input name="o_hipersensibilidad" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->o_hipersensibilidad == '1' ? 'checked' : '' }}>
+                                                        </div>
+                                                        {{-- <textarea name="o_hipersensibilidad" id="o_hipersensibilidad" class="form-control" rows="6" placeholder="">{!! html_entity_decode($historia->o_hipersensibilidad) !!}</textarea>
                                                         <script>
                                                             ClassicEditor
                                                               .create(document.querySelector('#o_hipersensibilidad'), {
@@ -734,7 +758,7 @@
                                                                         <font color="red">{{ $errors->first('o_hipersensibilidad') }}</font>
                                                                     </strong>
                                                             </span>
-                                                        @endif
+                                                        @endif --}}
                                                         <br>
                                                     </p>
                                                 </div>

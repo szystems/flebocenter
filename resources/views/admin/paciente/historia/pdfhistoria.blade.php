@@ -281,18 +281,20 @@ header('Content-Type: text/html; charset=UTF-8');
                 <tr>
                     <td align="center" colspan="8">
                         @php
-                            $texto = html_entity_decode($historia->i_enfermedades, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
+                            if ($historia->i_enfermedades) {
+                                $texto = html_entity_decode($historia->i_enfermedades, ENT_COMPAT, 'UTF-8');
+                                $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
+                                $dom = new DOMDocument('1.0', 'UTF-8');
+                                $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
+                                $imagenes = $dom->getElementsByTagName('img');
+                                foreach ($imagenes as $imagen) {
+                                    $imagen->removeAttribute('src');
+                                }
+                                $html = $dom->saveHTML();
+                                $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
+                                $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
+                                echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                             }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                         @endphp
                     </td>
                 </tr>
@@ -360,18 +362,20 @@ header('Content-Type: text/html; charset=UTF-8');
                 <tr>
                     <td align="center" colspan="8">
                         @php
-                            $texto = html_entity_decode($historia->o_circunferencia_mid, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
+                            if ($historia->o_circunferencia_mid) {
+                                $texto = html_entity_decode($historia->o_circunferencia_mid, ENT_COMPAT, 'UTF-8');
+                                $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
+                                $dom = new DOMDocument('1.0', 'UTF-8');
+                                $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
+                                $imagenes = $dom->getElementsByTagName('img');
+                                foreach ($imagenes as $imagen) {
+                                    $imagen->removeAttribute('src');
+                                }
+                                $html = $dom->saveHTML();
+                                $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
+                                $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
+                                echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                             }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                         @endphp
                     </td>
                 </tr>
@@ -381,209 +385,46 @@ header('Content-Type: text/html; charset=UTF-8');
                 <tr>
                     <td align="center" colspan="8">
                         @php
-                            $texto = html_entity_decode($historia->o_circunferencia_mii, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
+                            if ($historia->o_circunferencia_mii) {
+                                $texto = html_entity_decode($historia->o_circunferencia_mii, ENT_COMPAT, 'UTF-8');
+                                $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
+                                $dom = new DOMDocument('1.0', 'UTF-8');
+                                $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
+                                $imagenes = $dom->getElementsByTagName('img');
+                                foreach ($imagenes as $imagen) {
+                                    $imagen->removeAttribute('src');
+                                }
+                                $html = $dom->saveHTML();
+                                $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
+                                $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
+                                echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                             }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                         @endphp
                     </td>
                 </tr>
                 <tr>
-                    <th colspan="8" align="left">Ulcera:</th>
+                    <th align="right">Ulcera:</th>
+                    <td align="center">{{ $historia->o_ulcera == '1' ? 'Si' : 'No' }}</td>
+                    <th align="right">Edema:</th>
+                    <td align="center">{{ $historia->o_edema == '1' ? 'Si' : 'No' }}</td>
+                    <th align="right">Telangiectasias:</th>
+                    <td align="center" colspan="3">{{ $historia->o_telangiectasias == '1' ? 'Si' : 'No' }}</td>
                 </tr>
                 <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_ulcera, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
+                    <th align="right">Venas de pequeño tamaño:</th>
+                    <td align="center">{{ $historia->o_venas_pequeno == '1' ? 'Si' : 'No' }}</td>
+                    <th align="right">Venas de mediano tamaño:</th>
+                    <td align="center">{{ $historia->o_venas_mediano == '1' ? 'Si' : 'No' }}</td>
+                    <th align="right">Venas de gran tamaño:</th>
+                    <td align="center" colspan="3">{{ $historia->o_venas_gran == '1' ? 'Si' : 'No' }}</td>
                 </tr>
                 <tr>
-                    <th colspan="8" align="left">Edema:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_edema, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="8" align="left">Telangiectasias:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_telangiectasias, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="8" align="left">Venas de pequeño tamaño:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_venas_pequeno, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="8" align="left">Venas de mediano tamaño:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_venas_mediano, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="8" align="left">Venas de gran tamaño:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_venas_gran, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="8" align="left">Linfedema:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_linfedema, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="8" align="left">Lipodermatoesclerosis:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_lipodermatoesclerosis, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="8" align="left">Hipersensibilidad:</th>
-                </tr>
-                <tr>
-                    <td align="center" colspan="8">
-                        @php
-                            $texto = html_entity_decode($historia->o_hipersensibilidad, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
-                            }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
-                        @endphp
-                    </td>
+                    <th align="right">Linfedema:</th>
+                    <td align="center">{{ $historia->o_linfedema == '1' ? 'Si' : 'No' }}</td>
+                    <th align="right">Lipodermatoesclerosis:</th>
+                    <td align="center">{{ $historia->o_lipodermatoesclerosis == '1' ? 'Si' : 'No' }}</td>
+                    <th align="right">Hipersensibilidad:</th>
+                    <td align="center" colspan="3">{{ $historia->o_hipersensibilidad == '1' ? 'Si' : 'No' }}</td>
                 </tr>
                 <tr>
                     <th colspan="8" align="left">P. ¿DIAGNOSTICO?</th>
@@ -591,18 +432,20 @@ header('Content-Type: text/html; charset=UTF-8');
                 <tr>
                     <td align="center" colspan="8">
                         @php
-                            $texto = html_entity_decode($historia->p_diagnostico, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
+                            if ($historia->p_diagnostico) {
+                                $texto = html_entity_decode($historia->p_diagnostico, ENT_COMPAT, 'UTF-8');
+                                $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
+                                $dom = new DOMDocument('1.0', 'UTF-8');
+                                $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
+                                $imagenes = $dom->getElementsByTagName('img');
+                                foreach ($imagenes as $imagen) {
+                                    $imagen->removeAttribute('src');
+                                }
+                                $html = $dom->saveHTML();
+                                $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
+                                $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
+                                echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                             }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                         @endphp
                     </td>
                 </tr>
@@ -629,18 +472,20 @@ header('Content-Type: text/html; charset=UTF-8');
                 <tr>
                     <td align="center" colspan="8">
                         @php
-                            $texto = html_entity_decode($historia->r_resultado_doppler, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
+                            if ($historia->r_resultado_doppler) {
+                                $texto = html_entity_decode($historia->r_resultado_doppler, ENT_COMPAT, 'UTF-8');
+                                $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
+                                $dom = new DOMDocument('1.0', 'UTF-8');
+                                $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
+                                $imagenes = $dom->getElementsByTagName('img');
+                                foreach ($imagenes as $imagen) {
+                                    $imagen->removeAttribute('src');
+                                }
+                                $html = $dom->saveHTML();
+                                $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
+                                $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
+                                echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                             }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                         @endphp
                     </td>
                 </tr>
@@ -650,18 +495,20 @@ header('Content-Type: text/html; charset=UTF-8');
                 <tr>
                     <td align="center" colspan="8">
                         @php
-                            $texto = html_entity_decode($historia->s_tratamiento, ENT_COMPAT, 'UTF-8');
-                            $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
-                            $dom = new DOMDocument('1.0', 'UTF-8');
-                            $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
-                            $imagenes = $dom->getElementsByTagName('img');
-                            foreach ($imagenes as $imagen) {
-                                $imagen->removeAttribute('src');
+                            if ($historia->s_tratamiento) {
+                                $texto = html_entity_decode($historia->s_tratamiento, ENT_COMPAT, 'UTF-8');
+                                $texto = preg_replace('/<figure[^>]*>.*?<\/figure>/s', '', $texto);
+                                $dom = new DOMDocument('1.0', 'UTF-8');
+                                $dom->loadHTML(mb_convert_encoding($texto, 'HTML-ENTITIES', 'UTF-8'), LIBXML_HTML_NOIMPLIED | LIBXML_NOWARNING);
+                                $imagenes = $dom->getElementsByTagName('img');
+                                foreach ($imagenes as $imagen) {
+                                    $imagen->removeAttribute('src');
+                                }
+                                $html = $dom->saveHTML();
+                                $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
+                                $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
+                                echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                             }
-                            $html = $dom->saveHTML();
-                            $html = str_replace('&nbsp;', ' ', $html); // reemplazar &nbsp; por espacio normal
-                            $html = htmlspecialchars_decode($html, ENT_COMPAT); // convertir entidades HTML a caracteres normales
-                            echo utf8_encode($html); // agregar utf8_encode para asegurarse de que se muestre correctamente
                         @endphp
                     </td>
                 </tr>

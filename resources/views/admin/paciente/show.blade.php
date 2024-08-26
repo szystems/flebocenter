@@ -342,9 +342,9 @@
                                                     <div class="mb-3">
                                                         <h5 class="card-title"><u>Historia General</u></h5>
 
-                                                        <a href="{{ url('edit-historia/'.$historia->id) }}" class="btn btn-warning m-1" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
+                                                        <a href="{{ url('edit-historia/'.$historia->paciente_id) }}" class="btn btn-warning m-1" aria-current="page"><i class="bi bi-pencil"></i> Editar</a>
                                                         <button type="button" class="btn btn-info m-1" data-bs-toggle="modal"
-                                                            data-bs-target="#printModal{{ $historia->id }}">
+                                                            data-bs-target="#printModal{{ $historia->paciente_id }}">
                                                             <i class="bi bi-printer"></i> Imprimir
                                                         </button>
                                                         @include('admin.paciente.historia.printmodal')
@@ -626,23 +626,23 @@
                                                             <br>
                                                             Circunferencia MII: <div class="card-body"> {!! html_entity_decode($historia->o_circunferencia_mii) !!} </div>
                                                             <br>
-                                                            Ulcera: <div class="card-body"> {!! html_entity_decode($historia->o_ulcera) !!} </div>
+                                                            Ulcera: <strong>{{ $historia->o_ulcera == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Edema: <div class="card-body"> {!! html_entity_decode($historia->o_edema) !!} </div>
+                                                            Edema: <strong>{{ $historia->o_edema == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Telangiectasias: <div class="card-body"> {!! html_entity_decode($historia->o_telangiectasias) !!} </div>
+                                                            Telangiectasias: <strong>{{ $historia->o_telangiectasias == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Venas de pequeño tamaño: <div class="card-body"> {!! html_entity_decode($historia->o_venas_pequeno) !!} </div>
+                                                            Venas de pequeño tamaño: <strong>{{ $historia->o_venas_pequeno == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Venas de mediano tamaño: <div class="card-body"> {!! html_entity_decode($historia->o_venas_mediano) !!} </div>
+                                                            Venas de mediano tamaño: <strong>{{ $historia->o_venas_mediano == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Venas de gran tamaño: <div class="card-body"> {!! html_entity_decode($historia->o_venas_gran) !!} </div>
+                                                            Venas de gran tamaño: <strong>{{ $historia->o_venas_gran == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Linfedema: <div class="card-body"> {!! html_entity_decode($historia->o_linfedema) !!} </div>
+                                                            Linfedema: <strong>{{ $historia->o_linfedema == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Lipodermatoesclerosis: <div class="card-body"> {!! html_entity_decode($historia->o_lipodermatoesclerosis) !!} </div>
+                                                            Lipodermatoesclerosis: <strong>{{ $historia->o_lipodermatoesclerosis == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
-                                                            Hipersensibilidad: <div class="card-body"> {!! html_entity_decode($historia->o_hipersensibilidad) !!} </div>
+                                                            Hipersensibilidad: <strong>{{ $historia->o_hipersensibilidad == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
                                                         </p>
                                                     </div>

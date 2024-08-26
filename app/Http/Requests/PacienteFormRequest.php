@@ -42,7 +42,6 @@ class PacienteFormRequest extends FormRequest
             'dpi' => [
                 'required',
                 'string',
-                'size:13',
                 Rule::unique('pacientes')->ignore($this->route('id')),
             ],
             'nit' => 'nullable|string|max:17',

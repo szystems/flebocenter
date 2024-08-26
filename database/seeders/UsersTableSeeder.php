@@ -24,6 +24,15 @@ class UsersTableSeeder extends Seeder
             'principal' => '1',
         ]);
 
+        User::create([
+            'name' => 'Mirla Rodriguez',
+            'email' => 'flebocenter.quetgo@gmail.com',
+            'password' => Hash::make('ABCD1234'),
+            'colegiado'=> '16437',
+            'role_as' => '0',
+            'principal' => '1',
+        ]);
+
         User::factory()->count(20)->create();
     }
 

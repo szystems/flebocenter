@@ -11,7 +11,7 @@ class Historia extends Model
 
     protected $table = 'historias';
 
-    protected $primaryKey='id';
+    protected $primaryKey='paciente_id';
 
     protected $fillable = [
         'paciente_id',

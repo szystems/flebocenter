@@ -89,6 +89,7 @@ class PacienteController extends Controller
         $paciente->save();
 
         // $historia = new Historia();
+        // $historia->paciente_id = $paciente->id;
         // $historia->save();
 
         return redirect('show-paciente/'.$paciente->id)->with('status', __('Paciente agregado  correctamente!'));
@@ -156,7 +157,7 @@ class PacienteController extends Controller
         $paciente->estado = 0;
         $paciente->email = $paciente->email.'-Deleted'.$paciente->id;
         $paciente->update();
-        return redirect('users')->with('status',__('Paciente eliminado correctamente!'));
+        return redirect('pacientes')->with('status',__('Paciente eliminado correctamente!'));
     }
 
     public function pdf(Request $request)
