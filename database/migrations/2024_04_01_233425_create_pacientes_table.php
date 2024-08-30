@@ -22,7 +22,7 @@ class CreatePacientesTable extends Migration
             $table->string('telefono')->nullable();
             $table->string('celular');
             $table->text('direccion')->nullable();
-            $table->string('email')->unique();
+            $table->string('email')->unique()->nullable();
             $table->string('dpi')->unique();
             $table->string('nit')->nullable();
             $table->string('fotografia')->nullable();

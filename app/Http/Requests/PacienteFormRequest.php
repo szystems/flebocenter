@@ -33,7 +33,7 @@ class PacienteFormRequest extends FormRequest
             'celular' => 'required|string|max:20',
             'direccion' => 'nullable|string|max:255',
             'email' => [
-                'required',
+                'nullable',
                 'string',
                 'email',
                 'max:255',
