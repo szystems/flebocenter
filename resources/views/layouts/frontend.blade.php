@@ -102,7 +102,7 @@
                         @endphp
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user"></i> {{ ucwords($nombre[0]) }}</a>
                         <div class="dropdown-menu m-0">
-                            <a href="#" class="dropdown-item">Mi Perfil</a>
+                            <a href="{{ url('show-user/'.Auth::user()->id) }}" class="dropdown-item">Mi Perfil</a>
                             <a href="{{ url('dashboard') }}" class="dropdown-item">Panel de Control</a>
                             <a href="javascript:; {{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="dropdown-item">Cerrar Sesion</a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">

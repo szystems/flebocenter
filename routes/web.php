@@ -142,6 +142,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('delete-cita/{id}', [CitaController::class, 'destroy']);
     Route::get('print-citas', [CitaController::class, 'printcitas']);
     Route::get('print-cita', [CitaController::class, 'printcita']);
+    Route::get('add-cita-paciente/{id}', [CitaController::class, 'addcitapaciente']);
 
     //Categorías
     Route::get('categorias', [CategoriaController::class, 'index']);

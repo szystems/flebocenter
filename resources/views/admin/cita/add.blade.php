@@ -63,13 +63,18 @@
                                                                     Paciente&nbsp;
 
                                                                 </label>
+                                                                @if ($paciente)
+                                                                    <input readonly type="text" name="paciente_nombre" class="form-control text-center" value="{{ $paciente->nombre }}"/>
+                                                                    <input type="hidden" name="paciente_id" value="{{ $paciente->id }}">
+                                                                @else
+                                                                    <select id="miSelect" name="paciente_id" class="form-select">
+                                                                        <option value="">Seleccione Paciente</option>
+                                                                        @foreach($filtroPacientes as $paciente)
+                                                                            <option value="{{ $paciente->id }}"{{ old('paciente_id') == $paciente->id ? ' selected' : '' }}>{{ $paciente->nombre }} - DPI: {{ $paciente->dpi }}</option>
+                                                                        @endforeach
+                                                                    </select>
+                                                                @endif
 
-                                                                <select id="miSelect" name="paciente_id" class="form-select">
-                                                                    <option value="">Seleccione Paciente</option>
-                                                                    @foreach($filtroPacientes as $paciente)
-                                                                        <option value="{{ $paciente->id }}"{{ old('paciente_id') == $paciente->id ? ' selected' : '' }}>{{ $paciente->nombre }} - DPI: {{ $paciente->dpi }}</option>
-                                                                    @endforeach
-                                                                </select>
                                                                 <br>
                                                                 <a href="{{ url('add-paciente') }}" type="button" class="text-blue mt-1">
                                                                     <i class="bi bi-plus-square"></i> Agregar Paciente

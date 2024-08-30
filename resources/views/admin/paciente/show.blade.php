@@ -779,6 +779,10 @@
                                             <div class="row gx-3">
 
                                                 <h5 class="card-title"><u>Historial de Citas</u></h5>
+                                                <br>
+                                                <a href="{{ url('add-cita-paciente/'.$paciente->id) }}" type="button" class="btn btn-success float-end">
+                                                    <i class="bi bi-plus-square"></i> Crear Cita
+                                                </a>
 
                                                 <div class="table-responsive">
                                                     <table class="table align-middle table-striped flex-column">

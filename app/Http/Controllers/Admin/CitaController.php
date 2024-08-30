@@ -75,8 +75,19 @@ class CitaController extends Controller
         $filtroClinicas = Clinica::where('estado', 1)->get();
         $filtroPacientes = Paciente::where('estado', 1)->get();
         $filtroDoctores = User::where('estado', 1)->where('role_as', 0)->get();
-        return view('admin.cita.add', compact('filtroDoctores','filtroPacientes','filtroClinicas'));
+        $paciente = null;
+        return view('admin.cita.add', compact('filtroDoctores','filtroPacientes','filtroClinicas','paciente'));
     }
+
+    public function addcitapaciente($id)
+{
+    $filtroClinicas = Clinica::where('estado', 1)->get();
+    $filtroPacientes = Paciente::where('estado', 1)->get();
+    $filtroDoctores = User::where('estado', 1)->where('role_as', 0)->get();
+    $paciente = Paciente::find($id);
+
+    return view('admin.cita.add', compact('filtroDoctores', 'filtroPacientes', 'filtroClinicas','paciente'));
+}
 
     public function verificarTraslape($clinica_id, $doctor_id, $fecha_cita, $hora_inicio, $hora_fin) {
         // Buscar citas existentes para el mismo doctor y fecha
