@@ -24,6 +24,7 @@
                                 <p>{{ $fechaReceta }}</p>
                                 <input type="hidden" name="fecha" value="{{ $receta->fecha }}">
                                 <input type="hidden" name="paciente_id" value="{{ $receta->paciente_id }}">
+                                <input type="hidden" name="doctor_id" value="{{ $receta->doctor_id }}">
                             </div>
                         </div>
 

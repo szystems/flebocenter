@@ -67,7 +67,8 @@ header('Content-Type: text/html; charset=UTF-8');
 
 <body>
     <header>
-        <img align="center" src="{{ $imagen }}" alt="" height="100">
+        <br><br><br><br><br><br><br>
+        {{-- <img align="center" src="{{ $imagen }}" alt="" height="100"> --}}
         <h1><u>Receta</u></h1>
         @php
                 $horafecha = new DateTime("now", new DateTimeZone('America/Guatemala'));
@@ -76,61 +77,21 @@ header('Content-Type: text/html; charset=UTF-8');
         {{-- <p align="left"><font size="1">Fecha de impresion: {{ $horafecha }}</font></p> --}}
     </header>
     <section>
-        <table class="table" Width=100%>
-            <thead>
-                <tr>
 
-                    <th align="right">
-                        <font size="1">Fecha:</font>
-                    </th>
-                    <td align="left" colspan="6">
+                        <font size="1"><strong>Fecha:</strong></font>
+
                         @php
                             $fecha = date("d/m/Y", strtotime($receta->fecha));
                         @endphp
                         <font size="1">{{ $fecha }}</font>
-                    </td>
-                    {{-- <th align="right">
-                        <font size="1">Doctor:</font>
-                    </th>
-                    <td colspan="4" align="left">
-                        <font size="1">{{ $receta->doctor->name }} ({{ $receta->doctor->colegiado }})</font>
-                    </td> --}}
+                        <br>
+                        <font size="1"><strong>Paciente:</strong></font>
 
-                </tr>
-                {{-- <tr>
-                    <th align="right">
-                        <font size="1">Doctor:</font>
-                    </th>
-                    <td colspan="4" align="left">
-                        <font size="1">{{ $receta->doctor->name }} ({{ $receta->doctor->colegiado }})</font>
-                    </td>
-                </tr> --}}
-                <tr>
-                    <th align="right">
-                        <font size="1">Paciente:</font>
-                    </th>
-                    <td colspan="6" align="left">
                         <font size="1">{{ $receta->paciente->nombre }}</font>
-                    </td>
-                </tr>
-                <tr>
-                    <td colspan="7">
-                        <font size="1">{!! html_entity_decode($receta->descripcion) !!}</font>
-                    </td>
-                </tr>
 
-            </thead>
-            {{-- <tbody>
-                <tr>
-                    <td align="center">
-                        <font size="1">hola</font>
-                    </td>
-                    <td align="center">
-                        <font size="1">hola 2</font>
-                    </td>
-                </tr>
-            </tbody> --}}
-        </table>
+                        <font size="1">{!! html_entity_decode($receta->descripcion) !!}</font>
+
+
     </section>
 
     <footer>
