@@ -14,7 +14,7 @@
 
                     <div class="row gx-3 p-3">
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <!-- Form Field Start -->
                             <div class="mb-3">
                                 <label for="pdftamaño" class="form-label">Tamaño</label>
@@ -28,10 +28,10 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <!-- Form Field Start -->
                             <div class="mb-3">
-                                <label for="pdfhorientacion" class="form-label">Horientación</label>
+                                <label for="pdfhorientacion" class="form-label">Orientación</label>
                                 <select name="pdfhorientacion" class="form-select" aria-label="Default select example">
                                     <option value="portrait "{{ request('pdfhorientacion') == 'portrait' ? ' selected' : '' }}>portrait</option>
                                     <option value="landscape"{{ request('pdfhorientacion') == 'landscape' ? ' selected' : '' }}>landscape</option>
@@ -39,13 +39,27 @@
                             </div>
                         </div>
 
-                        <div class="col-md-4 mb-3">
+                        <div class="col-md-3 mb-3">
                             <!-- Form Field Start -->
                             <div class="mb-3">
                                 <label for="pdfarchivo" class="form-label">Archivo</label>
                                 <select name="pdfarchivo" class="form-select" aria-label="Default select example">
                                     <option value="download "{{ request('pdfarchivo') == 'download' ? ' selected' : '' }}>download</option>
                                     <option value="stream"{{ request('pdfarchivo') == 'stream' ? ' selected' : '' }}>stream</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3 mb-3">
+                            <!-- Form Field Start -->
+                            <div class="mb-3">
+                                <label for="pdfletra" class="form-label">Letra</label>
+                                <select name="pdfletra" class="form-select" aria-label="Default select example">
+                                    <option value="1" {{ request('pdfletra') == '1' ? ' selected' : '' }}>1</option>
+                                    <option value="2" {{ request('pdfletra') == '2' ? ' selected' : '' }}>2</option>
+                                    <option value="3" {{ request('pdfletra') == '3' ? ' selected' : '' }}>3</option>
+                                    {{-- <option value="4" {{ request('pdfletra') == '4' ? ' selected' : '' }}>4</option>
+                                    <option value="5" {{ request('pdfletra') == '5' ? ' selected' : '' }}>5</option> --}}
                                 </select>
                             </div>
                         </div>

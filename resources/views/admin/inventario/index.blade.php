@@ -34,10 +34,10 @@
                         <div class="card-header">
                             <div class="card-title">
                                 Listado de Inventario
-                                <a href="{{ url('add-articulo') }}" type="button" class="btn btn-success float-end">
+                                {{-- <a href="{{ url('add-articulo') }}" type="button" class="btn btn-success float-end">
                                     <i class="bi bi-plus-square"></i> Agregar
                                 </a>
-                                <br>
+                                <br> --}}
                                 <small class="text-secondary"><u>Filtros:</u></small>
                                 <small class="text-muted">
 
@@ -66,23 +66,21 @@
                                         Stock Minimo:  <small class="text-info">{{ request('stock_minimo') }},</small>
                                     @endif
                                 </small>
-                                <br>
-                                <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printInventarioModal">
-                                    <i class="bi bi-printer"></i> Imprimir
-                                </button>
+                                <div class="d-flex justify-content-end">
+                                    <button type="button" class="btn btn-info m-1" data-bs-toggle="modal" data-bs-target="#printInventarioModal">
+                                        <i class="bi bi-printer"></i> Imprimir
+                                    </button>
                                     <form action="{{ url('exportinventario') }}" method="GET" target="_blank">
-
                                         <input type="hidden" name="articulo_imprimir" value="{{ request('nombre') }}">
                                         <input type="hidden" name="categoria_imprimir" value="{{ request('categoria_id') }}">
                                         <input type="hidden" name="proveedor_imprimir" value="{{ request('proveedor_id') }}">
                                         <input type="hidden" name="stock_imprimir" value="{{ request('stock') }}">
                                         <input type="hidden" name="stockminimo_imprimir" value="{{ request('stock_minimo') }}">
-
-
                                         <button type="submit" class="btn btn-success m-1">
                                             <i class="bi bi-printer"></i> Informe Plano
                                         </button>
                                     </form>
+                                </div>
 
                                 @include('admin.inventario.printinventariomodal')
                             </div>

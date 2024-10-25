@@ -42,6 +42,7 @@ use App\Http\Controllers\Admin\ConfigController;
 // });
 Route::get('/', [FrontendController::class, 'index']);
 Route::get('about-us', [FrontendController::class, 'aboutus']);
+Route::get('services', [FrontendController::class, 'services']);
 Route::get('contact', [FrontendController::class, 'contact']);
 Route::get('send-contact-email', [FrontendController::class, 'sendcontactemail']);
 

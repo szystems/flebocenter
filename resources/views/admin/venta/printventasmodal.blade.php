@@ -29,7 +29,7 @@
                         <div class="col-md-4 mb-3">
                             <!-- Form Field Start -->
                             <div class="mb-3">
-                                <label for="pdfhorientacion" class="form-label">Horientación</label>
+                                <label for="pdfhorientacion" class="form-label">Orientación</label>
                                 <select name="pdfhorientacion" class="form-select" aria-label="Default select example">
                                     <option value="portrait "{{ request('pdfhorientacion') == 'portrait' ? ' selected' : '' }}>portrait</option>
                                     <option value="landscape"{{ request('pdfhorientacion') == 'landscape' ? ' selected' : '' }}>landscape</option>

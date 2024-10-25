@@ -6,18 +6,18 @@
 <div class="container-fluid p-0">
     <div id="header-carousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
         <div class="carousel-inner">
-            <div class="carousel-item active">
+            {{-- <div class="carousel-item active">
                 <img class="w-100" src="frontendtemplate/img/face1.png" alt="Image">
-                {{-- <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <div class="p-3" style="max-width: 900px;">
                         <h5 class="text-white text-uppercase mb-3 animated slideInDown">Keep Your Teeth Healthy</h5>
                         <h1 class="display-1 text-white mb-md-4 animated zoomIn">Take The Best Quality Dental Treatment</h1>
                         <a href="appointment.html" class="btn btn-primary py-md-3 px-md-5 me-3 animated slideInLeft">Appointment</a>
                         <a href="" class="btn btn-secondary py-md-3 px-md-5 animated slideInRight">Contact Us</a>
                     </div>
-                </div> --}}
-            </div>
-            <div class="carousel-item">
+                </div>
+            </div> --}}
+            <div class="carousel-item active">
                 <img class="w-100" src="frontendtemplate/img/face2.png" alt="Image">
                 {{-- <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
                     <div class="p-3" style="max-width: 900px;">
@@ -53,17 +53,22 @@
                     <h1 class="display-5 mb-0">FLEBOCENTER</h1>
                 </div>
                 <h4 class="text-body fst-italic mb-4">Líderes en el tratamiento de enfermedades venosas y linfáticas</h4>
-                <p class="mb-4">En FLEBOCENTER, nos dedicamos apasionadamente a mejorar la salud vascular de nuestros pacientes. Con más de 10 años de experiencia, somos líderes en el tratamiento de enfermedades venosas y linfáticas. Nuestro equipo de especialistas altamente capacitados está comprometido con la excelencia médica y la atención personalizada.</p>
+                <p class="mb-4">En FLEBOCENTER, contamos con años de experiencia y somos líderes
+                    en el tratamiento de enfermedades venosas y linfáticas; trabajamos
+                    apasionadamente para mejorar la salud de nuestros pacientes.
+                    Nuestro equipo de especialistas altamente capacitados está
+                    comprometidos con la excelencia médica, actualización académica
+                    constante y atención personalizada. <a href="{{ url('about-us') }}">Ver mas...</a></p>
                 <p class="mb-4">Serán gustosamente atendidos por la <strong>Dra. Mirla Rodríguez</strong></p>
                 <div class="row g-3">
-                    <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
+                    {{-- <div class="col-sm-6 wow zoomIn" data-wow-delay="0.3s">
                         <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Award Winning</h5>
                         <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Professional Staff</h5>
                     </div>
                     <div class="col-sm-6 wow zoomIn" data-wow-delay="0.6s">
                         <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>24/7 Opened</h5>
                         <h5 class="mb-3"><i class="fa fa-check-circle text-primary me-3"></i>Fair Prices</h5>
-                    </div>
+                    </div> --}}
                 </div>
                 <a href="https://wa.me/50257358668" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s" target="_blank">Hacer una Cita</a>
             </div>
@@ -78,6 +83,9 @@
                                 <a class="btn btn-primary btn-square m-1" href="https://wa.me/50257358668" target="_blank"><i class="fab fa-whatsapp fw-normal"></i></a>
                                 <a class="btn btn-primary btn-square m-1" href="https://www.facebook.com/flebocenterQuetzaltenango/" target="_blank"><i class="fab fa-facebook-f fw-normal"></i></a>
                                 <a class="btn btn-primary btn-square m-1" href="https://www.instagram.com/flebocenter_quetzaltenango/?utm_source=qr&igsh=OXAyZDl6Zjh1OHh4" target="_blank"><i class="fab fa-instagram fw-normal"></i></a>
+                                <a class="btn btn-primary btn-square m-1" href="https://www.tiktok.com/your_tiktok_profile" target="_blank">
+                                    <img src="{{ asset('frontendtemplate\img\logo\tiktok.png') }}" alt="TikTok" width="20px" height="20px">
+                                  </a>
                             </div>
                         </div>
                         <div class="team-text position-relative bg-light text-center rounded-bottom p-4 pt-5">
@@ -111,7 +119,7 @@
                 <div class="row g-5">
                     <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
                         <div class="rounded-top overflow-hidden">
-                            <img class="img-fluid" src="frontendtemplate/img/drenajelinfatico.jpg" alt="">
+                            <img class="img-fluid" src="frontendtemplate/img/enf/25.jpg" alt="">
                         </div>
                         <div class="position-relative bg-light rounded-bottom text-center p-4">
                             <h5 class="m-0">Drenaje Linfático</h5>
@@ -119,7 +127,7 @@
                     </div>
                     <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.9s">
                         <div class="rounded-top overflow-hidden">
-                            <img class="img-fluid" src="frontendtemplate/img/face3.jpg" alt="">
+                            <img class="img-fluid" src="frontendtemplate/img/enf/20.jpg" alt="">
                         </div>
                         <div class="position-relative bg-light rounded-bottom text-center p-4">
                             <h5 class="m-0">Flebología</h5>
@@ -133,15 +141,15 @@
                 <div class="row g-5">
                     <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.3s">
                         <div class="rounded-top overflow-hidden">
-                            <img class="img-fluid" src="frontendtemplate/img/piediabitico.jpg" alt="">
+                            <img class="img-fluid" src="frontendtemplate/img/enf/27.jpg" alt="">
                         </div>
                         <div class="position-relative bg-light rounded-bottom text-center p-4">
-                            <h5 class="m-0">Pie Diabético</h5>
+                            <h5 class="m-0">Cirugía</h5>
                         </div>
                     </div>
                     <div class="col-md-6 service-item wow zoomIn" data-wow-delay="0.6s">
                         <div class="rounded-top overflow-hidden">
-                            <img class="img-fluid" src="frontendtemplate/img/presoterapia.jpg" alt="">
+                            <img class="img-fluid" src="frontendtemplate/img/enf/22.jpg" alt="">
                         </div>
                         <div class="position-relative bg-light rounded-bottom text-center p-4">
                             <h5 class="m-0">Presoterapia</h5>
@@ -157,6 +165,7 @@
                     <h2 class="text-white mb-0"><a class="text-white" href="tel:+50277677954" target="_blank"><i class="bi bi-telephone fw-normal"></i></i> 7767 7954</a></h2>
                 </div>
             </div>
+            <a href="{{ url('services') }}" class="btn btn-primary py-3 px-5 mt-4 wow zoomIn" data-wow-delay="0.6s" target="_blank">Ver todos los servicios</a>
         </div>
     </div>
 </div>

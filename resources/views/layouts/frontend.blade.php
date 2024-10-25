@@ -83,10 +83,10 @@
 
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <div class="navbar-nav ms-auto py-0">
-                <a href="{{ url('/') }}" class="nav-item nav-link active">Inicio</a>
-                <a href="{{ url('about-us') }}" class="nav-item nav-link">Nosotros</a>
-                {{-- <a href="about-us" class="nav-item nav-link">Servicios</a> --}}
-                <a href="{{ url('contact') }}" class="nav-item nav-link">Contacto</a>
+                <a href="{{ url('/') }}" class="nav-item nav-link {{ Request::is('/','home') ? 'active':''  }}">Inicio</a>
+                <a href="{{ url('about-us') }}" class="nav-item nav-link {{ Request::is('about-us') ? 'active':''  }}">Nosotros</a>
+                <a href="services" class="nav-item nav-link {{ Request::is('services') ? 'active':''  }}">Servicios</a>
+                <a href="{{ url('contact') }}" class="nav-item nav-link {{ Request::is('contact') ? 'active':''  }}">Contacto</a>
                 <div class="nav-item dropdown">
                     @if (Auth::guest())
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-user"></i></a>
@@ -150,7 +150,7 @@
                     <div class="d-flex flex-column justify-content-start">
                         <a class="text-light mb-2" href="{{ url('/') }}"><i class="bi bi-arrow-right text-primary me-2"></i>Inicio</a>
                         <a class="text-light mb-2" href="{{ url('about-us') }}"><i class="bi bi-arrow-right text-primary me-2"></i>Nosotros</a>
-                        {{-- <a class="text-light mb-2" href="{{  }}"><i class="bi bi-arrow-right text-primary me-2"></i>Our Services</a> --}}
+                        <a class="text-light mb-2" href="{{ url('services') }}"><i class="bi bi-arrow-right text-primary me-2"></i>Servicios</a>
                         <a class="text-light" href="{{ url('contact') }}"><i class="bi bi-arrow-right text-primary me-2"></i>Contacto</a>
                     </div>
                 </div>
@@ -176,7 +176,10 @@
                         {{-- <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="#"><i class="fab fa-twitter fw-normal"></i></a> --}}
                         <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="https://www.facebook.com/flebocenterQuetzaltenango/"><i class="fab fa-facebook-f fw-normal"></i></a>
                         <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="https://wa.me/50257358668"><i class="fab fa-whatsapp fw-normal"></i></a>
-                        <a class="btn btn-lg btn-primary btn-lg-square rounded" target="_blank" href="https://www.instagram.com/flebocenter_quetzaltenango/?utm_source=qr&igsh=OXAyZDl6Zjh1OHh4"><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="https://www.instagram.com/flebocenter_quetzaltenango/?utm_source=qr&igsh=OXAyZDl6Zjh1OHh4"><i class="fab fa-instagram fw-normal"></i></a>
+                        <a class="btn btn-lg btn-primary btn-lg-square rounded me-2" target="_blank" href="https://www.tiktok.com/tag/flebocenter">
+                            <img src="{{ asset('frontendtemplate\img\logo\tiktok.png') }}" alt="TikTok" width="20px" height="20px">
+                        </a>
                     </div>
                 </div>
             </div>

@@ -74,10 +74,11 @@ class RecetaController extends Controller
             $pdftamaño = $request->input('pdftamaño');
             $pdfhorientacion = $request->input('pdfhorientacion');
             $pdfarchivo = $request->input('pdfarchivo');
+            $pdfletra = $request->input('pdfletra');
 
             if ( $pdfarchivo == "download" )
             {
-                $pdf = PDF::loadView('admin.paciente.receta.pdfreceta', compact('imagen','receta','config','imagen'));
+                $pdf = PDF::loadView('admin.paciente.receta.pdfreceta', compact('imagen','receta','config','imagen','pdfletra'));
                 if($request->input('pdftamaño') == 'Media Carta'){
                     $pdf->setPaper(array(0, 0, 396, 612), $pdfhorientacion);
                 }else{
@@ -87,7 +88,7 @@ class RecetaController extends Controller
             }
             if ( $pdfarchivo == "stream" )
             {
-                $pdf = PDF::loadView('admin.paciente.receta.pdfreceta', compact('imagen','receta','config','imagen'));
+                $pdf = PDF::loadView('admin.paciente.receta.pdfreceta', compact('imagen','receta','config','imagen','pdfletra'));
                 if($request->input('pdftamaño') == 'Media Carta'){
                     $pdf->setPaper(array(0, 0, 396, 612), $pdfhorientacion);
                 }else{

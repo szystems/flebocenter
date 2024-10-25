@@ -26,6 +26,12 @@ class FrontendController extends Controller
         return view('frontend.aboutus', compact('config'));
     }
 
+    public function services()
+    {
+        $config = Config::first();
+        return view('frontend.services', compact('config'));
+    }
+
     public function contact()
     {
         $config = Config::first();

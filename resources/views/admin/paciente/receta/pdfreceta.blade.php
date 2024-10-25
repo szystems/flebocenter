@@ -69,33 +69,35 @@ header('Content-Type: text/html; charset=UTF-8');
     <header>
         <br><br><br><br><br><br><br>
         {{-- <img align="center" src="{{ $imagen }}" alt="" height="100"> --}}
-        <h1><u>Receta</u></h1>
+        {{-- <h1><u>Receta</u></h1> --}}
         @php
                 $horafecha = new DateTime("now", new DateTimeZone('America/Guatemala'));
                 $horafecha = $horafecha->format('d/m/Y')
             @endphp
-        {{-- <p align="left"><font size="1">Fecha de impresion: {{ $horafecha }}</font></p> --}}
+        {{-- <p align="left"><font size="{{ $pdfletra }}">Fecha de impresion: {{ $horafecha }}</font></p> --}}
     </header>
     <section>
 
-                        <font size="1"><strong>Fecha:</strong></font>
+        <font size="{{ $pdfletra }}"><strong>Fecha:</strong></font>
 
-                        @php
-                            $fecha = date("d/m/Y", strtotime($receta->fecha));
-                        @endphp
-                        <font size="1">{{ $fecha }}</font>
-                        <br>
-                        <font size="1"><strong>Paciente:</strong></font>
+        @php
+            $fecha = date("d/m/Y", strtotime($receta->fecha));
+        @endphp
+        <font size="{{ $pdfletra }}">{{ $fecha }}</font>
+        <br>
+        <font size="{{ $pdfletra }}"><strong>Paciente:</strong></font>
 
-                        <font size="1">{{ $receta->paciente->nombre }}</font>
+        <font size="{{ $pdfletra }}">{{ $receta->paciente->nombre }}</font>
 
-                        <font size="1">{!! html_entity_decode($receta->descripcion) !!}</font>
+        <br><br>
+        <strong>Rp.</strong>
 
+        <font size="{{ $pdfletra }}">{!! html_entity_decode($receta->descripcion) !!}</font>
 
     </section>
 
     <footer>
-        <br><br>
+
         <table align="center" width="100%">
             <tr>
                 <td width="50%" align="center">___________________________</td>
@@ -105,7 +107,7 @@ header('Content-Type: text/html; charset=UTF-8');
                 <td width="50%" align="center">Firma del médico</td>
                 <td width="50%" align="center">Sello del médico</td>
             </tr>
-        </table><br>
+        </table>
         <p align="left">Próxima cita: __________________</p>
     </footer>
 </body>
