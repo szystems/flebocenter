@@ -130,6 +130,26 @@ header('Content-Type: text/html; charset=UTF-8');
                     </td>
                 </tr>
                 @endif
+                @php
+                    $fnacimiento = date("d/m/Y", strtotime($paciente->fecha_nacimiento));
+                @endphp
+
+
+                <tr>
+                    <th align="right">Fecha Primera Cita:</th>
+                    @php
+                        $fprimeracita = date("d/m/Y", strtotime($paciente->fecha_primera_cita));
+                    @endphp
+                    <td>{{ $fprimeracita }}</td>
+
+                </tr>
+                <tr>
+                    <th align="right">Enviado Por Medico:</th>
+                    <td colspan="5">{{ $paciente->enviado_por_medico }}</td>
+                </tr>
+
+
+
 
             </thead>
         </table>

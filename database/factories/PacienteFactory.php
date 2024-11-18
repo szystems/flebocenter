@@ -40,6 +40,8 @@ class PacienteFactory extends Factory
                 'user4.png',
                 'user5.png',
             ]),
+            'fecha_nacimiento' => $this->faker->date($format = 'Y-m-d', $max = 'now'),
+            'enviado_por_medico' => $this->faker->name,
             'created_at' => now(),
             'updated_at' => now()
         ];

@@ -257,6 +257,37 @@
                                                                 </div>
                                                             </div>
 
+                                                            <div class="col-md-3 mb-3">
+                                                                <!-- Form Field Start -->
+                                                                <div class="mb-3">
+                                                                    <label for="birthDay" class="form-label">Fecha Primera cita</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" name="fecha_primera_cita" class="form-control datepicker" id="fprimeracita" value="{{ $paciente->fecha_primera_cita }}"/>
+                                                                        <span class="input-group-text">
+                                                                            <i class="bi bi-calendar4"></i>
+                                                                        </span>
+                                                                        @php
+                                                                            // dd($fnacimiento)
+                                                                        @endphp
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3 mb-3">
+                                                                <!-- Form Field Start -->
+                                                                <div class="mb-3">
+                                                                    <label for="enviado_por_medico" class="form-label">Enviado Por Medico</label>
+                                                                    <input name="enviado_por_medico" type="text" class="form-control" placeholder="Nombre del Medico..." value="{{ $paciente->enviado_por_medico }}" />
+                                                                    @if ($errors->has('enviado_por_medico'))
+                                                                        <span class="help-block opacity-7">
+                                                                                <strong>
+                                                                                    <font color="red">{{ $errors->first('enviado_por_medico') }}</font>
+                                                                                </strong>
+                                                                        </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div>
+
                                                         </div>
                                                         <div class="d-flex gap-2 justify-content-center">
                                                             <a href="{{ url('show-paciente/'.$paciente->id) }}" type="button" class="btn btn-danger">
@@ -310,6 +341,7 @@
 
         };
         $( '#fnacimiento' ).datepicker( optSimple );
+        $( '#fprimeracita' ).datepicker( optSimple );
     </script>
 
 @endsection

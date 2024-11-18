@@ -23,10 +23,12 @@ class CreatePacientesTable extends Migration
             $table->string('celular');
             $table->text('direccion')->nullable();
             $table->string('email')->unique()->nullable();
-            $table->string('dpi')->unique();
+            $table->string('dpi')->nullable();
             $table->string('nit')->nullable();
             $table->string('fotografia')->nullable();
             $table->boolean('estado')->default(true);
+            $table->date('fecha_primera_cita')->nullable();
+            $table->string('enviado_por_medico')->nullable();
             $table->timestamps();
         });
     }

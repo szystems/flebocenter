@@ -67,6 +67,8 @@ class PacienteController extends Controller
         $paciente = new Paciente();
         $fecha_nacimiento = $request->get('fecha_nacimiento');
         $fecha_nacimiento = date("Y-m-d", strtotime($fecha_nacimiento));
+        $fecha_primera_cita = $request->get('fecha_primera_cita');
+        $fecha_primera_cita = date("Y-m-d", strtotime($fecha_primera_cita));
         if($request->hasFile('fotografia'))
         {
             $file = $request->file('fotografia');
@@ -86,6 +88,8 @@ class PacienteController extends Controller
         $paciente->email = $request->input('email');
         $paciente->dpi = $request->input('dpi');
         $paciente->nit = $request->input('nit');
+        $paciente->fecha_primera_cita = $fecha_primera_cita;
+        $paciente->enviado_por_medico = $request->input('enviado_por_medico');
         $paciente->save();
 
         // $historia = new Historia();
@@ -107,6 +111,8 @@ class PacienteController extends Controller
         // $emailrepeat = Paciente::where('id', '<>', $id)->where('email', $request->input('email'))->count();
         $fecha_nacimiento = $request->get('fecha_nacimiento');
         $fecha_nacimiento = date("Y-m-d", strtotime($fecha_nacimiento));
+        $fecha_primera_cita = $request->get('fecha_primera_cita');
+        $fecha_primera_cita = date("Y-m-d", strtotime($fecha_primera_cita));
         if($request->hasFile('fotografia'))
         {
             $path = 'assets/imgs/pacientes/'.$paciente->fotografia;
@@ -133,6 +139,8 @@ class PacienteController extends Controller
         $paciente->email = $request->input('email');
         $paciente->dpi = $request->input('dpi');
         $paciente->nit = $request->input('nit');
+        $paciente->fecha_primera_cita = $fecha_primera_cita;
+        $paciente->enviado_por_medico = $request->input('enviado_por_medico');
         $paciente->update();
 
         // if ($emailrepeat >= "1") {

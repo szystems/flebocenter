@@ -26,6 +26,8 @@ class Paciente extends Model
         'nit',
         'fotografia',
         'estado',
+        'fecha_primera_cita',
+        'enviado_por_medico',
     ];
 
     /**

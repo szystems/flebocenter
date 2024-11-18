@@ -219,6 +219,27 @@
                                                             </div>
                                                         </div>
 
+                                                        <div class="col-md-3 mb-3">
+                                                            <!-- Form Field Start -->
+                                                            <div class="mb-3">
+                                                                <label for="birthDay" class="form-label">Fecha Primera Cita</label>
+                                                                @php
+                                                                    $fprimeracita = date("d-m-Y", strtotime($paciente->fecha_primera_cita));
+                                                                @endphp
+                                                                <p>
+                                                                    <strong class="text-info">{{ $fprimeracita }}</strong>
+                                                                </p>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="col-md-3 mb-3">
+                                                            <!-- Form Field Start -->
+                                                            <div class="mb-3">
+                                                                <label for="fullName" class="form-label">Enviado Por Medico</label>
+                                                                <p>{{ $paciente->enviado_por_medico }}</p>
+                                                            </div>
+                                                        </div>
+
                                                     </div>
                                                 </div>
                                             </div>
@@ -334,6 +355,19 @@
                                                     <div class="mb-3">
                                                         <label class="form-label">Dirección</label>
                                                         <p>{{ $paciente->direccion }}</p>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3 mb-3">
+                                                    <!-- Form Field Start -->
+                                                    <div class="mb-3">
+                                                        <label for="birthDay" class="form-label">Fecha Primera Cita</label>
+                                                        @php
+                                                            $fprimeracita = date("d-m-Y", strtotime($paciente->fecha_primera_cita));
+                                                        @endphp
+                                                        <p>
+                                                            <strong class="text-info">{{ $fprimeracita }}</strong>
+                                                        </p>
                                                     </div>
                                                 </div>
 

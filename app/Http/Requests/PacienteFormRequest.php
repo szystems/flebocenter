@@ -40,13 +40,14 @@ class PacienteFormRequest extends FormRequest
                 Rule::unique('pacientes')->ignore($this->route('id')),
             ],
             'dpi' => [
-                'required',
+                'nullable', // Permite que el campo sea vacío
                 'string',
                 Rule::unique('pacientes')->ignore($this->route('id')),
             ],
             'nit' => 'nullable|string|max:17',
             'fotografia' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'estado' => 'boolean',
+            'enviado_por_medico' => 'required|string|max:255',
         ];
     }
 }

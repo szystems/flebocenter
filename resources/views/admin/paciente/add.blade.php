@@ -248,16 +248,43 @@
                                                                 </div>
                                                             </div>
 
-                                                            <div class="col-md-12 mb-3">
+                                                            {{-- <div class="col-md-12 mb-3">
                                                                 <!-- Form Field Start -->
                                                                 <div class="mb-3">
                                                                     <label class="form-label">Descripción</label>
-                                                                    {{-- <textarea name="descripcionckeditor" class="form-control" rows="3" placeholder="Descripción de la empresa...">{{ old('descripcionckeditor') }}</textarea> --}}
                                                                     <textarea id="editor" class="form-control border px-2 class" name="contenido" rows="20">{{ old('contenido') }}</textarea>
                                                                     @if ($errors->has('contenido'))
                                                                         <span class="help-block opacity-7">
                                                                                 <strong>
                                                                                     <font color="red">{{ $errors->first('contenido') }}</font>
+                                                                                </strong>
+                                                                        </span>
+                                                                    @endif
+                                                                </div>
+                                                            </div> --}}
+
+                                                            <div class="col-md-3 mb-3">
+                                                                <!-- Form Field Start -->
+                                                                <div class="mb-3">
+                                                                    <label for="birthDay" class="form-label">Fecha Primera cita</label>
+                                                                    <div class="input-group">
+                                                                        <input type="text" name="fecha_primera_cita" class="form-control datepicker" id="fprimeracita" value="{{ old('fecha_primera_cita') }}"/>
+                                                                        <span class="input-group-text">
+                                                                            <i class="bi bi-calendar4"></i>
+                                                                        </span>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            <div class="col-md-3 mb-3">
+                                                                <!-- Form Field Start -->
+                                                                <div class="mb-3">
+                                                                    <label for="enviado_por_medico" class="form-label">Enviado Por Medico</label>
+                                                                    <input name="enviado_por_medico" type="text" class="form-control" placeholder="Nombre del Medico..." value="{{ old('enviado_por_medico') }}" />
+                                                                    @if ($errors->has('enviado_por_medico'))
+                                                                        <span class="help-block opacity-7">
+                                                                                <strong>
+                                                                                    <font color="red">{{ $errors->first('enviado_por_medico') }}</font>
                                                                                 </strong>
                                                                         </span>
                                                                     @endif
@@ -316,6 +343,7 @@
 
         };
         $( '#fnacimiento' ).datepicker( optSimple );
+        $( '#fprimeracita' ).datepicker( optSimple );
     </script>
 
 <script>
