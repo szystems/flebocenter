@@ -32,6 +32,7 @@ class CreateHistoriasTable extends Migration
             $table->tinyInteger('b_cansancio')->default(false);
             $table->tinyInteger('b_pesadez')->default(false);
             $table->tinyInteger('b_calambres')->default(false);
+            $table->string('b_describir')->nullable();
             $table->tinyInteger('c_caminar')->default(false);
             $table->tinyInteger('c_periodos_prolongados_pie')->default(false);
             $table->tinyInteger('c_calor')->default(false);
@@ -49,6 +50,7 @@ class CreateHistoriasTable extends Migration
             $table->tinyInteger('e_flebitis')->default(false);
             $table->tinyInteger('e_ulceras_llagas_piernas')->default(false);
             $table->tinyInteger('e_trombosis')->default(false);
+            $table->string('e_quien')->nullable();
             $table->tinyInteger('f_tratamientos_venosos_previos')->default(false);
             $table->string('f_cuales')->nullable();
             $table->tinyInteger('g_alergico')->default(false);
@@ -58,6 +60,7 @@ class CreateHistoriasTable extends Migration
             $table->date('j_fecha_ultima_regla')->nullable();
             $table->tinyInteger('j_hormonas_anticonceptivos')->default(false);
             $table->string('j_cuales')->nullable();
+            $table->string('j_otro')->nullable();
             $table->tinyInteger('k_tiempo_pie')->default(false);
             $table->tinyInteger('k_tiempo_sentado')->default(false);
             $table->tinyInteger('k_expuesto_calor')->default(false);
@@ -79,6 +82,7 @@ class CreateHistoriasTable extends Migration
             $table->tinyInteger('o_linfedema')->default(false);
             $table->tinyInteger('o_lipodermatoesclerosis')->default(false);
             $table->tinyInteger('o_hipersensibilidad')->default(false);
+            $table->string('o_otros')->nullable();
             $table->text('p_diagnostico')->nullable();
             $table->tinyInteger('q_arterial')->default(false);
             $table->tinyInteger('q_venoso')->default(false);

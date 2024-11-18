@@ -461,6 +461,11 @@
                                                             Pesadez: <strong>{{ $historia->b_pesadez == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
                                                             Calambres: <strong>{{ $historia->b_calambres == '1' ? 'Si' : 'No' }}</strong>
+                                                            <br>
+                                                            @if ($historia->b_describir)
+                                                                Otros sintomas: <strong>{{ $historia->b_describir }}</strong>
+                                                            @endif
+
                                                         </p>
                                                     </div>
                                                 </div>
@@ -519,6 +524,10 @@
                                                             Ulceras o llagas en las piernas: <strong>{{ $historia->e_ulceras_llagas_piernas == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
                                                             Trombosis: <strong>{{ $historia->e_trombosis == '1' ? 'Si' : 'No' }}</strong>
+                                                            <br>
+                                                            @if ($historia->e_quien)
+                                                            ¿Quien?: <strong>{{ $historia->e_quien }}</strong>
+                                                            @endif
                                                         </p>
                                                     </div>
                                                 </div>
@@ -581,6 +590,10 @@
                                                                 }
                                                             @endphp
                                                             {{ $historia->j_fecha_ultima_regla != null ? $fur : 'No definido' }}
+                                                            <br>
+                                                            @if ($historia->j_otro)
+                                                            Otro: <strong>{{ $historia->j_otro }}</strong>
+                                                            @endif
                                                             <br>
                                                             ¿Esta tomando hormonas o anticonceptivos? <strong>{{ $historia->j_hormonas_anticonceptivos == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
@@ -678,6 +691,9 @@
                                                             <br>
                                                             Hipersensibilidad: <strong>{{ $historia->o_hipersensibilidad == '1' ? 'Si' : 'No' }}</strong>
                                                             <br>
+                                                            @if ($historia->o_otros)
+                                                            Otros: <strong>{{ $historia->o_otros }}</strong>
+                                                            @endif
                                                         </p>
                                                     </div>
                                                 </div>

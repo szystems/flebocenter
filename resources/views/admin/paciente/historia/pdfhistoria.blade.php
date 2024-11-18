@@ -197,6 +197,11 @@ header('Content-Type: text/html; charset=UTF-8');
                     <td align="center">{{ $historia->b_pesadez == '1' ? 'Si' : 'No' }}</td>
                     <th align="right">Calambres:</th>
                     <td align="center">{{ $historia->b_calambres == '1' ? 'Si' : 'No' }}</td>
+
+                </tr>
+                <tr>
+                    <th align="right">Describir Otros:</th>
+                    <td align="center">{{ $historia->b_describir }}</td>
                 </tr>
                 <tr>
                     <th colspan="8" align="left">C. ¿EL DOLOR AUMENTA CON?</th>
@@ -252,6 +257,11 @@ header('Content-Type: text/html; charset=UTF-8');
                     <td align="center">{{ $historia->e_ulceras_llagas_piernas == '1' ? 'Si' : 'No' }}</td>
                     <th align="right">Trombosis:</th>
                     <td align="center">{{ $historia->e_trombosis == '1' ? 'Si' : 'No' }}</td>
+
+                </tr>
+                <tr>
+                    <th align="right">¿Quien?:</th>
+                    <td align="center">{{ $historia->e_quien }}</td>
                 </tr>
                 <tr>
                     <th colspan="8" align="left">F. ¿TRATAMIENTOS VENOSOS PREVIOS?</th>
@@ -306,6 +316,10 @@ header('Content-Type: text/html; charset=UTF-8');
                         }
                     @endphp
                     <td align="center" colspan="4">{{ $historia->j_fecha_ultima_regla != null ? $fur : 'No definido' }}</td>
+                </tr>
+                <tr>
+                    <th align="right">Otro:</th>
+                    <td align="center">{{ $historia->j_otro }}</td>
                 </tr>
                 <tr>
                     <th align="right">¿Esta tomando hormonas o anticonceptivos?</th>
@@ -425,6 +439,10 @@ header('Content-Type: text/html; charset=UTF-8');
                     <td align="center">{{ $historia->o_lipodermatoesclerosis == '1' ? 'Si' : 'No' }}</td>
                     <th align="right">Hipersensibilidad:</th>
                     <td align="center" colspan="3">{{ $historia->o_hipersensibilidad == '1' ? 'Si' : 'No' }}</td>
+                </tr>
+                <tr>
+                    <th align="right">Otros:</th>
+                    <td align="center">{{ $historia->o_otros }}</td>
                 </tr>
                 <tr>
                     <th colspan="8" align="left">P. ¿DIAGNOSTICO?</th>

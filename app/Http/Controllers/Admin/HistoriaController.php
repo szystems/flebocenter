@@ -49,6 +49,7 @@ class HistoriaController extends Controller
         $historia->b_cansancio = boolval($request->filled('b_cansancio'));
         $historia->b_pesadez = boolval($request->filled('b_pesadez'));
         $historia->b_calambres = boolval($request->filled('b_calambres'));
+        $historia->b_describir = $request->filled('b_describir') ? $request->b_describir : null;
         $historia->c_caminar = boolval($request->filled('c_caminar'));
         $historia->c_periodos_prolongados_pie = boolval($request->filled('c_periodos_prolongados_pie'));
         $historia->c_calor = boolval($request->filled('c_calor'));
@@ -66,6 +67,7 @@ class HistoriaController extends Controller
         $historia->e_flebitis = boolval($request->filled('e_flebitis'));
         $historia->e_ulceras_llagas_piernas = boolval($request->filled('e_ulceras_llagas_piernas'));
         $historia->e_trombosis = boolval($request->filled('e_trombosis'));
+        $historia->e_quien = $request->filled('e_quien') ? $request->e_quien : null;
         $historia->f_tratamientos_venosos_previos = boolval($request->filled('f_tratamientos_venosos_previos'));
         $historia->f_cuales = $request->filled('f_cuales') ? $request->f_cuales : null;
         $historia->g_alergico = boolval($request->filled('g_alergico'));
@@ -75,6 +77,7 @@ class HistoriaController extends Controller
         $historia->j_fecha_ultima_regla = $fur;
         $historia->j_hormonas_anticonceptivos = boolval($request->filled('j_hormonas_anticonceptivos'));
         $historia->j_cuales = $request->filled('j_cuales') ? $request->j_cuales : null;
+        $historia->j_otro = $request->filled('j_otro') ? $request->j_otro : null;
         $historia->k_tiempo_pie = boolval($request->filled('k_tiempo_pie'));
         $historia->k_tiempo_sentado = boolval($request->filled('k_tiempo_sentado'));
         $historia->k_expuesto_calor = boolval($request->filled('k_expuesto_calor'));
@@ -87,7 +90,6 @@ class HistoriaController extends Controller
         $historia->n_informacion_pertinente = $request->filled('n_informacion_pertinente') ? $request->n_informacion_pertinente : null;
         $historia->o_circunferencia_mid = $request->filled('o_circunferencia_mid') ? $request->o_circunferencia_mid : null;
         $historia->o_circunferencia_mii = $request->filled('o_circunferencia_mii') ? $request->o_circunferencia_mii : null;
-
         $historia->o_ulcera = boolval($request->filled('o_ulcera'));
         $historia->o_edema = boolval($request->filled('o_edema'));
         $historia->o_telangiectasias = boolval($request->filled('o_telangiectasias'));
@@ -97,6 +99,7 @@ class HistoriaController extends Controller
         $historia->o_linfedema = boolval($request->filled('o_linfedema'));
         $historia->o_lipodermatoesclerosis = boolval($request->filled('o_lipodermatoesclerosis'));
         $historia->o_hipersensibilidad = boolval($request->filled('o_hipersensibilidad'));
+        $historia->o_otros = $request->filled('j_otros') ? $request->j_otros : null;
 
 
         // $historia->o_ulcera = $request->filled('o_ulcera') ? $request->o_ulcera : null;

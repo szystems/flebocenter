@@ -217,6 +217,8 @@
                                                             <label class="form-check-label" for="flexSwitchCheckDefault">Calambres</label>
                                                             <input name="b_calambres" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->b_calambres == '1' ? 'checked' : '' }}>
                                                         </div>
+                                                        Describir Otros:
+                                                        <input name="b_describir" type="text" class="form-control" placeholder="Describir otros sintomas..." value="{{$historia->b_describir }}" />
                                                     </p>
                                                 </div>
                                             </div>
@@ -309,6 +311,8 @@
                                                             <label class="form-check-label" for="flexSwitchCheckDefault">Trombosis</label>
                                                             <input name="e_trombosis" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->e_trombosis == '1' ? 'checked' : '' }}>
                                                         </div>
+                                                        ¿Quien?:
+                                                        <input name="e_quien" type="text" class="form-control" placeholder="Quien de sus familiares..." value="{{$historia->e_quien }}" />
                                                     </p>
                                                 </div>
                                             </div>
@@ -409,6 +413,8 @@
                                                         };
                                                         $( '#j_fecha_ultima_regla' ).datepicker( optSimple );
                                                     </script>
+                                                    Otro:
+                                                    <input name="j_otro" type="text" class="form-control" placeholder="Otro..." value="{{$historia->j_otro }}" />
                                                 </div>
                                             </div>
 
@@ -465,7 +471,8 @@
                                                             <input name="l_otros" class="form-check-input" type="checkbox" id="flexSwitchCheckDefault" {{ $historia->l_otros == '1' ? 'checked' : '' }}>
                                                         </div>
                                                         <br>
-                                                        Cuales: <strong>{{ $historia->l_cuales == null ? '' : $historia->l_cuales }}</strong>
+                                                        Cuales:
+                                                        <input name="l_cuales" type="text" class="form-control" placeholder="Cuales..." value="{{$historia->l_cuales }}" />
                                                     </p>
                                                 </div>
                                             </div>
@@ -760,6 +767,8 @@
                                                             </span>
                                                         @endif --}}
                                                         <br>
+                                                        Otros:
+                                                        <input name="o_otros" type="text" class="form-control" placeholder="Otros..." value="{{ $historia->o_otros }}" />
                                                     </p>
                                                 </div>
                                             </div>
