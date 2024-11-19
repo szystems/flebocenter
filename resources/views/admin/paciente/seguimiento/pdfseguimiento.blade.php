@@ -7,7 +7,7 @@ header('Content-Type: text/html; charset=UTF-8');
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Receta</title>
+    <title>Seguimiento</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -67,9 +67,8 @@ header('Content-Type: text/html; charset=UTF-8');
 
 <body>
     <header>
-        <br><br><br><br><br><br><br>
-        {{-- <img align="center" src="{{ $imagen }}" alt="" height="100"> --}}
-        {{-- <h1><u>Receta</u></h1> --}}
+        <img align="center" src="{{ $imagen }}" alt="" height="100">
+        {{-- <h1><u>Seguimiento</u></h1> --}}
         @php
                 $horafecha = new DateTime("now", new DateTimeZone('America/Guatemala'));
                 $horafecha = $horafecha->format('d/m/Y')
@@ -77,31 +76,32 @@ header('Content-Type: text/html; charset=UTF-8');
         {{-- <p align="left"><font size="{{ $pdfletra }}">Fecha de impresion: {{ $horafecha }}</font></p> --}}
     </header>
     <section>
+        <h2 align="center"><u>Seguimiento</u></h2>
 
         <font size="{{ $pdfletra }}"><strong>Fecha:</strong></font>
 
         @php
-            $fecha = date("d/m/Y", strtotime($receta->fecha));
+            $fecha = date("d/m/Y", strtotime($seguimiento->fecha));
         @endphp
         <font size="{{ $pdfletra }}">{{ $fecha }}</font>
         <br>
         <font size="{{ $pdfletra }}"><strong>Paciente:</strong></font>
 
-        <font size="{{ $pdfletra }}">{{ $receta->paciente->nombre }}</font>
+        <font size="{{ $pdfletra }}">{{ $seguimiento->paciente->nombre }}</font>
 
         <br>
         <font size="{{ $pdfletra }}"><strong>Doctor:</strong></font>
 
-        <font size="{{ $pdfletra }}">{{ $receta->doctor->name }} ({{ $receta->doctor->colegiado }})</font>
+        <font size="{{ $pdfletra }}">{{ $seguimiento->doctor->name }} ({{ $seguimiento->doctor->colegiado }})</font>
 
         <br><br>
-        <strong>Rp.</strong>
+        <strong>Descripcion</strong>
 
-        <font size="{{ $pdfletra }}">{!! html_entity_decode($receta->descripcion) !!}</font>
+        <font size="{{ $pdfletra }}">{!! html_entity_decode($seguimiento->descripcion) !!}</font>
 
     </section>
 
-    <footer>
+    {{-- <footer>
 
         <table align="center" width="100%">
             <tr>
@@ -114,7 +114,7 @@ header('Content-Type: text/html; charset=UTF-8');
             </tr>
         </table>
         <p align="left">Próxima cita: __________________</p>
-    </footer>
+    </footer> --}}
 </body>
 
 </html>

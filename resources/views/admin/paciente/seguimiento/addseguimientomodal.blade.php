@@ -1,12 +1,12 @@
 <!-- Modal -->
-<div class="modal fade" id="addRecetaModal" tabindex="-1"
-aria-labelledby="addRecetaModal" aria-hidden="true">
+<div class="modal fade" id="addSeguimientoModal" tabindex="-1"
+aria-labelledby="addSeguimientoModal" aria-hidden="true">
 
 <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
     <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="addRecetaModal">
-                <i class="bi bi-pencil text-warning"></i> Crear Receta
+            <h5 class="modal-title" id="addSeguimientoModal">
+                <i class="bi bi-pencil text-warning"></i> Crear Seguimiento
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -21,7 +21,7 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
             </div>
 
         @endif
-        <form action="{{ url('insert-receta') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ url('insert-seguimiento') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="modal-body">
                 <div class="row gx-3">
@@ -46,7 +46,7 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
                     <div class="col-md-8 mb-3">
                         <!-- Form Field Start -->
                         <div class="mb-3">
-                            <label class="receta"><strong>Doctor</strong></label>
+                            <label class="seguimiento"><strong>Doctor</strong></label>
                             <p>{{ Auth::User()->name }} ({{ Auth::User()->colegiado }})</p>
                         </div>
                     </div>
@@ -54,9 +54,9 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
                     <div class="col-md-12 mb-3">
                         <!-- Form Field Start -->
                         <div class="mb-3">
-                            <label class="receta"><strong>Receta</strong></label>
-                            {{-- <textarea name="descripcion" class="form-control" rows="6" placeholder="Descripción de la receta...">{{ $receta->descripcion }}</textarea> --}}
-                            <textarea id="addreceta" class="form-control border px-2 class" name="descripcion" rows="20">{{ old('descripcion') }}</textarea>
+                            <label class="seguimiento"><strong>Seguimiento</strong></label>
+                            {{-- <textarea name="descripcion" class="form-control" rows="6" placeholder="Descripción de la seguimiento...">{{ $seguimiento->descripcion }}</textarea> --}}
+                            <textarea id="addseguimiento" class="form-control border px-2 class" name="descripcion" rows="20">{{ old('descripcion') }}</textarea>
                             @if ($errors->has('descripcion'))
                                 <span class="help-block opacity-7">
                                         <strong>
@@ -85,13 +85,13 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
 <script>
     let editorInstance;
 
-    $('#addRecetaModal').on('shown.bs.modal', function() {
+    $('#addSeguimientoModal').on('shown.bs.modal', function() {
         if (editorInstance) {
             editorInstance.destroy();
         }
 
         ClassicEditor
-            .create( document.querySelector( '#addreceta' ) )
+            .create( document.querySelector( '#addseguimiento' ) )
             .then(editor => {
                 editorInstance = editor;
             })
@@ -100,7 +100,7 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
             } );
     });
 
-    $('#addRecetaModal').on('hidden.bs.modal', function() {
+    $('#addSeguimientoModal').on('hidden.bs.modal', function() {
         if (editorInstance) {
             editorInstance.destroy();
             editorInstance = null;

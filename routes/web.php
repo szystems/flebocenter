@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\AsistenteController;
 use App\Http\Controllers\Admin\PacienteController;
 use App\Http\Controllers\Admin\RecetaController;
+use App\Http\Controllers\Admin\SeguimientoController;
 use App\Http\Controllers\Admin\HistoriaController;
 use App\Http\Controllers\Admin\DocumentoController;
 use App\Http\Controllers\Admin\TerapiaController;
@@ -93,6 +94,12 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-receta/{id}', [RecetaController::class, 'update'])->name('update-receta');
     Route::get('delete-receta/{id}', [RecetaController::class, 'delete']);
     Route::get('print-receta', [RecetaController::class, 'print']);
+
+    //Seguimientos
+    Route::post('insert-seguimiento', [SeguimientoController::class, 'insert']);
+    Route::put('update-seguimiento/{id}', [SeguimientoController::class, 'update'])->name('update-seguimiento');
+    Route::get('delete-seguimiento/{id}', [SeguimientoController::class, 'delete']);
+    Route::get('print-seguimiento', [SeguimientoController::class, 'print']);
 
     //Historia
     Route::get('edit-historia/{id}',[HistoriaController::class,'edit']);

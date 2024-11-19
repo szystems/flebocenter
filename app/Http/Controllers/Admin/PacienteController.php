@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Paciente;
 use App\Models\Cita;
 use App\Models\Receta;
+use App\Models\Seguimiento;
 use App\Http\Requests\PacienteFormRequest;
 use App\Models\Historia;
 use App\Http\Requests\HistoriaFormRequest;
@@ -49,12 +50,13 @@ class PacienteController extends Controller
     {
         $paciente = Paciente::find($id);
         $recetas = Receta::where('paciente_id',$id)->orderBy('created_at', 'desc')->get();
+        $seguimientos = Seguimiento::where('paciente_id',$id)->orderBy('created_at', 'desc')->get();
         $citas = Cita::Where('paciente_id',$paciente->id)->orderBy('fecha_cita','desc')->get();
         $historia = Historia::where('paciente_id', $paciente->id)->first();
         $documentos = Documento::Where('paciente_id',$paciente->id)->orderBy('created_at','desc')->get();
         $terapias = Terapia::Where('paciente_id',$paciente->id)->orderBy('created_at','desc')->get();
         // dd($historia);
-        return view('admin.paciente.show', compact('paciente','citas','recetas','historia','documentos','terapias'));
+        return view('admin.paciente.show', compact('paciente','citas','recetas','seguimientos','historia','documentos','terapias'));
     }
 
     public function add()

@@ -71,9 +71,16 @@
                                             <a class="nav-link active" id="tab-info" data-bs-toggle="tab" href="#info" role="tab"
                                                 aria-controls="info" aria-selected="true">Información</a>
                                         </li>
+
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="tab-historia" data-bs-toggle="tab" href="#historia" role="tab"
                                                 aria-controls="historia" aria-selected="false">Historia</a>
+                                        </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="tab-seguimiento" data-bs-toggle="tab" href="#seguimiento" role="tab"
+                                                aria-controls="seguimiento" aria-selected="false">Seguimiento
+                                                <span class="badge rounded-pill green ms-2">{{ $seguimientos->count() }}</span>
+                                            </a>
                                         </li>
                                         <li class="nav-item" role="presentation">
                                             <a class="nav-link" id="tab-documentos" data-bs-toggle="tab" href="#documentos" role="tab"
@@ -242,6 +249,83 @@
 
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <!-- Row end -->
+                                        </div>
+
+                                        <div class="tab-pane fade" id="seguimiento" role="tabpanel">
+                                            <!-- Row start -->
+                                            <div class="row gx-3">
+
+                                                <h5 class="card-title"><u>Historial de Seguimientos</u></h5>
+                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#addSeguimientoModal">
+                                                    <i class="bi bi-plus-square"></i> Crear Seguimiento
+                                                </button>
+
+                                                @include('admin.paciente.seguimiento.addseguimientomodal')
+
+
+                                                {{-- Acordion de Seguimientos --}}
+                                                <div class="accordion" id="accordionSeguimientos">
+
+                                                    @foreach($seguimientos as $seguimiento)
+                                                        <div class="accordion-item">
+                                                            <h2 class="accordion-header" id="heading{{ $seguimiento->id }}">
+                                                                <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                                                                        data-bs-target="#collapse{{ $seguimiento->id }}" aria-expanded="false"
+                                                                        aria-controls="collapse{{ $seguimiento->id }}">
+                                                                        @php
+                                                                            $fechaSeguimiento = date("d/m/Y", strtotime($seguimiento->fecha));
+                                                                            // dd($fnacimiento);
+                                                                        @endphp
+                                                                        {{ $fechaSeguimiento }} - Dr(a).{{ $seguimiento->doctor->name }} ({{ $seguimiento->doctor->colegiado }})
+                                                                </button>
+                                                            </h2>
+                                                            <div id="collapse{{ $seguimiento->id }}" class="accordion-collapse collapse strip"
+                                                                aria-labelledby="heading{{ $seguimiento->id }}" data-bs-parent="#accordionSeguimientos">
+                                                                <div class="accordion-body">
+                                                                    <div class="row gx-3">
+
+                                                                        <div class="col-md-12 mb-3">
+                                                                            <!-- Form Field Start -->
+                                                                            <div class="mb-3">
+                                                                                <label class="descripcion"><strong>Seguimiento:</strong></label>
+                                                                                <div class="card">
+                                                                                    <div class="card-body">
+                                                                                        {!! html_entity_decode($seguimiento->descripcion) !!}
+                                                                                    </div>
+                                                                                </div>
+
+
+                                                                                <button type="button" class="btn btn-warning" data-bs-toggle="modal"
+                                                                                    data-bs-target="#editarSeguimientoModal{{ $seguimiento->id }}">
+                                                                                    <i class="bi bi-pencil"></i> Editar
+                                                                                </button>
+
+                                                                                <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                                                                    data-bs-target="#deleteseguimientoModal-{{ $seguimiento->id }}">
+                                                                                    <i class="bi bi-trash"></i> Eliminar
+                                                                                </button>
+
+                                                                                <button type="button" class="btn btn-info m-1" data-bs-toggle="modal"
+                                                                                    data-bs-target="#printModal{{ $seguimiento->id }}">
+                                                                                    <i class="bi bi-printer"></i> Imprimir
+                                                                                </button>
+                                                                                @include('admin.paciente.seguimiento.printmodal')
+                                                                                @include('admin.paciente.seguimiento.editarseguimientomodal')
+                                                                                @include('admin.paciente.seguimiento.deleteseguimientomodal')
+                                                                            </div>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+
+                                                </div>
+
                                             </div>
                                             <!-- Row end -->
                                         </div>
@@ -957,7 +1041,7 @@
                                                                             $fechaReceta = date("d/m/Y", strtotime($receta->fecha));
                                                                             // dd($fnacimiento);
                                                                         @endphp
-                                                                        {{ $fechaReceta }}
+                                                                        {{ $fechaReceta }} - Dr(a).{{ $receta->doctor->name }} ({{ $receta->doctor->colegiado }})
                                                                 </button>
                                                             </h2>
                                                             <div id="collapse{{ $receta->id }}" class="accordion-collapse collapse strip"
