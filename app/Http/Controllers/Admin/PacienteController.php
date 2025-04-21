@@ -13,6 +13,7 @@ use App\Models\Historia;
 use App\Http\Requests\HistoriaFormRequest;
 use App\Models\Documento;
 use App\Models\Terapia;
+use App\Models\Bariatria;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\Config;
@@ -55,8 +56,9 @@ class PacienteController extends Controller
         $historia = Historia::where('paciente_id', $paciente->id)->first();
         $documentos = Documento::Where('paciente_id',$paciente->id)->orderBy('created_at','desc')->get();
         $terapias = Terapia::Where('paciente_id',$paciente->id)->orderBy('created_at','desc')->get();
-        // dd($historia);
-        return view('admin.paciente.show', compact('paciente','citas','recetas','seguimientos','historia','documentos','terapias'));
+        $bariatrias = Bariatria::where('paciente_id',$paciente->id)->orderBy('fecha','desc')->get();
+
+        return view('admin.paciente.show', compact('paciente','citas','recetas','seguimientos','historia','documentos','terapias','bariatrias'));
     }
 
     public function add()

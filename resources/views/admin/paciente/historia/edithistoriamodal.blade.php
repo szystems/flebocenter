@@ -1,20 +1,19 @@
 <!-- Modal -->
 <div class="modal fade" id="editarHistoriaModal{{ $historia->paciente_id }}" tabindex="-1"
     aria-labelledby="editarHistoriaModal{{ $historia->paciente_id }}" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable scrollable">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header sticky-top bg-white">
                 <h5 class="modal-title" id="editarHistoriaModal{{ $historia->paciente_id }}">
                     <i class="bi bi-pencil text-warning"></i> Editar Historia
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-
             <form action="{{ url('update-historia/'.$historia->paciente_id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="modal-body">
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
                     <div class="row gx-3">
 
 
@@ -417,7 +416,7 @@
 
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer sticky-bottom bg-white">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle"></i> Cancelar
                     </button>
@@ -429,4 +428,28 @@
         </div>
     </div>
 </div>
+
+<style>
+    .modal-dialog-scrollable .modal-content {
+        max-height: 85vh;
+        overflow-y: hidden;
+    }
+
+    .modal-body {
+        overflow-y: auto;
+        padding-right: 15px;
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    .sticky-bottom {
+        position: sticky;
+        bottom: 0;
+        z-index: 1020;
+    }
+</style>
 

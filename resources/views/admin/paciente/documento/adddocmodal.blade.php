@@ -2,9 +2,9 @@
 <div class="modal fade" id="addDocModal" tabindex="-1"
 aria-labelledby="addDocModal" aria-hidden="true">
 
-<div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+<div class="modal-dialog modal-xl modal-dialog-scrollable">
     <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header sticky-top bg-white">
             <h5 class="modal-title" id="addDocModal">
                 <i class="bi bi-plus text-success"></i> Agregar Documento
             </h5>
@@ -23,7 +23,7 @@ aria-labelledby="addDocModal" aria-hidden="true">
         @endif
         <form action="{{ url('insert-documento') }}" method="POST" enctype="multipart/form-data">
             @csrf
-            <div class="modal-body">
+            <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
                 <div class="row gx-3">
 
                     <div class="col-md-12 mb-3">
@@ -75,7 +75,7 @@ aria-labelledby="addDocModal" aria-hidden="true">
 
                 </div>
             </div>
-            <div class="modal-footer">
+            <div class="modal-footer sticky-bottom bg-white">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                     <i class="bi bi-x-circle"></i> Cancelar
                 </button>
@@ -87,5 +87,29 @@ aria-labelledby="addDocModal" aria-hidden="true">
     </div>
 </div>
 </div>
+
+<style>
+    .modal-dialog-scrollable .modal-content {
+        max-height: 85vh;
+        overflow-y: hidden;
+    }
+
+    .modal-body {
+        overflow-y: auto;
+        padding-right: 15px;
+    }
+
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
+
+    .sticky-bottom {
+        position: sticky;
+        bottom: 0;
+        z-index: 1020;
+    }
+</style>
 
 

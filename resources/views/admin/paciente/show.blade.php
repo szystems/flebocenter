@@ -103,6 +103,12 @@
                                                 <span class="badge rounded-pill green ms-2">{{ $terapias->count() }}</span>
                                             </a>
                                         </li>
+                                        <li class="nav-item" role="presentation">
+                                            <a class="nav-link" id="tab-bariatria" data-bs-toggle="tab" href="#bariatria" role="tab"
+                                                aria-controls="bariatria" aria-selected="false">Bariatría
+                                                <span class="badge rounded-pill green ms-2">{{ $bariatrias->count() }}</span>
+                                            </a>
+                                        </li>
                                     </ul>
                                     <div class="tab-content h-350">
 
@@ -1181,6 +1187,82 @@
 
 
 
+                                            </div>
+                                            <!-- Row end -->
+                                        </div>
+
+                                        <div class="tab-pane fade" id="bariatria" role="tabpanel">
+                                            <!-- Row start -->
+                                            <div class="row gx-3">
+
+                                                <h4>Evaluaciones Bariátricas</h4>
+                                                <hr>
+
+                                                <button type="button" class="btn btn-success" data-bs-toggle="modal"
+                                                    data-bs-target="#addBariatriaModal">
+                                                    <i class="bi bi-plus-square"></i> Agregar Evaluación Bariátrica
+                                                </button>
+
+                                                @include('admin.paciente.bariatria.addbariatriamodal')
+
+                                                <div class="table-responsive">
+                                                    <table class="table align-middle table-striped flex-column">
+                                                        <thead>
+                                                            <tr>
+                                                                <td align="center"><i class="bi bi-list-task"></i></td>
+                                                                <td align="center">Fecha</td>
+                                                                <td align="center">IMC</td>
+                                                                <td align="center">Peso</td>
+                                                                <td align="center">Talla</td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            @foreach ($bariatrias as $bariatria)
+                                                            <tr>
+                                                                <td align="center">
+                                                                    <a type="button" class="btn btn-info m-1" href="{{ url('show-bariatria/'.$bariatria->id) }}"><i class="bi bi-eye-fill text-white"></i></a>
+
+                                                                    <button type="button" class="btn btn-warning m-1" data-bs-toggle="modal"
+                                                                        data-bs-target="#editarBariatriaModal{{ $bariatria->id }}">
+                                                                        <i class="bi bi-pencil"></i>
+                                                                    </button>
+
+                                                                    @if (Auth::user()->principal == 1)
+                                                                        <button type="button" class="btn btn-danger m-1" data-bs-toggle="modal" data-bs-target="#deleteBariatriaModal-{{ $bariatria->id }}">
+                                                                            <i class="bi bi-trash-fill text-white"></i>
+                                                                        </button>
+                                                                    @endif
+
+                                                                    @include('admin.paciente.bariatria.editbariatriamodal')
+                                                                    @include('admin.paciente.bariatria.deletebariatriamodal')
+                                                                </td>
+                                                                <td align="center">
+                                                                    @php
+                                                                        $fechaBariatria = date('d/m/Y', strtotime($bariatria->fecha));
+                                                                    @endphp
+                                                                    <p class="text-success">{{ $fechaBariatria }}</p>
+                                                                </td>
+                                                                <td align="center">
+                                                                    <p>{{ $bariatria->imc }}</p>
+                                                                </td>
+                                                                <td align="center">
+                                                                    <p>{{ $bariatria->peso }} kg</p>
+                                                                </td>
+                                                                <td align="center">
+                                                                    <p>{{ $bariatria->talla }} cm</p>
+                                                                </td>
+                                                            </tr>
+                                                            @endforeach
+                                                        </tbody>
+                                                    </table>
+                                                    @if ($bariatrias->count() == 0)
+                                                        <div class="alert alert-warning text-white" role="alert">
+                                                            <ul align="center">
+                                                                <p>No se han ingresado evaluaciones bariátricas.</p>
+                                                            </ul>
+                                                        </div>
+                                                    @endif
+                                                </div>
                                             </div>
                                             <!-- Row end -->
                                         </div>

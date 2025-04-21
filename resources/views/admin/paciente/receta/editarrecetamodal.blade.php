@@ -1,20 +1,19 @@
 <!-- Modal -->
 <div class="modal fade" id="editarRecetaModal{{ $receta->id }}" tabindex="-1"
     aria-labelledby="editarRecetaModal{{ $receta->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header sticky-top bg-white">
                 <h5 class="modal-title" id="editarRecetaModal{{ $receta->id }}">
                     <i class="bi bi-pencil text-warning"></i> Editar Receta
                 </h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
 
-
             <form action="{{ url('update-receta/'.$receta->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
-                <div class="modal-body">
+                <div class="modal-body" style="max-height: 70vh; overflow-y: auto;">
                     <div class="row gx-3">
 
                         <div class="col-md-3 mb-3">
@@ -29,8 +28,8 @@
                                             </strong>
                                     </span>
                                 @endif
-                                <input type="hidden" name="paciente_id" value="{{ $seguimiento->paciente_id }}">
-                                <input type="hidden" name="doctor_id" value="{{ $seguimiento->doctor_id }}">
+                                <input type="hidden" name="paciente_id" value="{{ $receta->paciente_id }}">
+                                <input type="hidden" name="doctor_id" value="{{ $receta->doctor_id }}">
                             </div>
                         </div>
 
@@ -60,7 +59,7 @@
 
                     </div>
                 </div>
-                <div class="modal-footer">
+                <div class="modal-footer sticky-bottom bg-white">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="bi bi-x-circle"></i> Cancelar
                     </button>
@@ -71,30 +70,54 @@
             </form>
         </div>
     </div>
-    </div>
+</div>
 
-    <script>
-        let editorInstance__{{ $receta->id }};
+<style>
+    .modal-dialog-scrollable .modal-content {
+        max-height: 85vh;
+        overflow-y: hidden;
+    }
 
-        $('#editarRecetaModal{{ $receta->id }}').on('shown.bs.modal', function() {
-            if (editorInstance__{{ $receta->id }}) {
-                editorInstance__{{ $receta->id }}.destroy();
-            }
+    .modal-body {
+        overflow-y: auto;
+        padding-right: 15px;
+    }
 
-            ClassicEditor
-                .create( document.querySelector( '#editreceta{{ $receta->id }}' ) )
-                .then(editor => {
-                    editorInstance__{{ $receta->id }} = editor;
-                })
-                .catch( error => {
-                    console.error( error );
-                } );
-        });
+    .sticky-top {
+        position: sticky;
+        top: 0;
+        z-index: 1020;
+    }
 
-        $('#editarRecetaModal{{ $receta->id }}').on('hidden.bs.modal', function() {
-            if (editorInstance__{{ $receta->id }}) {
-                editorInstance__{{ $receta->id }}.destroy();
-                editorInstance__{{ $receta->id }} = null;
-            }
-        });
-    </script>
+    .sticky-bottom {
+        position: sticky;
+        bottom: 0;
+        z-index: 1020;
+    }
+</style>
+
+<script>
+    let editorInstance__{{ $receta->id }};
+
+    $('#editarRecetaModal{{ $receta->id }}').on('shown.bs.modal', function() {
+        if (editorInstance__{{ $receta->id }}) {
+            editorInstance__{{ $receta->id }}.destroy();
+        }
+
+        ClassicEditor
+            .create( document.querySelector( '#editreceta{{ $receta->id }}' ) )
+            .then(editor => {
+                editorInstance__{{ $receta->id }} = editor;
+            })
+            .catch( error => {
+                console.error( error );
+            } );
+    });
+
+    $('#editarRecetaModal{{ $receta->id }}').on('hidden.bs.modal', function() {
+        if (editorInstance__{{ $receta->id }}) {
+            editorInstance__{{ $receta->id }}.destroy();
+            editorInstance__{{ $receta->id }} = null;
+        }
+    });
+</script>

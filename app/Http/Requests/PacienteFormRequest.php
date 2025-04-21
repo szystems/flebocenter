@@ -47,7 +47,7 @@ class PacienteFormRequest extends FormRequest
             'nit' => 'nullable|string|max:17',
             'fotografia' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'estado' => 'boolean',
-            'enviado_por_medico' => 'required|string|max:255',
+            'enviado_por_medico' => 'nullable|string|max:255',
         ];
     }
 }

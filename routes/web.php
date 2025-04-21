@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\PagoIngresoController;
 use App\Http\Controllers\Admin\VentaController;
 use App\Http\Controllers\Admin\PagoVentaController;
 use App\Http\Controllers\Admin\ConfigController;
+use App\Http\Controllers\Admin\BariatriaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -204,8 +205,6 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-pago/{id}', [PagoIngresoController::class, 'update']);
     Route::get('delete-pago/{id}', [PagoIngresoController::class, 'destroy']);
 
-
-
     //Ventas
     Route::get('ventas', [VentaController::class, 'index']);
     Route::get('show-venta/{id}', [VentaController::class, 'show']);
@@ -223,6 +222,14 @@ Route::middleware(['auth'])->group(function () {
     Route::post('insert-pago-venta', [PagoVentaController::class, 'insert']);
     Route::put('update-pago-venta/{id}', [PagoVentaController::class, 'update']);
     Route::get('delete-pago-venta/{id}', [PagoVentaController::class, 'destroy']);
+
+    //Bariatría
+    Route::get('show-bariatria/{id}', [BariatriaController::class, 'show']);
+    Route::post('insert-bariatria', [BariatriaController::class, 'insert']);
+    Route::put('update-bariatria/{id}', [BariatriaController::class, 'update']);
+    Route::get('delete-bariatria/{id}', [BariatriaController::class, 'destroy']);
+    Route::post('upload_imagen_bariatria', [BariatriaController::class, 'uploadimagen']);
+    Route::get('print-bariatria', [BariatriaController::class, 'print']);
 
     //config
     Route::get('config', [ConfigController::class, 'index']);
