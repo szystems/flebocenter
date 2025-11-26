@@ -58,6 +58,13 @@
                         <span class="badge green">Hoy {{ $cita_count }}</span>
                     </a>
                 </li>
+                <li class="{{ Request::is('agenda','agenda/dia/*') ? 'active-page-link':''  }}">
+                    <a href="{{ url('agenda') }}">
+                        <i class="bi bi-calendar-month"></i>
+                        <span class="menu-text">Agenda</span>
+                        <span class="badge blue">Nuevo</span>
+                    </a>
+                </li>
                 <li class="{{ Request::is('pacientes','show-paciente/*','add-paciente','edit-paciente/*') ? 'active-page-link':''  }}">
                     <a href="{{ url('pacientes') }}">
                         <i class="bi bi-person"></i>

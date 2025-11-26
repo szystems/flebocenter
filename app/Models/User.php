@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
+
+    protected $connection = 'mysql';
 
     /**
      * The attributes that are mass assignable.
@@ -52,9 +55,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getTimeZoneAttribute ($value): string
+    public function getTimeZoneAttribute($value): string
     {
-    return $value == config('app.timezone') || empty($value) ? config('app.timezone') : $value;
+        return $value == config('app.timezone') || empty($value) ? config('app.timezone') : $value;
     }
 
     public function setTimeZoneAttribute($value)
@@ -64,10 +67,17 @@ class User extends Authenticatable
 
     public function getCreatedAtAttribute($value): Carbon
     {
-        return Carbon::parse($value)->timezone(Helpers::getUserTimeZone());
+        // Utilizar la zona horaria de la configuración del sistema
+        $config = Config::first();
+        $timezone = $config ? $config->time_zone : 'America/Guatemala'; // Valor por defecto si no hay config
+        return Carbon::parse($value)->timezone($timezone);
     }
+
     public function getUpdatedAtAttribute($value): Carbon
     {
-        return Carbon::parse($value)->timezone(Helpers::getUserTimeZone());
+        // Utilizar la zona horaria de la configuración del sistema
+        $config = Config::first();
+        $timezone = $config ? $config->time_zone : 'America/Guatemala'; // Valor por defecto si no hay config
+        return Carbon::parse($value)->timezone($timezone);
     }
 }

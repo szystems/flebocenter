@@ -9,6 +9,8 @@ class Documento extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $fillable = [
         'paciente_id',
         'nombre',

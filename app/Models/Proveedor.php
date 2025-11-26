@@ -9,6 +9,8 @@ class Proveedor extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'proveedors';
 
     protected $primaryKey='id';

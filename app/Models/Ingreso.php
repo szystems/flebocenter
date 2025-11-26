@@ -11,6 +11,8 @@ class Ingreso extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'ingresos';
 
     protected $primaryKey='id';

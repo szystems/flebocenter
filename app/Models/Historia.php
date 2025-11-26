@@ -9,6 +9,7 @@ class Historia extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
     protected $table = 'historias';
 
     protected $primaryKey='paciente_id';

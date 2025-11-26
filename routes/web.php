@@ -236,6 +236,21 @@ Route::middleware(['auth'])->group(function () {
     Route::put('update-config', [ConfigController::class, 'update']);
  });
 
+// Rutas para el módulo de Agenda
+Route::middleware(['auth', 'isAdmin'])->group(function () {
+    // Vista principal del calendario
+    Route::get('/agenda', [App\Http\Controllers\Admin\AgendaController::class, 'index'])->name('agenda');
+
+    // Ver citas de un día específico
+    Route::get('/agenda/dia/{fecha}', [App\Http\Controllers\Admin\AgendaController::class, 'verDia'])->name('agenda.dia');
+
+    // Endpoints AJAX
+    Route::get('/agenda/disponibilidad', [App\Http\Controllers\Admin\AgendaController::class, 'obtenerDisponibilidad'])->name('agenda.disponibilidad');
+    Route::post('/agenda/citas', [App\Http\Controllers\Admin\AgendaController::class, 'guardarCita'])->name('agenda.guardar-cita');
+    Route::put('/agenda/citas/{id}', [App\Http\Controllers\Admin\AgendaController::class, 'actualizarCita'])->name('agenda.actualizar-cita');
+    Route::delete('/agenda/citas/{id}', [App\Http\Controllers\Admin\AgendaController::class, 'eliminarCita'])->name('agenda.eliminar-cita');
+});
+
 //  Route::middleware(['auth', 'isAdmin'])->group(function () {
 //     //front user
 // });

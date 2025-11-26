@@ -126,6 +126,32 @@
                     </a>
                 </div>
                 <div class="col-xxl-3 col-sm-6 col-12">
+                    <a href="{{ url('agenda') }}">
+                        <div class="stats-tile d-flex align-items-center position-relative tile-blue">
+                            <div class="sale-icon icon-box xl rounded-5 me-3">
+                                <i class="bi bi-calendar-month font-2x text-blue"></i>
+                            </div>
+                            <div class="sale-details">
+                                <h5 class="text-light"><u>Agenda</u></h5>
+                                <span class="badge bg-primary">Nuevo</span>
+                            </div>
+                            <div class="tile-count d-flex align-items-center justify-content-center flex-column fw-bold blue">
+                                @php
+                                    $hoy = Carbon\Carbon::now('America/Guatemala');
+                                    $hoy = $hoy->format('Y-m-d');
+                                    $mes_actual = Carbon\Carbon::now()->format('m');
+                                    $anno_actual = Carbon\Carbon::now()->format('Y');
+                                    $cita_count_mes = \App\Models\Cita::whereMonth('fecha_cita', $mes_actual)
+                                                                    ->whereYear('fecha_cita', $anno_actual)
+                                                                    ->count();
+                                @endphp
+                                <i class="bi bi-calendar-month font-1x"></i>
+                                <span>{{ $cita_count_mes }}</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xxl-3 col-sm-6 col-12">
                     <a href="{{ url('pacientes') }}">
                         <div class="stats-tile d-flex align-items-center position-relative tile-green">
                             <div class="sale-icon icon-box xl rounded-5 me-3">

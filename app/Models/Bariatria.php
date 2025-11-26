@@ -9,6 +9,8 @@ class Bariatria extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     /**
      * Los atributos que son asignables masivamente.
      *

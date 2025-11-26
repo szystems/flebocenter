@@ -9,6 +9,8 @@ class Terapia extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'terapias';
 
     protected $primaryKey='id';

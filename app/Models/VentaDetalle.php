@@ -9,6 +9,8 @@ class VentaDetalle extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'venta_detalles';
 
     protected $primaryKey='id';

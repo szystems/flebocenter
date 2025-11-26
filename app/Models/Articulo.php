@@ -9,6 +9,7 @@ class Articulo extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
     protected $table = 'articulos';
 
     protected $fillable = [

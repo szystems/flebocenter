@@ -9,6 +9,8 @@ class Cita extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     // Especificar la tabla si no sigue la convención de nombres de Laravel
     protected $table = 'citas';
 

@@ -9,6 +9,8 @@ class Clinica extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'clinicas';
 
     protected $primaryKey='id';

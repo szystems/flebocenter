@@ -9,6 +9,8 @@ class PagoIngreso extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'pago_ingresos';
 
     protected $primaryKey='id';

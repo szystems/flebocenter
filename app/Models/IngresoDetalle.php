@@ -11,6 +11,8 @@ class IngresoDetalle extends Model
 {
     use HasFactory;
 
+    protected $connection = 'mysql';
+
     protected $table = 'ingreso_detalles';
 
     protected $primaryKey='id';
