@@ -15,7 +15,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        // Forzar que NO se use SQLite bajo ninguna circunstancia
+        $this->app->bind('db.connection.sqlite', function () {
+            throw new \Exception('SQLite está deshabilitado. Use MySQL.');
+        });
     }
 
     /**
@@ -27,5 +30,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
         Paginator::useBootstrap();
+        
+        // Forzar MySQL como conexión por defecto
+        config(['database.default' => 'mysql']);
     }
 }

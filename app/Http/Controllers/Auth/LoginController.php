@@ -28,16 +28,19 @@ class LoginController extends Controller
      * @var string
      */
     // protected $redirectTo = RouteServiceProvider::HOME;
-    protected function authenticated()
+    protected function authenticated($request, $user)
     {
-        if(Auth::user()->role_as == '0') //1 = Admin Login
+        if($user->role_as == '0') //0 = Doctor Login
         {
             return redirect('dashboard')->with('status',__('Bienvenido Doctor a FLEBOCENTER'));
         }
-        elseif(Auth::user()->role_as == '1') // Normal or Default User Login
+        elseif($user->role_as == '1') //1 = Admin/User Login
         {
             return redirect('dashboard')->with('status',__('Bienvenido Usuario a FLEBOCENTER'));
         }
+        
+        // Default redirect si no hay role_as definido
+        return redirect('dashboard')->with('status',__('Bienvenido a FLEBOCENTER'));
     }
 
     /**
