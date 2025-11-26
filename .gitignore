@@ -84,3 +84,11 @@ PERMISSIONS_SOLUTION.md
 bootstrap/app-fixed.php
 .htaccess_ipage
 index_ipage.php
+
+# Archivos temporales de debugging
+.env.local.OLD
+bootstrap/cache/*.tmp
+find-phpmyadmin-config.php
+reparacion-definitiva-final.php
+verify-db-config.php
+ipage-*.php
