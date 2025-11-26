@@ -107,17 +107,18 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
 </style>
 
 <script>
-    let editorInstance;
+    // Usar variable global para evitar redeclaraciones
+    window.editorInstanceAddReceta = window.editorInstanceAddReceta || null;
 
     $('#addRecetaModal').on('shown.bs.modal', function() {
-        if (editorInstance) {
-            editorInstance.destroy();
+        if (window.editorInstanceAddReceta) {
+            window.editorInstanceAddReceta.destroy();
         }
 
         ClassicEditor
             .create( document.querySelector( '#addreceta' ) )
             .then(editor => {
-                editorInstance = editor;
+                window.editorInstanceAddReceta = editor;
             })
             .catch( error => {
                 console.error( error );
@@ -125,9 +126,9 @@ aria-labelledby="addRecetaModal" aria-hidden="true">
     });
 
     $('#addRecetaModal').on('hidden.bs.modal', function() {
-        if (editorInstance) {
-            editorInstance.destroy();
-            editorInstance = null;
+        if (window.editorInstanceAddReceta) {
+            window.editorInstanceAddReceta.destroy();
+            window.editorInstanceAddReceta = null;
         }
     });
 </script>
