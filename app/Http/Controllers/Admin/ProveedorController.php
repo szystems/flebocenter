@@ -107,7 +107,7 @@ class ProveedorController extends Controller
 
             $proveedores = Proveedor::where('estado',1)->orderBy('nombre','asc')->get();
             $verpdf = "Browser";
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $config = Config::first();
@@ -148,7 +148,7 @@ class ProveedorController extends Controller
 
         $proveedor = Proveedor::find($id);
         $verpdf = "Browser";
-        $nompdf = date('m/d/Y g:ia');
+        $nompdf = date('Y-m-d_H-i-s');
         $path = public_path('assets/imgs/');
         $pathproveedor = public_path('assets/imgs/proveedores/');
 

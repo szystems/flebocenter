@@ -168,7 +168,7 @@ class DashboardController extends Controller
 
             $doctores = User::where('estado',1)->orderBy('name','asc')->get();
             $verpdf = "Browser";
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $config = Config::first();
@@ -209,7 +209,7 @@ class DashboardController extends Controller
 
         $doctor = User::find($id);
         $verpdf = "Browser";
-        $nompdf = date('m/d/Y g:ia');
+        $nompdf = date('Y-m-d_H-i-s');
         $path = public_path('assets/imgs/');
         $pathdoctor = public_path('assets/imgs/pacientes/');
 

@@ -93,7 +93,7 @@ class ClinicaController extends Controller
 
             $clinicas = Clinica::where('estado',1)->orderBy('nombre','asc')->get();
             $verpdf = "Browser";
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $config = Config::first();
@@ -134,7 +134,7 @@ class ClinicaController extends Controller
 
         $clinica = Clinica::find($id);
         $verpdf = "Browser";
-        $nompdf = date('m/d/Y g:ia');
+        $nompdf = date('Y-m-d_H-i-s');
         $path = public_path('assets/imgs/');
 
         $config = Config::first();

@@ -151,7 +151,7 @@ class AsistenteController extends Controller
 
             $asistentes = User::where('estado',1)->orderBy('name','asc')->get();
             $verpdf = "Browser";
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $config = Config::first();
@@ -192,7 +192,7 @@ class AsistenteController extends Controller
 
         $asistente = User::find($id);
         $verpdf = "Browser";
-        $nompdf = date('m/d/Y g:ia');
+        $nompdf = date('Y-m-d_H-i-s');
         $path = public_path('assets/imgs/');
         $pathasistente = public_path('assets/imgs/users/');
 

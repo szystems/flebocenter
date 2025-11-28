@@ -286,7 +286,7 @@ class IngresoController extends Controller
             $ingresos = $Consultafiltros->get();
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $currency = $config->currency_simbol;
@@ -339,7 +339,7 @@ class IngresoController extends Controller
             $totalAbonado = PagoIngreso::where('ingreso_id', $ingreso->id)->sum('cantidad');
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $currency = $config->currency_simbol;

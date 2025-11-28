@@ -54,7 +54,7 @@ class SeguimientoController extends Controller
             $seguimiento = Seguimiento::find($request->input('seguimiento_id'));
 
 
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $currency = $config->currency_simbol;

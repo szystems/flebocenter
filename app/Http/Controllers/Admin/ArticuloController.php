@@ -165,7 +165,7 @@ class ArticuloController extends Controller
             $articulos = $articulos->get();
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
             $patharticulo = public_path('assets/imgs/articulos/');
 
@@ -215,7 +215,7 @@ class ArticuloController extends Controller
             $articulo = Articulo::find($request->input('articulo_id'));
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
             $patharticulo = public_path('assets/imgs/articulos/');
 

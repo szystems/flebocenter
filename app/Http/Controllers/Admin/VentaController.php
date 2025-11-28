@@ -365,7 +365,7 @@ class VentaController extends Controller
             $ventas = $Consultafiltros->get();
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $currency = $config->currency_simbol;
@@ -418,7 +418,7 @@ class VentaController extends Controller
             $totalAbonado = PagoVenta::where('venta_id', $venta->id)->sum('cantidad');
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $currency = $config->currency_simbol;

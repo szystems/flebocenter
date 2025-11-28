@@ -283,7 +283,7 @@ class CitaController extends Controller
             ->get();
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $currency = $config->currency_simbol;
@@ -332,7 +332,7 @@ class CitaController extends Controller
             $cita = Cita::find($request->input('cita_id'));
 
             $config = Config::first();
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $currency = $config->currency_simbol;

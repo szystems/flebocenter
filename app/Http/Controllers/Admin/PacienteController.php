@@ -179,7 +179,7 @@ class PacienteController extends Controller
 
             $pacientes = Paciente::where('estado',1)->orderBy('nombre','asc')->get();
             $verpdf = "Browser";
-            $nompdf = date('m/d/Y g:ia');
+            $nompdf = date('Y-m-d_H-i-s');
             $path = public_path('assets/imgs/');
 
             $config = Config::first();
@@ -220,7 +220,7 @@ class PacienteController extends Controller
 
         $paciente = Paciente::find($id);
         $verpdf = "Browser";
-        $nompdf = date('m/d/Y g:ia');
+        $nompdf = date('Y-m-d_H-i-s');
         $path = public_path('assets/imgs/');
         $pathpaciente = public_path('assets/imgs/pacientes/');
 
