@@ -17,6 +17,42 @@ $app = new Illuminate\Foundation\Application(
 
 /*
 |--------------------------------------------------------------------------
+| Register Configuration Repository (Laravel 12 Fix)
+|--------------------------------------------------------------------------
+|
+| Laravel 12 requires explicit configuration repository registration
+| for applications using the Laravel 10 structure.
+|
+*/
+
+$app->singleton('config', function ($app) {
+    $configCache = $app->bootstrapPath('cache/config.php');
+    
+    // Si el cache existe, cargarlo
+    if (file_exists($configCache)) {
+        return new Illuminate\Config\Repository(
+            require $configCache
+        );
+    }
+    
+    // Si no existe, cargar configuración sin cache
+    $config = new Illuminate\Config\Repository();
+    
+    // Cargar archivos de configuración individuales
+    $configPath = $app->basePath('config');
+    
+    foreach (glob($configPath . '/*.php') as $file) {
+        $key = basename($file, '.php');
+        $config->set($key, require $file);
+    }
+    
+    return $config;
+});
+
+$app->instance('config', $app->make('config'));
+
+/*
+|--------------------------------------------------------------------------
 | Bind Important Interfaces
 |--------------------------------------------------------------------------
 |
