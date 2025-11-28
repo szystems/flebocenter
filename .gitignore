@@ -92,3 +92,25 @@ find-phpmyadmin-config.php
 reparacion-definitiva-final.php
 verify-db-config.php
 ipage-*.php
+
+# Scripts de debug Error 500/419 (2025-11-28)
+public/aplicar-env-production.php
+public/captura-bootstrap-error.php
+public/captura-con-debug.php
+public/captura-error-final.php
+public/eliminar-cache-corrupto.php
+public/eliminar-cache-final.php
+public/eliminar-csrf-file.php
+public/error-500-login.php
+public/generar-cache-manual.php
+public/index-debug.php
+public/opcion-nuclear.php
+public/regenerar-cache.php
+public/reparar-500.php
+public/reparar-permisos.php
+public/reparar-sesiones.php
+public/solucion-definitiva-419.php
+public/ver-error-500.php
+public/ver-log-completo.php
+public/ver-logs-laravel.php
+public/verificacion-final.php
