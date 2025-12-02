@@ -53,6 +53,23 @@ $app->instance('config', $app->make('config'));
 
 /*
 |--------------------------------------------------------------------------
+| Register Core Service Providers (Laravel 12 Fix)
+|--------------------------------------------------------------------------
+|
+| Laravel 12 requires explicit registration of core service providers
+| when using Laravel 10 structure. We register SessionServiceProvider
+| here to ensure sessions and CSRF tokens work correctly.
+|
+*/
+
+// Registrar SessionServiceProvider explícitamente
+$app->register(\Illuminate\Session\SessionServiceProvider::class);
+
+// Registrar otros providers críticos que dependen de sesiones
+$app->register(\Illuminate\View\ViewServiceProvider::class);
+
+/*
+|--------------------------------------------------------------------------
 | Bind Important Interfaces
 |--------------------------------------------------------------------------
 |
