@@ -152,7 +152,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         
         .logo-section {
-        .logo-section {
             text-align: center;
             margin-bottom: 35px;
         }
@@ -162,6 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             height: auto;
             margin-bottom: 20px;
         }
+        
         h1 {
             color: #1e293b;
             font-size: 28px;
