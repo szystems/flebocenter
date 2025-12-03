@@ -351,7 +351,31 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <i class="bi bi-<?php echo $loginType === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill'; ?>"></i>
     <div class="login-container">
         <div class="logo-section">
-            <img src="assets/imgs/logos/logopng.png" alt="FleboCenter" class="logo-img">
+            <?php
+            $logoPath = 'assets/imgs/logos/logopng.png';
+            if (file_exists(__DIR__ . '/' . $logoPath)) {
+                echo '<img src="' . $logoPath . '" alt="FleboCenter" class="logo-img">';
+            } else {
+                // Intentar rutas alternativas
+                $altPaths = [
+                    'frontendtemplate/img/logo/logopng.png',
+                    'frontendtemplate/img/logo/logo.png',
+                    'assets/imgs/logos/logoimg.png'
+                ];
+                $logoFound = false;
+                foreach ($altPaths as $path) {
+                    if (file_exists(__DIR__ . '/' . $path)) {
+                        echo '<img src="' . $path . '" alt="FleboCenter" class="logo-img">';
+                        $logoFound = true;
+                        break;
+                    }
+                }
+                if (!$logoFound) {
+                    // Fallback: mostrar texto
+                    echo '<h1 style="color: #0061f2; font-size: 36px; margin: 20px 0;">FleboCenter</h1>';
+                }
+            }
+            ?>
             <h1>FleboCenter</h1>
             <p class="subtitle">Sistema de Gestión Clínica</p>
         </div>  <label for="email">
