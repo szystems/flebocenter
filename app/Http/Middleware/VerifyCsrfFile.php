@@ -22,10 +22,6 @@ class VerifyCsrfFile
      */
     public function handle(Request $request, Closure $next)
     {
-        // TEMPORAL: CSRF Desactivado para debug - cliente urgente
-        // TODO: Investigar por qué falla la validación
-        return $next($request);
-        
         // Solo verificar CSRF para métodos que modifican datos
         if (in_array($request->method(), ['POST', 'PUT', 'PATCH', 'DELETE'])) {
             
