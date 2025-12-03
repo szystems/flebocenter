@@ -133,66 +133,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0061f2 0%, #6900c7 100%);
+            background: #ffffff;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        /* Animated background */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 200%;
-            height: 200%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
-            animation: drift 20s ease-in-out infinite;
-        }
-        
-        @keyframes drift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(-50px, -50px) rotate(180deg); }
         }
         
         .login-container {
             background: white;
             padding: 50px 45px;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid #e2e8f0;
             max-width: 450px;
             width: 100%;
-            position: relative;
-            z-index: 1;
         }
         
+        .logo-section {
         .logo-section {
             text-align: center;
             margin-bottom: 35px;
         }
         
-        .logo-icon {
-            width: 80px;
-            height: 80px;
-            background: linear-gradient(135deg, #0061f2 0%, #6900c7 100%);
-            border-radius: 20px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+        .logo-img {
+            max-width: 200px;
+            height: auto;
             margin-bottom: 20px;
-            box-shadow: 0 10px 30px rgba(0, 97, 242, 0.3);
         }
-        
-        .logo-icon i {
-            font-size: 45px;
-            color: white;
-        }
-        
         h1 {
             color: #1e293b;
             font-size: 28px;
@@ -380,14 +349,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <?php if ($loginMessage): ?>
             <div class="alert alert-<?php echo $loginType; ?>">
                 <i class="bi bi-<?php echo $loginType === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill'; ?>"></i>
-                <div><?php echo $loginMessage; ?></div>
-            </div>
-            <?php echo $redirectScript; ?>
-        <?php endif; ?>
-
-        <form method="POST">
-            <div class="form-group">
-                <label for="email">
+    <div class="login-container">
+        <div class="logo-section">
+            <img src="assets/imgs/logos/logopng.png" alt="FleboCenter" class="logo-img">
+            <h1>FleboCenter</h1>
+            <p class="subtitle">Sistema de Gestión Clínica</p>
+        </div>  <label for="email">
                     <i class="bi bi-envelope-fill"></i>
                     Correo Electrónico
                 </label>
