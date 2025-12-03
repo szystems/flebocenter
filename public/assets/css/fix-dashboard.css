@@ -15,3 +15,48 @@
     opacity: 1 !important;
     position: relative !important;
 }
+
+/* Fix Sidebar Scroll - Permitir scroll cuando hay muchos módulos */
+.sidebar-wrapper {
+    max-height: 100vh !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.sidebar-menu {
+    max-height: calc(100vh - 70px) !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+.sidebarMenuScroll {
+    max-height: 100% !important;
+    overflow-y: auto !important;
+    overflow-x: hidden !important;
+}
+
+/* Estilo del scrollbar del sidebar */
+.sidebar-wrapper::-webkit-scrollbar,
+.sidebar-menu::-webkit-scrollbar,
+.sidebarMenuScroll::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-track,
+.sidebar-menu::-webkit-scrollbar-track,
+.sidebarMenuScroll::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb,
+.sidebar-menu::-webkit-scrollbar-thumb,
+.sidebarMenuScroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.sidebar-wrapper::-webkit-scrollbar-thumb:hover,
+.sidebar-menu::-webkit-scrollbar-thumb:hover,
+.sidebarMenuScroll::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
