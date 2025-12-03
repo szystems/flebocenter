@@ -6,10 +6,12 @@
 
 .content-wrapper-scroll {
     overflow: visible !important;
+    position: relative !important;
 }
 
 .content-wrapper {
     min-height: 500px !important;
     visibility: visible !important;
     opacity: 1 !important;
+    position: relative !important;
 }

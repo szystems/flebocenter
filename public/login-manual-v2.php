@@ -194,7 +194,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-container">
         <div class="logo-section">
             <img src="assets/imgs/logos/logopng.png" alt="FleboCenter" class="logo-img" onerror="this.style.display='none'">
-            <h1>FleboCenter</h1>
+            <!-- <h1>FleboCenter</h1> -->
             <p class="subtitle">Sistema de Gestión Clínica</p>
         </div>
 
