@@ -114,7 +114,8 @@
         <!-- Vendor Js Files -->
         <!-- Overlay Scroll JS -->
         <script src="{{ asset('dashboardtemplate/design/assets/vendor/overlay-scroll/jquery.overlayScrollbars.min.js') }}"></script>
-        <script src="{{ asset('dashboardtemplate/design/assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script>
+        {{-- Script de scrollbar deshabilitado: causa que el contenido desaparezca --}}
+        {{-- <script src="{{ asset('dashboardtemplate/design/assets/vendor/overlay-scroll/custom-scrollbar.js') }}"></script> --}}
 
         <!-- News ticker -->
         <script src="{{ asset('dashboardtemplate/design/assets/vendor/newsticker/newsTicker.min.js') }}"></script>
@@ -128,6 +129,31 @@
 
         <!-- Sweet Alert -->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+        <!-- Fix: Forzar visibilidad del contenido después de que todo se cargue -->
+        <script>
+        $(document).ready(function() {
+            // Esperar a que todo se cargue
+            setTimeout(function() {
+                // Forzar visibilidad de todos los elementos principales
+                $('.content-wrapper, .content-wrapper-scroll, .os-content, .os-viewport').css({
+                    'opacity': '1 !important',
+                    'visibility': 'visible !important',
+                    'display': 'block !important',
+                    'height': 'auto !important',
+                    'min-height': '100vh'
+                });
+                
+                // Remover cualquier overlay que pueda estar ocultando
+                $('.os-host').css({
+                    'height': 'auto !important',
+                    'overflow': 'visible !important'
+                });
+                
+                console.log('✅ Visibilidad del dashboard forzada');
+            }, 100);
+        });
+        </script>
 
 
 		<!-- Apex Charts -->
