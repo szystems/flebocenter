@@ -29,16 +29,15 @@ class Kernel extends HttpKernel
      */
     protected $middlewareGroups = [
         'web' => [
-            // StartSession debe ir PRIMERO para que la sesión esté disponible
+            // EncryptCookies PRIMERO - antes de leer/escribir cookies
+            \App\Http\Middleware\EncryptCookies::class,
+            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            // Session DESPUÉS de cookies - para desencriptar cookie de sesión
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            // CSRF después de sesión
-            // \App\Http\Middleware\VerifyCsrfToken::class, // CSRF estándar con sesiones
-            \App\Http\Middleware\VerifyCsrfFile::class, // CSRF basado en archivos para iPage
-            // Cookies después de sesión para encriptar correctamente
-            \App\Http\Middleware\EncryptCookies::class,
-            \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+            // CSRF basado en archivos (no usa sesión)
+            \App\Http\Middleware\VerifyCsrfFile::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
