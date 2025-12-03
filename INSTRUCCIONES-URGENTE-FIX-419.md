@@ -52,7 +52,11 @@ bootstrap/app.php
 
 ### PASO 5: Limpiar caché en producción
 
-Crea un archivo temporal `limpia-cache-419.php` en la raíz del proyecto en iPage:
+Sube el archivo `limpia-cache-419.php` a la carpeta `public/` en iPage.
+
+El archivo ya está listo en tu proyecto local en: `public/limpia-cache-419.php`
+
+Código del archivo (si necesitas crearlo manualmente):
 
 ```php
 <?php

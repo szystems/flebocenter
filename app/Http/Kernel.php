@@ -34,8 +34,8 @@ class Kernel extends HttpKernel
             \Illuminate\Session\Middleware\StartSession::class,
             // \Illuminate\Session\Middleware\AuthenticateSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
-            \App\Http\Middleware\VerifyCsrfToken::class, // CSRF estándar para local
-            // \App\Http\Middleware\VerifyCsrfFile::class, // Solo para producción iPage
+            // \App\Http\Middleware\VerifyCsrfToken::class, // CSRF estándar con sesiones
+            \App\Http\Middleware\VerifyCsrfFile::class, // CSRF basado en archivos para iPage
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
 
