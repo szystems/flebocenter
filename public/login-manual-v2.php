@@ -32,32 +32,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $hasher = new \Illuminate\Hashing\BcryptHasher();
             
             if ($hasher->check($password, $user['password'])) {
-                // Generar session ID
                 $sessionId = \Illuminate\Support\Str::random(40);
                 
-                // Crear payload en formato Laravel (serializado)
                 $guardName = 'web';
                 $sessionData = [
                     '_token' => \Illuminate\Support\Str::random(40),
                     '_previous' => ['url' => 'https://www.flebocenter.com/dashboard'],
                     '_flash' => [
                         'old' => [],
-                        'new' => [
-                            'status' => 'Bienvenido a FLEBOCENTER'
-                        ]
+                        'new' => ['status' => 'Bienvenido a FLEBOCENTER']
                     ],
                     'login_' . $guardName . '_' . sha1('Illuminate\\Auth\\SessionGuard') => $user['id'],
                     'password_hash_' . $guardName => $user['password'],
-                    'url' => [
-                        'intended' => 'https://www.flebocenter.com/dashboard'
-                    ]
+                    'url' => ['intended' => 'https://www.flebocenter.com/dashboard']
                 ];
                 
-                // Serializar como Laravel lo hace
                 $serialized = serialize($sessionData);
                 $payload = base64_encode($serialized);
                 
-                // Insertar en BD
                 $stmt = $pdo->prepare("
                     REPLACE INTO sessions (id, user_id, ip_address, user_agent, payload, last_activity)
                     VALUES (:id, :user_id, :ip, :user_agent, :payload, :last_activity)
@@ -72,7 +64,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'last_activity' => time()
                 ]);
                 
-                // Cookie sin cifrar (Laravel la cifrará automáticamente)
                 setcookie(
                     'app_session',
                     $sessionId,
@@ -88,12 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 $loginSuccess = true;
                 $loginType = 'success';
-                $loginMessage = '<strong>✅ ¡Login Exitoso!</strong><br>' .
-                               'Bienvenido, ' . htmlspecialchars($user['name']) . '<br>' .
-                               'User ID: ' . $user['id'] . '<br>' .
-                               'Session ID: ' . substr($sessionId, 0, 20) . '...<br>' .
-                               '<br><strong>Redirigiendo al dashboard...</strong>';
-                
+                $loginMessage = '<strong>✅ ¡Login Exitoso!</strong><br>Bienvenido, ' . htmlspecialchars($user['name']) . '<br><br><strong>Redirigiendo al dashboard...</strong>';
                 $redirectScript = '<script>setTimeout(function() { window.location.href = "/dashboard"; }, 1500);</script>';
                 
             } else {
@@ -117,30 +103,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - FleboCenter</title>
-    
-    <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="dashboardtemplate/design/assets/css/bootstrap.min.css">
-    
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="dashboardtemplate/design/assets/fonts/bootstrap/bootstrap-icons.css">
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: #ffffff;
+            background: #f8f9fa;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 20px;
         }
-        
         .login-container {
             background: white;
             padding: 50px 45px;
@@ -150,57 +125,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             max-width: 450px;
             width: 100%;
         }
-        
-        .logo-section {
-            text-align: center;
-            margin-bottom: 35px;
-        }
-        
-        .logo-img {
-            max-width: 200px;
-            height: auto;
-            margin-bottom: 20px;
-        }
-        
-        h1 {
-            color: #1e293b;
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-        
-        .subtitle {
-            color: #64748b;
-            font-size: 15px;
-            font-weight: 400;
-        }
-        
-        .form-group {
-            margin-bottom: 25px;
-        }
-        
-        label {
-            display: block;
-            margin-bottom: 10px;
-            color: #334155;
-            font-weight: 600;
-            font-size: 14px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        label i {
-            color: #0061f2;
-            font-size: 16px;
-        }
-        
-        .input-wrapper {
-            position: relative;
-        }
-        
-        input[type="email"],
-        input[type="password"] {
+        .logo-section { text-align: center; margin-bottom: 35px; }
+        .logo-img { max-width: 200px; height: auto; margin-bottom: 20px; }
+        h1 { color: #1e293b; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+        .subtitle { color: #64748b; font-size: 15px; font-weight: 400; }
+        .form-group { margin-bottom: 25px; }
+        label { display: block; margin-bottom: 10px; color: #334155; font-weight: 600; font-size: 14px; }
+        label i { color: #0061f2; font-size: 16px; margin-right: 8px; }
+        input[type="email"], input[type="password"] {
             width: 100%;
             padding: 14px 18px;
             border: 2px solid #e2e8f0;
@@ -209,14 +141,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             transition: all 0.3s ease;
             background: #f8fafc;
         }
-        
         input:focus {
             outline: none;
             border-color: #0061f2;
             background: white;
             box-shadow: 0 0 0 4px rgba(0, 97, 242, 0.1);
         }
-        
         .btn-login {
             width: 100%;
             padding: 16px;
@@ -228,171 +158,60 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
             margin-top: 10px;
         }
-        
         .btn-login:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 30px rgba(0, 97, 242, 0.4);
         }
-        
-        .btn-login:active {
-            transform: translateY(0);
-        }
-        
         .alert {
             padding: 16px 20px;
             border-radius: 12px;
             margin-bottom: 25px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
             font-size: 14px;
             animation: slideIn 0.3s ease;
         }
-        
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
-        
-        .alert-success {
-            background: #d1fae5;
-            border: 2px solid #6ee7b7;
-            color: #065f46;
-        }
-        
-        .alert-success i {
-            color: #10b981;
-            font-size: 24px;
-        }
-        
-        .alert-error {
-            background: #fee2e2;
-            border: 2px solid #fca5a5;
-            color: #991b1b;
-        }
-        
-        .alert-error i {
-            color: #ef4444;
-            font-size: 24px;
-        }
-        
+        .alert-success { background: #d1fae5; border: 2px solid #6ee7b7; color: #065f46; }
+        .alert-error { background: #fee2e2; border: 2px solid #fca5a5; color: #991b1b; }
         .footer {
             text-align: center;
             margin-top: 30px;
             padding-top: 25px;
             border-top: 1px solid #e2e8f0;
         }
-        
-        .footer p {
-            color: #94a3b8;
-            font-size: 13px;
-            margin: 0;
-        }
-        
-        .loading {
-            display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spin 0.6s linear infinite;
-        }
-        
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        
-        /* Responsive */
+        .footer p { color: #94a3b8; font-size: 13px; margin: 0; }
         @media (max-width: 576px) {
-            .login-container {
-                padding: 35px 30px;
-            }
-            
-            h1 {
-                font-size: 24px;
-            }
-            
-            .logo-icon {
-                width: 70px;
-                height: 70px;
-            }
-            
-            .logo-icon i {
-                font-size: 40px;
-            }
+            .login-container { padding: 35px 30px; }
+            h1 { font-size: 24px; }
         }
     </style>
 </head>
 <body>
     <div class="login-container">
         <div class="logo-section">
-            <div class="logo-icon">
-                <i class="bi bi-heart-pulse-fill"></i>
-            </div>
+            <img src="assets/imgs/logos/logopng.png" alt="FleboCenter" class="logo-img" onerror="this.style.display='none'">
             <h1>FleboCenter</h1>
             <p class="subtitle">Sistema de Gestión Clínica</p>
         </div>
 
         <?php if ($loginMessage): ?>
             <div class="alert alert-<?php echo $loginType; ?>">
-                <i class="bi bi-<?php echo $loginType === 'success' ? 'check-circle-fill' : 'exclamation-triangle-fill'; ?>"></i>
-    <div class="login-container">
-        <div class="logo-section">
-            <?php
-            $logoPath = 'assets/imgs/logos/logopng.png';
-            if (file_exists(__DIR__ . '/' . $logoPath)) {
-                echo '<img src="' . $logoPath . '" alt="FleboCenter" class="logo-img">';
-            } else {
-                // Intentar rutas alternativas
-                $altPaths = [
-                    'frontendtemplate/img/logo/logopng.png',
-                    'frontendtemplate/img/logo/logo.png',
-                    'assets/imgs/logos/logoimg.png'
-                ];
-                $logoFound = false;
-                foreach ($altPaths as $path) {
-                    if (file_exists(__DIR__ . '/' . $path)) {
-                        echo '<img src="' . $path . '" alt="FleboCenter" class="logo-img">';
-                        $logoFound = true;
-                        break;
-                    }
-                }
-                if (!$logoFound) {
-                    // Fallback: mostrar texto
-                    echo '<h1 style="color: #0061f2; font-size: 36px; margin: 20px 0;">FleboCenter</h1>';
-                }
-            }
-            ?>
-            <h1>FleboCenter</h1>
-            <p class="subtitle">Sistema de Gestión Clínica</p>
-        </div>  <label for="email">
+                <?php echo $loginMessage; ?>
+            </div>
+            <?php echo $redirectScript; ?>
+        <?php endif; ?>
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="email">
                     <i class="bi bi-envelope-fill"></i>
                     Correo Electrónico
                 </label>
-                <div class="input-wrapper">
-                    <input 
-                        type="email" 
-                        id="email" 
-                        name="email" 
-                        placeholder="tu-email@ejemplo.com"
-                        value=""
-                        required 
-                        autofocus
-                    >
-                </div>
+                <input type="email" id="email" name="email" placeholder="tu-email@ejemplo.com" required autofocus>
             </div>
 
             <div class="form-group">
@@ -400,15 +219,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <i class="bi bi-lock-fill"></i>
                     Contraseña
                 </label>
-                <div class="input-wrapper">
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        placeholder="••••••••"
-                        required
-                    >
-                </div>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
 
             <button type="submit" class="btn-login">
@@ -421,23 +232,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p><i class="bi bi-shield-check"></i> Conexión segura • FleboCenter © <?php echo date('Y'); ?></p>
         </div>
     </div>
-
-    <script>
-        // Auto-enfoque en el campo de email al cargar
-        document.addEventListener('DOMContentLoaded', function() {
-            const emailInput = document.getElementById('email');
-            if (emailInput && !emailInput.value) {
-                emailInput.focus();
-            }
-        });
-        
-        // Agregar loading al botón al enviar
-        const form = document.querySelector('form');
-        const submitBtn = form.querySelector('.btn-login');
-        form.addEventListener('submit', function() {
-            submitBtn.innerHTML = '<span class="loading"></span> Iniciando sesión...';
-            submitBtn.disabled = true;
-        });
-    </script>
 </body>
 </html>
