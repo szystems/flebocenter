@@ -1,0 +1,15 @@
+/* Fix para OverlayScrollbars - Forzar visibilidad del contenido */
+.os-content {
+    min-height: 100vh !important;
+    height: auto !important;
+}
+
+.content-wrapper-scroll {
+    overflow: visible !important;
+}
+
+.content-wrapper {
+    min-height: 500px !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}

@@ -36,12 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $sessionId = \Illuminate\Support\Str::random(40);
                 
                 // Crear payload en formato Laravel (serializado)
+                $guardName = 'web';
                 $sessionData = [
                     '_token' => \Illuminate\Support\Str::random(40),
                     '_previous' => ['url' => 'https://www.flebocenter.com/dashboard'],
-                    '_flash' => ['old' => [], 'new' => []],
-                    'login_web_' . sha1('Illuminate\Auth\SessionGuard') => $user['id'],
-                    'password_hash_web' => $user['password']
+                    '_flash' => [
+                        'old' => [],
+                        'new' => [
+                            'status' => 'Bienvenido a FLEBOCENTER'
+                        ]
+                    ],
+                    'login_' . $guardName . '_' . sha1('Illuminate\\Auth\\SessionGuard') => $user['id'],
+                    'password_hash_' . $guardName => $user['password'],
+                    'url' => [
+                        'intended' => 'https://www.flebocenter.com/dashboard'
+                    ]
                 ];
                 
                 // Serializar como Laravel lo hace

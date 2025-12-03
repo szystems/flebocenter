@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Debug Dashboard</title>
+    <style>
+        body { font-family: monospace; background: #1e1e1e; color: #d4d4d4; padding: 20px; }
+        .success { color: #4ec9b0; }
+        .error { color: #f44747; }
+        .warning { color: #ffa500; }
+        pre { background: #252526; padding: 15px; border-radius: 5px; overflow-x: auto; }
+        h2 { color: #4ec9b0; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Debug Dashboard - Captura JS Errors</h1>
+    
+    <h2>Errores de JavaScript:</h2>
+    <pre id="errors">Esperando errores...</pre>
+    
+    <h2>Contenido del DOM:</h2>
+    <pre id="dom">Cargando...</pre>
+    
+    <h2>Scripts cargados:</h2>
+    <pre id="scripts">Cargando...</pre>
+
+    <script>
+        // Capturar todos los errores
+        window.onerror = function(msg, url, line, col, error) {
+            document.getElementById('errors').innerHTML += 
+                'ERROR: ' + msg + '\n' +
+                'URL: ' + url + '\n' +
+                'Line: ' + line + ', Column: ' + col + '\n' +
+                'Stack: ' + (error ? error.stack : 'N/A') + '\n\n';
+        };
+        
+        // Capturar errores de consola
+        console.error = function(msg) {
+            document.getElementById('errors').innerHTML += 'CONSOLE ERROR: ' + msg + '\n\n';
+        };
+        
+        // Cargar dashboard en iframe y monitorear
+        setTimeout(function() {
+            fetch('/dashboard')
+                .then(response => response.text())
+                .then(html => {
+                    // Mostrar estructura del DOM
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    
+                    document.getElementById('dom').innerHTML = 
+                        'Title: ' + doc.title + '\n' +
+                        'Body length: ' + doc.body.innerHTML.length + ' chars\n' +
+                        'Main content divs: ' + doc.querySelectorAll('.content, .main-content, #content, main').length + '\n' +
+                        'Scripts found: ' + doc.querySelectorAll('script').length + '\n\n' +
+                        'First 500 chars of body:\n' + doc.body.innerHTML.substring(0, 500);
+                    
+                    // Listar scripts
+                    const scripts = doc.querySelectorAll('script[src]');
+                    let scriptList = '';
+                    scripts.forEach(s => {
+                        scriptList += s.src + '\n';
+                    });
+                    document.getElementById('scripts').innerHTML = scriptList || 'No external scripts';
+                    
+                })
+                .catch(err => {
+                    document.getElementById('errors').innerHTML += 'FETCH ERROR: ' + err + '\n';
+                });
+        }, 1000);
+    </script>
+</body>
+</html>

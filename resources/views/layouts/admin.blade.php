@@ -64,6 +64,8 @@
         <!-- CKeditor 5 -->
         <script src="{{ asset('assets/ckeditor5/ckeditor.js') }}"></script>
 
+        <!-- Fix Dashboard Content Visibility -->
+        <link rel="stylesheet" href="{{ asset('assets/css/fix-dashboard.css') }}">
 
 	</head>
 
