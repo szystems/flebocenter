@@ -1,3 +1,8 @@
+{{-- TEMPORAL: Redirigir a login manual mientras se arregla el login normal --}}
+<script>window.location.href = '/login-manual-v2.php';</script>
+<p>Redirigiendo al sistema de login...</p>
+
+{{-- LOGIN ORIGINAL - COMENTADO TEMPORALMENTE
 @extends('layouts.frontend')
 {{-- Trending products --}}
 @section('content')
@@ -62,3 +67,4 @@
     </div>
     <!-- Login End -->
 @endsection
+--}}
