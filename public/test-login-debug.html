@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Test Login Debug</title>
+    <style>
+        body { font-family: Arial; background: #f0f0f0; padding: 50px; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input, button { width: 100%; padding: 12px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; font-size: 16px; }
+        button { background: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background: #45a049; }
+        .info { background: #e7f3fe; padding: 15px; border-left: 4px solid #2196F3; margin: 20px 0; }
+        .token-display { background: #f9f9f9; padding: 10px; border: 1px solid #ddd; border-radius: 5px; word-break: break-all; font-family: monospace; font-size: 12px; }
+        h1 { color: #333; }
+        label { display: block; margin-top: 15px; font-weight: bold; color: #555; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Test Login - Debug Mode</h1>
+        
+        <div class="info">
+            <strong>Este formulario envía a debug-login-post.php</strong><br>
+            Podrás ver exactamente qué datos se envían, incluyendo el token CSRF.
+        </div>
+
+        <form method="POST" action="/debug-login-post.php">
+            <label>Token CSRF:</label>
+            <div class="token-display" id="tokenDisplay">Generando token...</div>
+            <input type="hidden" name="_token" id="tokenInput" value="">
+
+            <label>Email:</label>
+            <input type="email" name="email" placeholder="tu@email.com" required>
+
+            <label>Password:</label>
+            <input type="password" name="password" placeholder="Tu contraseña" required>
+
+            <label>
+                <input type="checkbox" name="remember" value="1" style="width: auto; margin: 0;">
+                Remember Me
+            </label>
+
+            <button type="submit">🔍 Test Login (Debug)</button>
+        </form>
+
+        <div class="info" style="margin-top: 30px; background: #fff3cd; border-left-color: #ffc107;">
+            <strong>⚠️ Nota:</strong><br>
+            Este formulario NO hace login real. Solo muestra los datos que se enviarían.
+        </div>
+    </div>
+
+    <script>
+        // Generar token CSRF usando el mismo método que Laravel
+        async function generateToken() {
+            try {
+                // Llamar al helper de PHP para obtener el token
+                const response = await fetch('/get-csrf-token.php');
+                const data = await response.json();
+                
+                if (data.token) {
+                    document.getElementById('tokenInput').value = data.token;
+                    document.getElementById('tokenDisplay').textContent = data.token;
+                } else {
+                    document.getElementById('tokenDisplay').textContent = 'Error: ' + (data.error || 'No se pudo generar token');
+                }
+            } catch (error) {
+                document.getElementById('tokenDisplay').textContent = 'Error al generar token: ' + error.message;
+            }
+        }
+
+        // Generar token al cargar la página
+        generateToken();
+    </script>
+</body>
+</html>
