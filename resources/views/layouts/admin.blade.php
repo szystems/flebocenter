@@ -107,7 +107,8 @@
 		<!-- Required JavaScript Files -->
         <!-- Bootstrap Bundle JS -->
         <script src="{{ asset('dashboardtemplate/design/assets/js/bootstrap.bundle.min.js') }}"></script>
-        <script src="{{ asset('dashboardtemplate/design/assets/js/modernizr.js') }}"></script>
+        {{-- Modernizr deshabilitado: causa problemas con Tracking Prevention en navegadores --}}
+        {{-- <script src="{{ asset('dashboardtemplate/design/assets/js/modernizr.js') }}"></script> --}}
         <script src="{{ asset('dashboardtemplate/design/assets/js/moment.js') }}"></script>
 
         <!-- Vendor Js Files -->

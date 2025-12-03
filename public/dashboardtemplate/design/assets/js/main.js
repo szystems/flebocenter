@@ -1,6 +1,9 @@
 // Loading
 $(function () {
-	$("#loading-wrapper").fadeOut(2000);
+	// Verificar si el elemento existe antes de intentar ocultarlo
+	if ($("#loading-wrapper").length) {
+		$("#loading-wrapper").fadeOut(2000);
+	}
 });
 
 // Toggle sidebar
