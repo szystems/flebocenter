@@ -41,30 +41,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        // DEBUG TEMPORAL
-        echo "Email buscado: " . htmlspecialchars($email) . "<br>";
-        echo "Usuario encontrado: " . ($user ? 'SÍ - ID: ' . $user['id'] . ' - ' . $user['name'] : 'NO') . "<br>";
-        
         if ($user) {
             $hasher = new \Illuminate\Hashing\BcryptHasher();
             $passwordMatch = $hasher->check($password, $user['password']);
-            echo "Password ingresado: " . htmlspecialchars($password) . "<br>";
-            echo "Password correcto: " . ($passwordMatch ? '✅ SÍ' : '❌ NO') . "<br>";
             
             if ($passwordMatch) {
                 $sessionId = \Illuminate\Support\Str::random(40);
                 
+                // URL según ambiente
+                $dashboardUrl = $isLocal ? 'http://127.0.0.1:8000/dashboard' : 'https://www.flebocenter.com/dashboard';
+                
                 $guardName = 'web';
                 $sessionData = [
                     '_token' => \Illuminate\Support\Str::random(40),
-                    '_previous' => ['url' => 'https://www.flebocenter.com/dashboard'],
+                    '_previous' => ['url' => $dashboardUrl],
                     '_flash' => [
                         'old' => [],
-                        'new' => ['status' => 'Bienvenido a FLEBOCENTER']
+                        'new' => []
                     ],
                     'login_' . $guardName . '_' . sha1('Illuminate\\Auth\\SessionGuard') => $user['id'],
                     'password_hash_' . $guardName => $user['password'],
-                    'url' => ['intended' => 'https://www.flebocenter.com/dashboard']
+                    'url' => ['intended' => $dashboardUrl]
                 ];
                 
                 $serialized = serialize($sessionData);
@@ -97,16 +94,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
                 $cookieSet = setcookie($cookieName, $sessionId, $cookieOptions);
                 
-                // DEBUG: Verificar cookie y sesión
-                echo "<br>Cookie establecida: " . ($cookieSet ? '✅ SÍ' : '❌ NO') . "<br>";
-                echo "Session ID: " . htmlspecialchars($sessionId) . "<br>";
-                echo "User ID guardado en sesión: " . $user['id'] . "<br>";
-                echo "<br><strong>Redirigiendo en 3 segundos...</strong><br>";
-                
                 $loginSuccess = true;
                 $loginType = 'success';
                 $loginMessage = '<strong>✅ ¡Login Exitoso!</strong><br>Bienvenido, ' . htmlspecialchars($user['name']) . '<br><br><strong>Redirigiendo al dashboard...</strong>';
-                $redirectScript = '<script>setTimeout(function() { window.location.href = "/dashboard"; }, 3000);</script>';
+                $redirectScript = '<script>window.location.href = "/dashboard";</script>';
                 
             } else {
                 $loginType = 'error';
