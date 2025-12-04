@@ -41,14 +41,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
-        // DEBUG: Descomentar para ver qué está pasando
-        // echo "Email buscado: " . $email . "<br>";
-        // echo "Usuario encontrado: " . ($user ? 'SÍ' : 'NO') . "<br>";
+        // DEBUG TEMPORAL
+        echo "Email buscado: " . htmlspecialchars($email) . "<br>";
+        echo "Usuario encontrado: " . ($user ? 'SÍ - ID: ' . $user['id'] . ' - ' . $user['name'] : 'NO') . "<br>";
         
         if ($user) {
             $hasher = new \Illuminate\Hashing\BcryptHasher();
+            $passwordMatch = $hasher->check($password, $user['password']);
+            echo "Password ingresado: " . htmlspecialchars($password) . "<br>";
+            echo "Password correcto: " . ($passwordMatch ? '✅ SÍ' : '❌ NO') . "<br>";
             
-            if ($hasher->check($password, $user['password'])) {
+            if ($passwordMatch) {
                 $sessionId = \Illuminate\Support\Str::random(40);
                 
                 $guardName = 'web';
@@ -82,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
                 
                 // Configurar cookie según ambiente
+                $cookieName = $isLocal ? 'flebocenter_session' : 'app_session'; // Usar el mismo nombre que Laravel
                 $cookieOptions = [
                     'expires' => time() + (480 * 60),
                     'path' => '/',
@@ -91,12 +95,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'samesite' => 'Lax'
                 ];
                 
-                setcookie('app_session', $sessionId, $cookieOptions);
+                $cookieSet = setcookie($cookieName, $sessionId, $cookieOptions);
+                
+                // DEBUG: Verificar cookie y sesión
+                echo "<br>Cookie establecida: " . ($cookieSet ? '✅ SÍ' : '❌ NO') . "<br>";
+                echo "Session ID: " . htmlspecialchars($sessionId) . "<br>";
+                echo "User ID guardado en sesión: " . $user['id'] . "<br>";
+                echo "<br><strong>Redirigiendo en 3 segundos...</strong><br>";
                 
                 $loginSuccess = true;
                 $loginType = 'success';
                 $loginMessage = '<strong>✅ ¡Login Exitoso!</strong><br>Bienvenido, ' . htmlspecialchars($user['name']) . '<br><br><strong>Redirigiendo al dashboard...</strong>';
-                $redirectScript = '<script>setTimeout(function() { window.location.href = "/dashboard"; }, 1500);</script>';
+                $redirectScript = '<script>setTimeout(function() { window.location.href = "/dashboard"; }, 3000);</script>';
                 
             } else {
                 $loginType = 'error';
