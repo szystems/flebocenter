@@ -60,7 +60,7 @@
                     </div>
                 </div>
             </div>
+        </div>
     </div>
     <!-- Login End -->
-@endsectionsection
---}}
+@endsection
