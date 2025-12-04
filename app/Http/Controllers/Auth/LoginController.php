@@ -27,7 +27,10 @@ class LoginController extends Controller
      *
      * @var string
      */
-    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/dashboard';
+    
+    // Método authenticated() comentado temporalmente para debug
+    /*
     protected function authenticated($request, $user)
     {
         if($user->role_as == '0') //0 = Doctor Login
@@ -42,6 +45,7 @@ class LoginController extends Controller
         // Default redirect si no hay role_as definido
         return redirect('dashboard')->with('status',__('Bienvenido a FLEBOCENTER'));
     }
+    */
 
     /**
      * Create a new controller instance.
