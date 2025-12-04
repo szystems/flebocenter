@@ -1,8 +1,4 @@
-{{-- TEMPORAL: Redirigir a login manual mientras se arregla el login normal --}}
-<script>window.location.href = '/login-manual-v2.php';</script>
-<p>Redirigiendo al sistema de login...</p>
-
-{{-- LOGIN ORIGINAL - COMENTADO TEMPORALMENTE
+{{-- LOGIN ORIGINAL HABILITADO TEMPORALMENTE PARA PRUEBAS --}}
 @extends('layouts.frontend')
 {{-- Trending products --}}
 @section('content')
@@ -14,7 +10,8 @@
                     <div class="appointment-form h-100 d-flex flex-column justify-content-center text-center p-5 wow zoomIn" data-wow-delay="0.6s">
                         <h1 class="text-white mb-4">Iniciar Sesión</h1>
                         <form method="POST" action="{{ route('login') }}">
-                            {!! csrf_field_file() !!}
+                            @csrf
+                            {{-- {!! csrf_field_file() !!} --}}
 
                             <div class="row g-3">
                                 <div class="col-12 col-sm-12">
@@ -63,8 +60,7 @@
                     </div>
                 </div>
             </div>
-        </div>
     </div>
     <!-- Login End -->
-@endsection
+@endsectionsection
 --}}
