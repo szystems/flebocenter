@@ -41,6 +41,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         
+        // DEBUG: Descomentar para ver qué está pasando
+        // echo "Email buscado: " . $email . "<br>";
+        // echo "Usuario encontrado: " . ($user ? 'SÍ' : 'NO') . "<br>";
+        
         if ($user) {
             $hasher = new \Illuminate\Hashing\BcryptHasher();
             
@@ -77,18 +81,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     'last_activity' => time()
                 ]);
                 
-                setcookie(
-                    'app_session',
-                    $sessionId,
-                    [
-                        'expires' => time() + (480 * 60),
-                        'path' => '/',
-                        'domain' => '.flebocenter.com',
-                        'secure' => true,
-                        'httponly' => true,
-                        'samesite' => 'Lax'
-                    ]
-                );
+                // Configurar cookie según ambiente
+                $cookieOptions = [
+                    'expires' => time() + (480 * 60),
+                    'path' => '/',
+                    'domain' => $isLocal ? '' : '.flebocenter.com', // Sin dominio en local
+                    'secure' => !$isLocal, // Solo HTTPS en producción
+                    'httponly' => true,
+                    'samesite' => 'Lax'
+                ];
+                
+                setcookie('app_session', $sessionId, $cookieOptions);
                 
                 $loginSuccess = true;
                 $loginType = 'success';
