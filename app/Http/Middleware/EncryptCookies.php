@@ -12,7 +12,8 @@ class EncryptCookies extends Middleware
      * @var array<int, string>
      */
     protected $except = [
-        'app_session', // Cookie de producción (iPage)
-        'flebocenter_session', // Cookie de local y producción
+        '*', // TEMPORAL: Deshabilitar cifrado de TODAS las cookies para debug
+        // 'app_session', // Cookie de producción (iPage)
+        // 'flebocenter_session', // Cookie de local y producción
     ];
 }
