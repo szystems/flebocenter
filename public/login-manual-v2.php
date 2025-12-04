@@ -17,11 +17,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
         require_once __DIR__ . '/../vendor/autoload.php';
         
-        $pdo = new PDO(
-            'mysql:host=szclinicascom.ipagemysql.com;dbname=dbflebocenternuevo;charset=utf8mb4',
-            'sz',
-            'SPP7007aaa@@@'
-        );
+        // CONFIGURACIÓN: Cambiar según ambiente (local o producción)
+        $isLocal = true; // Cambiar a false para producción
+        
+        if ($isLocal) {
+            // Conexión LOCAL
+            $pdo = new PDO(
+                'mysql:host=127.0.0.1;dbname=dbflebocenternuevo;charset=utf8mb4',
+                'root',
+                'root123'
+            );
+        } else {
+            // Conexión PRODUCCIÓN (iPage)
+            $pdo = new PDO(
+                'mysql:host=szclinicascom.ipagemysql.com;dbname=dbflebocenternuevo;charset=utf8mb4',
+                'sz',
+                'SPP7007aaa@@@'
+            );
+        }
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         
         $stmt = $pdo->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
