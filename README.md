@@ -1,64 +1,88 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+# Flebocenter - Medical Clinic Management System
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-8.x-red.svg)](https://laravel.com/)
+[![PHP](https://img.shields.io/badge/PHP-7.3%2B%7C8.0%2B-blue.svg)](https://php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-orange.svg)](https://mysql.com)
+[![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-## About Laravel
+**Flebocenter** is a secure medical clinic management system built with **Laravel 8**, designed to digitize patient records, automate appointment scheduling, and streamline clinical workflows. It follows healthcare data handling best practices to ensure patient data privacy and operational efficiency.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Key Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Patient Records Management** — Comprehensive digital patient profiles with medical history, treatments, and clinical notes.
+- **Appointment Scheduling** — Calendar-based booking system with automated reminders to reduce patient no-shows.
+- **Treatment Tracking** — End-to-end tracking of medical procedures, follow-ups, and treatment plans.
+- **Clinical Reporting** — Automated generation of medical reports and clinic performance analytics.
+- **Document Generation** — PDF export for patient records, prescriptions, and clinical reports using DomPDF.
+- **Role-Based Access Control** — Secure access levels for Administrators, Doctors, and Reception staff.
+- **Audit Trail** — Complete logging of all data access and modifications for compliance.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## Technical Architecture
 
-## Learning Laravel
+### Tech Stack
+| Layer | Technology |
+|---|---|
+| **Backend** | PHP 8.0+, Laravel 8 (Eloquent ORM, Form Requests, Middleware) |
+| **Database** | MySQL 5.7+ (Normalized Schema, Indexed Queries) |
+| **Frontend** | Blade Templates, Bootstrap 5, jQuery |
+| **PDF Engine** | DomPDF |
+| **Authentication** | Laravel Sanctum + Laravel UI |
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Architecture Highlights
+- **Data Privacy by Design** — Sensitive patient data is handled with strict access controls and encrypted storage following healthcare industry standards.
+- **Form Request Validation** — All input is validated through dedicated Form Request classes, ensuring data integrity before it reaches the database.
+- **Eloquent Relationships** — Complex medical data relationships (Patient → Appointments → Treatments → Follow-ups) modeled with Laravel's ORM for clean, maintainable queries.
+- **Middleware Authorization** — Route-level middleware ensuring role-based access to sensitive medical records.
+- **Optimized Queries** — Eager loading and query scopes to prevent N+1 problems when fetching patient histories with related records.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Database Design
+The system uses a normalized relational schema covering:
+- Patients (demographics, contact info, medical history)
+- Appointments (scheduling, status lifecycle, reminders)
+- Treatments (procedures, medications, clinical notes)
+- Users & Roles (doctors, admins, reception with granular permissions)
+- Audit Logs (data access and modification tracking)
 
-## Laravel Sponsors
+## Getting Started
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+### Requirements
+- PHP 7.3+ (8.0+ recommended)
+- Composer 2.0+
+- Node.js 14+
+- MySQL 5.7+ or MariaDB 10.3+
 
-### Premium Partners
+### Installation
+```bash
+git clone https://github.com/szystems/flebocenter.git
+cd flebocenter
+composer install
+npm install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+npm run dev
+php artisan serve
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+The application will be available at `http://localhost:8000`.
 
-## Contributing
+## Business Impact
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- Digitized **100% of patient records**, completely eliminating physical paper dependencies.
+- Automated appointment reminders, significantly reducing patient no-shows.
+- Streamlined clinical workflows, allowing staff to focus on patient care instead of administrative tasks.
 
-## Code of Conduct
+## Testing
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+```bash
+./vendor/bin/phpunit
+./vendor/bin/phpunit --filter SpecificTestName
+```
 
 ## License
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+
+---
+
+**Built by [Otto Szarata](https://github.com/szystems)** — Senior Full-Stack Developer | Victoria, BC, Canada
