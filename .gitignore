@@ -1,26 +1,89 @@
-/node_modules
+# =============================================================================
+# Laravel .gitignore - Comprehensive Security & Cleanliness Rules
+# =============================================================================
+
+# --- Laravel Framework ---
+/vendor/
+/node_modules/
 /public/hot
 /public/storage
+/public/build
+/public/mix-manifest.json
 /storage/*.key
-/vendor
+/bootstrap/cache/*.php
+
+# --- Environment Files (CRITICAL - prevents credential leaks) ---
 .env
-.env.backup
-.env.local
-.env.temporary
+.env.*
+!.env.example
 .env_*
+
+# --- Database Dumps & Backups ---
+*.sql
+*.sql.gz
+*.dump
+*.backup
+*.bak
+*.orig
+composer.json.backup
+composer.lock.backup
+
+# --- Storage (runtime data) ---
+/storage/framework/cache/*
+/storage/framework/sessions/*
+/storage/framework/views/*
+/storage/logs/*
+/storage/pail
+!/storage/framework/.gitignore
+!/storage/framework/cache/.gitignore
+!/storage/framework/sessions/.gitignore
+!/storage/framework/views/.gitignore
+!/storage/logs/.gitignore
+
+# --- IDE & Editor Files ---
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.zed
+*.swp
+*.swo
+*~
+.#*
+\#*#
+
+# --- OS Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+nul
+NUL
+
+# --- PHP Tools ---
 .phpunit.result.cache
+.phpunit.cache/
+.php-cs-fixer.cache
+.phpactor.json
+/psalm-output/
+/auth.json
+
+# --- Docker (local overrides) ---
 docker-compose.override.yml
+
+# --- Build & Dependencies ---
 Homestead.json
 Homestead.yaml
 npm-debug.log
 yarn-error.log
-/.idea
-/.vscode
 
-# Archivos temporales y de debug
-*.bat
-*.ps1
-*.sh
+# --- Temporary & Debug Files ---
+*.tmp
+*.temp
+*.log
+
+# ===========================
+# Flebocenter-specific ignores
+# ===========================
 archivos_temporales_limpieza/
 public/test-*.php
 public/fix-*.php
@@ -28,72 +91,6 @@ public/clear-*.php
 public/deep-*.php
 public/edit-*.php
 public/final-*.php
-public/force-*.php
-public/ipage-*.php
-public/no-*.php
-public/register-*.php
-public/server-*.php
-public/simple-*.php
-public/token-*.php
-public/ultimate-*.php
-public/update-*.php
-*-cleaner.php
-*-verification.php
-*-reparacion*.php
-*-fix*.php
-configurar-*.php
-correccion-*.php
-debug-*.php
-diagnostico-*.php
-install-*.php
-limpiar-*.php
-limpieza-*.php
-optimize_*.sh
-preparacion-*.php
-temp-*.php
-test-*.php
-contexto_*.md
-NUL
-
-# Cache y archivos compilados
-/bootstrap/cache/*.php
-!/bootstrap/cache/.gitignore
-/storage/framework/cache/*
-!/storage/framework/cache/.gitignore
-/storage/framework/sessions/*
-!/storage/framework/sessions/.gitignore
-/storage/framework/views/*.php
-!/storage/framework/views/.gitignore
-/storage/logs/*.log
-!/storage/logs/.gitignore
-/storage/framework/csrf_tokens/*
-
-# Archivos de documentación temporal
-ACTUALIZACION_*.md
-IMPLEMENTACION_*.md
-SOLUCION_*.md
-STEP_BY_STEP_*.md
-URGENT_*.md
-DOMAIN_OPTIONS.md
-LARAVEL_BOOST_INSTALADO.md
-PERMISSIONS_SOLUTION.md
-
-# Archivos de backup y zip
-*.zip
-*.backup
-bootstrap/app-fixed.php
-.htaccess_ipage
-index_ipage.php
-
-# Archivos temporales de debugging
-.env.local.OLD
-bootstrap/cache/*.tmp
-find-phpmyadmin-config.php
-reparacion-definitiva-final.php
-verify-db-config.php
-ipage-*.php
-
-# Scripts de debug Error 500/419 (2025-11-28)
 public/aplicar-env-production.php
 public/captura-bootstrap-error.php
 public/captura-con-debug.php
