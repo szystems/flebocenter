@@ -1,11 +1,12 @@
 # Flebocenter - Medical Clinic Management System
 
-[![Laravel](https://img.shields.io/badge/Laravel-8.x-red.svg)](https://laravel.com/)
-[![PHP](https://img.shields.io/badge/PHP-7.3%2B%7C8.0%2B-blue.svg)](https://php.net/)
-[![MySQL](https://img.shields.io/badge/MySQL-5.7%2B-orange.svg)](https://mysql.com)
+[![Laravel](https://img.shields.io/badge/Laravel-12-red.svg)](https://laravel.com/)
+[![PHP](https://img.shields.io/badge/PHP-8.3%2B-blue.svg)](https://php.net/)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0%2B-orange.svg)](https://mysql.com)
+[![PHPUnit](https://img.shields.io/badge/PHPUnit-11-green.svg)](https://phpunit.de/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-**Flebocenter** is a secure medical clinic management system built with **Laravel 8**, designed to digitize patient records, automate appointment scheduling, and streamline clinical workflows. It follows healthcare data handling best practices to ensure patient data privacy and operational efficiency.
+**Flebocenter** is a secure medical clinic management system built with **Laravel 12**, designed to digitize patient records, automate appointment scheduling, and streamline clinical workflows. It follows healthcare data handling best practices to ensure patient data privacy and operational efficiency.
 
 ## Key Features
 
@@ -14,6 +15,8 @@
 - **Treatment Tracking** — End-to-end tracking of medical procedures, follow-ups, and treatment plans.
 - **Clinical Reporting** — Automated generation of medical reports and clinic performance analytics.
 - **Document Generation** — PDF export for patient records, prescriptions, and clinical reports using DomPDF.
+- **Data Export** — Excel exports for patient lists, appointments, and clinic metrics (Maatwebsite/Excel).
+- **Multi-Language Support** — Full English/Spanish localization (laravel-lang).
 - **Role-Based Access Control** — Secure access levels for Administrators, Doctors, and Reception staff.
 - **Audit Trail** — Complete logging of all data access and modifications for compliance.
 
@@ -22,11 +25,14 @@
 ### Tech Stack
 | Layer | Technology |
 |---|---|
-| **Backend** | PHP 8.0+, Laravel 8 (Eloquent ORM, Form Requests, Middleware) |
-| **Database** | MySQL 5.7+ (Normalized Schema, Indexed Queries) |
+| **Backend** | PHP 8.3+, Laravel 12 |
+| **Database** | MySQL 8.0+ (Normalized Schema, Indexed Queries) |
 | **Frontend** | Blade Templates, Bootstrap 5, jQuery |
-| **PDF Engine** | DomPDF |
-| **Authentication** | Laravel Sanctum + Laravel UI |
+| **PDF Engine** | DomPDF 3.0 |
+| **Excel Export** | Maatwebsite/Excel 3.1 |
+| **Authentication** | Laravel Sanctum 4.0 + Laravel UI |
+| **Localization** | laravel-lang 14.0 |
+| **Testing** | PHPUnit 11 |
 
 ### Architecture Highlights
 - **Data Privacy by Design** — Sensitive patient data is handled with strict access controls and encrypted storage following healthcare industry standards.
@@ -34,6 +40,7 @@
 - **Eloquent Relationships** — Complex medical data relationships (Patient → Appointments → Treatments → Follow-ups) modeled with Laravel's ORM for clean, maintainable queries.
 - **Middleware Authorization** — Route-level middleware ensuring role-based access to sensitive medical records.
 - **Optimized Queries** — Eager loading and query scopes to prevent N+1 problems when fetching patient histories with related records.
+- **Helper Functions** — Global helper utilities autoloaded via Composer for consistent formatting and utility functions.
 
 ### Database Design
 The system uses a normalized relational schema covering:
@@ -46,10 +53,10 @@ The system uses a normalized relational schema covering:
 ## Getting Started
 
 ### Requirements
-- PHP 7.3+ (8.0+ recommended)
+- PHP 8.3+
 - Composer 2.0+
-- Node.js 14+
-- MySQL 5.7+ or MariaDB 10.3+
+- Node.js 16+
+- MySQL 8.0+ or MariaDB 10.5+
 
 ### Installation
 ```bash
@@ -75,8 +82,8 @@ The application will be available at `http://localhost:8000`.
 ## Testing
 
 ```bash
-./vendor/bin/phpunit
-./vendor/bin/phpunit --filter SpecificTestName
+php artisan test
+php artisan test --filter SpecificTestName
 ```
 
 ## License
