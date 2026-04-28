@@ -9,11 +9,10 @@ class EncryptCookies extends Middleware
     /**
      * The names of the cookies that should not be encrypted.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $except = [
-        '*', // TEMPORAL: Deshabilitar cifrado de TODAS las cookies para debug
-        // 'app_session', // Cookie de producción (iPage)
-        // 'flebocenter_session', // Cookie de local y producción
+        // Las cookies de sesión DEBEN ser cifradas/descifradas por Laravel
+        // NO excluir flebocenter_session ni app_session
     ];
 }
